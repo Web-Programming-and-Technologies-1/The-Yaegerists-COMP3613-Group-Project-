@@ -1,5 +1,101 @@
 <!doctype html>
 <html>
+
+  <style>
+    body{
+	margin: 0;
+	padding: 0;
+	justify-content: center;
+	min-height: 100vh;
+	font-family: 'Jost', sans-serif;
+	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+}
+nav{
+  margin-bottom: 20px;
+}
+.main{
+  margin: auto;
+	width: 1000px;
+	height: 460px;
+	background: red;
+  align-items: center;
+	overflow: hidden;
+	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
+	border-radius: 10px;
+	box-shadow: 5px 20px 50px #000;
+}
+
+.footer {
+  width: auto;
+  height: 85px;
+  text-align: center;
+  background: blue;
+  margin-top: 20px;
+}
+
+h1 {
+	font-weight: normal;
+	margin: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+}
+.signup{
+	position: relative;
+	width:100%;
+	height: 100%;
+}
+label{
+	color: #fff;
+	font-size: 2.3em;
+	justify-content: center;
+	display: flex;
+	margin: 60px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: .5s ease-in-out;
+}
+input{
+	width: 60%;
+	height: 20px;
+	background: #e0dede;
+	justify-content: center;
+	display: flex;
+	margin: 20px auto;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+}
+button{
+	width: 60%;
+	height: 40px;
+	margin: 10px auto;
+	justify-content: center;
+	display: block;
+	color: #fff;
+	background: #573b8a;
+	font-size: 1em;
+	font-weight: bold;
+	margin-top: 20px;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	transition: .2s ease-in;
+	cursor: pointer;
+}
+button:hover{
+	background: #6d44b8;
+}
+p {
+    text-align: center;
+    color:#e0dede;
+    font-size: 12px;
+}
+
+
+</style>
+
   <head>
   
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -12,36 +108,20 @@
     <title>{% block title %}{% endblock %}</title>
 
   </head>
+  
   <body>
-    <nav class="purple">
-      <div class="nav-wrapper">
-        <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
-        <div class="nav-wrapper">
-            <ul id="nav-mobile" class="left">
-                <li><a href="/">Home</a></li>
-                <li><a href="/users">Users Jinja</a></li>
-                <li><a href="/static/users">Users JS</a></li>
-            </ul>
-        </div>
-      </div>
+    <nav>
+
     </nav>
     
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <nav class="white black-text" style="padding: 10px">
-      <div class="nav-wrapper">
-          <ul class="flashes">
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-          </ul>
-      </div>
-    </nav>
-    {% endif %}
-    {% endwith %}
+    <div>
+        <div class="main">
 
-    <div class="container" id="content">{% block content %}{% endblock %}</div>
+        </div>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <div class="footer">
+      <p>footer</p>
+    </div>
   </body>
 </html>
