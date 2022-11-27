@@ -13,3 +13,8 @@ def login_page():
 @index_views.route('/signup', methods=['GET'])
 def signup_page():
     return render_template('signup.html')
+
+
+@index_views.route('/start', methods=['GET'])
+def start_page():
+    return render_template('start.html')
