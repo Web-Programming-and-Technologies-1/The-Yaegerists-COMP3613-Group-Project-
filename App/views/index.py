@@ -18,3 +18,7 @@ def signup_page():
 @index_views.route('/start', methods=['GET'])
 def start_page():
     return render_template('start.html')
+
+@index_views.route('/home', methods=['GET'])
+def home_page():
+    return render_template('home.html')
