@@ -1,67 +1,70 @@
-from App.models import Ranking, User, Image
+from App.models import Ranking, Profile, Image
 from App.database import db
+from sqlalchemy.exc import IntegrityError
 
-def create_ranking(creatorId, imageId, score):
-    newRanking = Ranking(creatorId=creatorId, imageId=imageId, score=score)
-    db.session.add(newRanking)
-    db.session.commit()
-    return newRanking
+'''Create operations'''
+def create_ranking(rankerId, imageId, score):
+    new_ranking = Ranking(rankerId=rankerId, imageId=imageId, score=score)
+    try:
+        db.session.add(new_ranking)
+        db.session.commit()
+        return new_ranking
+    except IntegrityError:
+        db.session.rollback()
+    return None 
 
-def get_rankings_by_creator(creatorId):
-    return Ranking.query.filter_by(creatorId=creatorId)
+'''Read operations'''
+def get_rankings_by_ranker(rankerId):
+    return Ranking.query.filter_by(rankerId=rankerId)
 
 def get_rankings_by_image(imageId):
     return Ranking.query.filter_by(imageId=imageId)
 
 def get_ranking(id):
-    ranking = Ranking.query.get(id)
-    return ranking
-
+    return Ranking.query.get(id)
+    
 def get_all_rankings():
     return Ranking.query.all()
 
 def get_all_rankings_json():
     rankings = Ranking.query.all()
-    if not rankings:
-        return []
-    rankings = [ranking.toJSON() for ranking in rankings]
-    return rankings
+    if rankings: 
+        return [ranking.toJSON() for ranking in rankings]
+    return None
 
-def get_rankings_by_creator(creatorId):
-    rankings = Ranking.query.filter_by(creatorId=creatorId)
-    if not rankings:
-        return []
-    rankings = [ranking.toJSON() for ranking in rankings]
-    return rankings
+def get_rankings_by_ranker(rankerId):
+    rankings = Ranking.query.filter_by(rankerId=rankerId)
+    if rankings:   
+        return[ranking.toJSON() for ranking in rankings]
+    return None
 
 def get_rankings_by_image(imageId):
     rankings = Ranking.query.filter_by(imageId=imageId)
-    if not rankings:
-        return []
-    rankings = [ranking.toJSON() for ranking in rankings]
-    return rankings
-
-def get_ranking_by_actors(creatorId, imageId):
-    if User.query.get(creatorId) and Image.query.get(imageId):
-        ranking = Ranking.query.filter_by(creatorId=creatorId, imageId=imageId).first()
-        return ranking
+    if rankings:
+        return [ranking.toJSON() for ranking in rankings]
     return None
 
+def get_ranking_by_actors(rankerId, imageId):
+    if Profile.query.get(rankerId) and Image.query.get(imageId):
+        return Ranking.query.filter_by(rankerId=rankerId, imageId=imageId).first()
+    return None
+
+'''Update operations'''
 def update_ranking(id, score):
     ranking = get_ranking(id)
-    if ranking:
-        ranking.score = score
-        db.session.add(ranking)
-        db.session.commit()
-        return ranking
+    try:
+        if ranking:
+            ranking.score = score
+            db.session.add(ranking)
+            db.session.commit()
+            return ranking
+        return None   
+    except:
+        db.session.rollback()
     return None
+    
 
-# def delete_ranking(id):
-#     ranking = get_ranking(id)
-#     if ranking:
-#         db.session.delete(ranking)
-#         return db.session.commit()
-#     return None
+#what Use case is this - can be removed
     
 def get_calculated_ranking(imageId):
     rankings = Ranking.query.filter_by(imageId=imageId)

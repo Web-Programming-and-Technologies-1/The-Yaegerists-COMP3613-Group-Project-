@@ -1,64 +1,65 @@
-from App.models import Rating, User
+from App.models import Rating, Profile
 from App.database import db
+from sqlalchemy.exc import IntegrityError
 
-def create_rating(creatorId, targetId, score):
-    newRating = Rating(creatorId=creatorId, targetId=targetId, score=score)
-    db.session.add(newRating)
-    db.session.commit()
-    return newRating
+'''Create operations'''
+def create_rating(senderId, receiverId, score):
+    new_rating = Rating(senderId=senderId, receiverId=receiverId, score=score)
+    try:
+        db.session.add(new_rating)
+        db.session.commit()
+        return new_rating
+    except IntegrityError:
+        db.session.rollback()
+    return None  
 
-def get_ratings_by_target(targetId):
-    ratings = Rating.query.filter_by(targetId=targetId)
-    if not ratings:
-        return []
-    ratings = [rating.toJSON() for rating in ratings]
-    return ratings
-
-def get_ratings_by_creator(creatorId):
-    ratings = Rating.query.filter_by(creatorId=creatorId)
-    if not ratings:
-        return []
-    ratings = [rating.toJSON() for rating in ratings]
-    return ratings
-
-def get_rating_by_actors(creatorId, targetId):
-    if User.query.get(creatorId) and User.query.get(targetId):
-        rating = Rating.query.filter_by(creatorId=creatorId, targetId=targetId).first()
-        return rating
+'''Read operations'''
+def get_ratings_by_target(receiverId):
+    ratings = Rating.query.filter_by(receiverId=receiverId)
+    if ratings: 
+        return [rating.toJSON() for rating in ratings]
     return None
 
-def get_rating(id):
-    rating = Rating.query.get(id)
-    return rating
+def get_ratings_by_creator(senderId):
+    ratings = Rating.query.filter_by(senderId=senderId)
+    if ratings:
+        return [rating.toJSON() for rating in ratings]
+    return None
+
+def get_rating_by_actors(senderId, receiverId):
+    if Profile.query.get(senderId) and Profile.query.get(receiverId):
+        return  Rating.query.filter_by(senderId=senderId, receiverId=receiverId).first()  
+    return None
+
+def get_rating(ratingId):
+    return Rating.query.filter_by(ratingId=ratingId).first()
 
 def get_all_ratings():
     return Rating.query.all()
 
 def get_all_ratings_json():
     ratings = Rating.query.all()
-    if not ratings:
-        return []
-    ratings = [rating.toJSON() for rating in ratings]
-    return ratings
-
-def update_rating(id, score):
-    rating = get_rating(id)
-    if rating:
-        rating.score = score
-        db.session.add(rating)
-        db.session.commit()
-        return rating
+    if ratings:
+        return[rating.toJSON() for rating in ratings]
     return None
 
-# def delete_rating(id):
-#     rating = get_rating(id)
-#     if rating:
-#         db.session.delete(rating)
-#         return db.session.commit()
-#     return None
-
-def get_calculated_rating(targetId):
-    ratings = Rating.query.filter_by(targetId=targetId)
+'''Update operations'''
+def update_rating(id, score):
+    rating = get_rating(id)
+    try:
+        if rating:
+            rating.score = score
+            db.session.add(rating)
+            db.session.commit()
+            return rating
+        return None
+    except:
+        db.session.rollback()
+    return None
+    
+#what Use case is this - can be removed
+def get_calculated_rating(receiverId):
+    ratings = Rating.query.filter_by(receiverId=receiverId)
     total = 0
     if ratings:
         for rating in ratings:
