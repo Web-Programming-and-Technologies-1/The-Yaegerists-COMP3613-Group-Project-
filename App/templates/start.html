@@ -4,7 +4,6 @@
 {% block page %}BeRealER.{% endblock %}
 
 {{ super() }}
-
 {% block content %} 
 
 <body>
@@ -15,9 +14,9 @@
                     <label aria-hidden="true">BeRealER.</label>
                     <h1>Welcome to BeRealER!</h1>
 					<h2>Sign Up or Login to start sharing and ranking photos</h2>
-					<button onclick="window.location.href='/signup';">Sign Up</button> 
+					<input type="button" onclick="window.location.href='/signup';"  value="Sign Up"/>
 					<h1>OR</h1>
-					<button onclick="window.location.href='/login';">Login</button> 
+					<input type="button" onclick="window.location.href='/login';"  value="Login"/>
 				</form>
 			</div>
 	</div>
