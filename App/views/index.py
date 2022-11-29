@@ -27,3 +27,6 @@ def home_page():
 def myprofile_page():
     return render_template('profilepage.html')
 
+@index_views.route('/toprated', methods=['GET'])
+def toprated_page():
+    return render_template('topratedprofiles.html')
