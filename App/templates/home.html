@@ -1,6 +1,6 @@
 {% extends "temp.html" %}
 
-{% block title %} <title>BeRealER. HomePage </title>{% endblock %}
+{% block title %} <title>BeRealER. HomePage</title>{% endblock %}
 
 {% block header %}
 
@@ -14,6 +14,7 @@
 
 {{ super() }}
 
+
 {% block navbar %} 
 
 
@@ -25,7 +26,7 @@
 
     <liright><a class ="active2" href="/login">Logout</a></liright> 
 
-    <liright><a href="#">My Account</a></liright> 
+    <liright><a href="/myprofile">My Profile</a></liright> 
 
   </ul>  
 
@@ -37,10 +38,13 @@
 
 {% block content %}
 	
-  <body>
+ 
+  
+<body>
+<div class="home" title="homepage">
+    	
+  <ph3>Profiles</ph3>
 
-<div class="home" title="homepage">  	
-  <ph3>Profiles</ph3> 
   <table id="profiles">
     <tr>
       <th>Ranking</th>

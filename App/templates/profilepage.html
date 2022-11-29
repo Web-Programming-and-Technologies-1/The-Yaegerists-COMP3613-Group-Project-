@@ -1,0 +1,98 @@
+{% extends "temp.html" %}
+
+{% block title %} <title>BeRealER. MyProfilePage </title>{% endblock %}
+
+{% block header %}
+
+<header>
+<ph1>BeRealER.</ph1>
+<ph2> My Profile </ph2>
+</header>
+
+{% endblock %}
+
+
+{{ super() }}
+
+{% block navbar %} 
+
+
+<ul>  
+
+    <li><a class="active" href="/home">Home</a></li>
+
+    <li><a href="#">Ranking</a></li> 
+
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
+
+    <liright><a href="#">My Profile</a></liright> 
+
+  </ul>  
+
+
+{% endblock %}
+
+
+
+
+{% block content %}
+	
+  <body>
+
+<div class="home" title="MyProfilePage">
+    	
+  <h3>Username</h3>
+  <h3>Name</h3>
+  <h3>Rank No.</h3>
+
+  <button2><h1>Edit Profile</h1></button2>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+
+
+</div>
+</body>
+{% endblock %} 
+
+{% block footer %}
+
+<div class="footer">
+  <h2> Copyright @ 2022 BeRealER. All Rights Reserved. </h2>
+ </div>
+
+{% endblock %}
