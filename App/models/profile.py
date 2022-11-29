@@ -8,14 +8,11 @@ class Profile(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    # what does this hold? can it be null?
-    recipients = db.Column(db.String(120), unique=True, nullable=False)
-    # what does this hold? can it be null? is feed and profile feed the same thing?
-    feed = db.Column(db.String(120), unique=True, nullable=False)
-    profile = db.relationship('ProfileFeed', backref='profile',
-                              lazy=True, cascade="all, delete-orphan")
+    recipients = db.relationship('ProfileFeed', backref='recipients',
+                                 lazy=True, cascade="all, delete-orphan")
+    feeds = db.relationship('ProfileFeed', backref='feeds',
+                           lazy=True, cascade="all, delete-orphan")
 
-    # should recipients and feed be initialized?
     def __init__(self, username, email, password):
         self.username = username
         self.email = email
@@ -23,10 +20,11 @@ class Profile(db.Model):
 
     def toJSON(self):
         return {
-            'id': self.id,
+            'profileId': self.id,
             'username': self.username,
-            'email': self.email
-            # what else to return? im unsure about what the attribute holds
+            'email': self.email,
+            'recipients': [recipient.toJSON() for recipient in self.recipients],
+            'feeds': [feed.toJSON() for feed in self.feeds]
         }
 
     def check_password(self, password):
@@ -37,6 +35,4 @@ class Profile(db.Model):
         """Create hashed password."""
         self.password = generate_password_hash(password, method='sha256')
 
-    # what does this function do/get
-    def get_feed():
-        pass
+   
