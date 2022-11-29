@@ -1,32 +1,33 @@
 {% extends "temp.html" %}
 
+{% block title %} <title>BeRealER. HomePage </title>{% endblock %}
 
+{% block header %}
 
-{% block content %} 
-
-<title>{% block title %} BeRealER. HomePage {% endblock %}</title>
-
-<ph1>{% block header %} BeRealER. {% endblock %}</ph1>
-
+<header>
+<ph1>BeRealER.</ph1>
 <ph2>For You Page. </ph2>
+</header>
+
+{% endblock %}
+
+
+{{ super() }}
+
+{% block navbar %} 
+
 
 <ul>  
 
-    <li><a class="active" href="#home">Home</a></li>
+    <li><a class="active" href="/home">Home</a></li>
 
     <li><a href="#">Ranking</a></li> 
 
-    <liright><a href="#">Logout</a></liright> 
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
 
     <liright><a href="#">My Account</a></liright> 
 
   </ul>  
-
-    <ph3>Profiles</ph3>
- 
-  
-  
-  
 
 
 {% endblock %}
@@ -34,5 +35,96 @@
 
 
 
+{% block content %}
+	
+  <body>
+
+<div class="home" title="homepage">  	
+  <ph3>Profiles</ph3> 
+  <table id="profiles">
+    <tr>
+      <th>Ranking</th>
+      <th>Username </th>
+      <th>View Profile</th>
+      <th>Rating</th>
+    </tr>
+    <tr>
+      <td>Rank 1</td>
+      <td>JoshuaAli</td>
+      <td><button>profile</button></td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>Rank 2</td>
+      <td>Tamika</td>
+      <td><button>profile</button></td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>Rank 3</td>
+      <td>Rae</td>
+      <td><button>profile</button></td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>Rank 4</td>
+      <td>Josh</td>
+      <td><button>profile</button></td>
+      <td>5</td>
+    </tr>
+  </table>
+
+</div>
+</body>
+{% endblock %} 
+
+{% block footer %}
+
+<div class="footer">
+  <h2> Copyright @ 2022 BeRealER. All Rights Reserved. </h2>
+ </div>
+
+{% endblock %}
+
+<!--
+<body>
+<ph3>Profiles</ph3> 
+
+<table id="profiles">
+  <tr>
+    <th>Ranking</th>
+    <th>Username </th>
+    <th>View Profile</th>
+    <th>Rating</th>
+  </tr>
+  <tr>
+    <td>Rank 1</td>
+    <td>JoshuaAli</td>
+    <td><button>profile</button></td>
+    <td>20</td>
+  </tr>
+  <tr>
+    <td>Rank 2</td>
+    <td>Tamika</td>
+    <td><button>profile</button></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>Rank 3</td>
+    <td>Rae</td>
+    <td><button>profile</button></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td>Rank 4</td>
+    <td>Josh</td>
+    <td><button>profile</button></td>
+    <td>5</td>
+  </tr>
+</table>
+
+
+</body>
+-->
 
 

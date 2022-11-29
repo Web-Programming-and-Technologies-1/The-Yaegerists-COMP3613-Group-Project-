@@ -25,6 +25,38 @@
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 }
+.home{
+	width: 80%;
+	margin: 80px;
+	padding: 70px;
+	height: 700px;
+	background: red;
+    align-items: center;
+	overflow: hidden;
+	background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/ cover;
+	border-radius: 10px;
+	box-shadow: 5px 20px 50px #000;
+}
+.container{
+
+	border: 10px solid gray;
+	max-width: 700px;
+	height: 50vh;
+	margin: auto;
+	display: flex;
+	align-items: center;
+}
+
+header {
+  width: 100%;
+  height: 250px;
+  top: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background:linear-gradient(to bottom, black, black, #302b63);
+  position: fixed;
+}
 
 h1 {
 	font-weight: normal;
@@ -42,51 +74,61 @@ h2 {
     font-size: 15px;
 }
 
+ph1{
+    position: fixed; 
+	top: 0;
+	color: #fff;
+	text-align: center;
+	left: 1000px;
+	justify-content: center;
+	margin: 0px;
+	font-weight: bold;
+	transition: .5s ease-in-out;
+	font-size: 120px;
+	height: 15vh;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 
 ph2 {
 	font-weight: normal;
 	position: fixed;
 	margin: 0;
 	top: 150px;
+	left: 1150px;
     text-align: center;
+	justify-content: center;
     color: #fff;
     font-size: 40px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
+
+ph3{
+	width: 100%;
+	height: 15vh;
+	color: #fff;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	margin: 0px;
+	font-weight: bold;
+	transition: .5s ease-in-out;
+	font-size: 70px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+
 .signup{
 	position: relative;
 	width:100%;
 	height: 100%;
 }
-ph1{
-	width: 100%;
-    position: fixed; 
-	top: 0;
-	color: #fff;
-	font-size: 2.3em;
-	justify-content: center;
-	display: flex;
-	margin: 0px;
-	font-weight: bold;
-	cursor: pointer;
-	transition: .5s ease-in-out;
-	font-size: 120px;
-	height: 1500px;
-}
 
-ph3{
-	width: 100%;
-    position: fixed; 
-	top: 200;
-	color: #fff;
-	font-size: 2.3em;
-	justify-content: center;
-	display: flex;
-	margin: 0px;
-	font-weight: bold;
-	cursor: pointer;
-	transition: .5s ease-in-out;
-	font-size: 90px;
-	height: 600px;
+.homepage{
+	position: relative;
+	width:100%;
+	height: 100%;
 }
 
 label{
@@ -158,13 +200,13 @@ p {
 
 ul {
   list-style-type: none;
-  position: absolute;
+  position: fixed;
   width: 100%;
   top: 250px;
   margin: 0;
   padding: 0px;
   overflow: hidden;
-  background-color:#fff;
+  background-color:lavenderblush;
 }
 
 
@@ -181,7 +223,7 @@ liright {
 
 liright a {
      display: block;
-     color: purple;
+     color:#573b8a;
      font-size:20px;
      text-align: center;
      padding: 10px 50px;
@@ -189,31 +231,82 @@ liright a {
 }
 
 liright a:hover {
-           background-color: purple;
+           background-color:#6d44b8;
            color: white;
 }
 
 li a {
      display: block;
-     color: purple;
+     color:#573b8a;
      font-size:20px;
      text-align: center;
      padding: 10px 50px;
      text-decoration: none;
 }
 .active{
-       background-color: gray;
-       color: purple;
+       background-color: silver;
+       color:#573b8a;
+}
+.active2:hover{
+       background-color: darkred;
+       color:white;
 }
 li a:hover {
-           background-color: purple;
+           background-color:#6d44b8;
            color: white;
+}
+
+#profiles {
+  font-family: Arial, Helvetica, sans-serif;
+  position: sticky;
+  border-collapse:collapse;
+  width: 70%;
+  height: 200px;
+  left: 250px;
+}
+
+#profiles td, #users th {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+}
+
+#profiles tr{background-color: lavenderblush;}
+
+#profiles tr:hover {background-color: linen;}
+
+#profiles th {
+  height: 30px;
+  border: 1px solid black;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color:#6d44b8;
+  color: white;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.footer {
+   position: fixed;
+   height: 5vh;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background: linear-gradient(to top, #0f0c29, #302b63, #24243e);
+   color: white;
+   text-align: center;
+   box-shadow: 5px 20px 50px #000;
 }
 
 
 </style>
 
-{% block content %} {% endblock %}
 
-
+{% block title %}{% endblock %}
+{% block header %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}
 
