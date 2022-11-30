@@ -8,12 +8,12 @@ from App.controllers import (
     get_all_rankings_json,
     get_ranking,
     get_rankings_by_image,
-    get_rankings_by_creator,
+    get_rankings_by_ranker,
     get_ranking_by_actors,
     get_calculated_ranking,
     update_ranking,
     #delete_ranking,
-    get_user,
+    get_profile,
     get_image
 )
 
@@ -22,7 +22,7 @@ ranking_views = Blueprint('ranking_views', __name__, template_folder='../templat
 @ranking_views.route('/api/rankings', methods=['POST'])
 def create_ranking_action():
     data = request.json
-    if get_user(data['creatorId']) and get_image(data['imageId']):
+    if get_profile(data['creatorId']) and get_image(data['imageId']):
         image = get_image(data['imageId'])
         if data['creatorId'] != image.userId:
 
@@ -51,8 +51,8 @@ def get_ranking_action():
 @ranking_views.route('/api/rankings/bycreator', methods=['GET'])
 def get_rankings_by_creator_action():
     data = request.json
-    if get_user(data['creatorId']):
-        ranking = get_rankings_by_creator(data['creatorId'])
+    if get_profile(data['creatorId']):
+        ranking = get_rankings_by_ranker(data['creatorId'])
         if ranking:
             return jsonify(ranking)
     return jsonify({"message":"User Not Found"})

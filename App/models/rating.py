@@ -18,7 +18,7 @@ class Rating(db.Model):
 
     def toJSON(self):
         return {
-            'id': self.id,
+            'id': self.ratingId,
             'senderId': self.senderId,
             'receiverId': self.receiverId,
             'score': self.score,

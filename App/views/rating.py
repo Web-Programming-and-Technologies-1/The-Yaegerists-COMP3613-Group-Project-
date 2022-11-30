@@ -11,7 +11,7 @@ from App.controllers import (
     get_ratings_by_creator,
     get_rating_by_actors,
     update_rating,
-    get_user,
+    get_profile,
     get_calculated_rating
 )
 
@@ -21,7 +21,7 @@ rating_views = Blueprint('rating_views', __name__, template_folder='../templates
 @rating_views.route('/api/ratings', methods=['POST'])
 def create_rating_action():
     data = request.json
-    if get_user(data['creatorId']) and get_user(data['targetId']):
+    if get_profile(data['creatorId']) and get_user(data['targetId']):
         if data['creatorId'] != data['targetId']:
             
             prev = get_rating_by_actors(data['creatorId'], data['targetId'])
@@ -49,7 +49,7 @@ def get_rating_action():
 @rating_views.route('/api/ratings/bycreator', methods=['GET'])
 def get_rating_by_creator_action():
     data = request.json
-    if get_user(data['creatorId']):
+    if get_profile(data['creatorId']):
         rating = get_ratings_by_creator(data['creatorId'])
         if rating:
             return jsonify(rating) 
@@ -59,7 +59,7 @@ def get_rating_by_creator_action():
 @rating_views.route('/api/ratings/bytarget', methods=['GET'])
 def get_rating_by_target_action():
     data = request.json
-    if get_user(data['targetId']):
+    if get_profile(data['targetId']):
         rating = get_ratings_by_target(data['targetId'])
         if rating:
             return jsonify(rating) 
@@ -85,7 +85,7 @@ def update_rating_action():
 @rating_views.route('/api/ratings/calc', methods=['GET'])
 def get_calculated_rating_action():
     data = request.json
-    if get_user(data['targetId']):
+    if get_profile(data['targetId']):
         rating = get_calculated_rating(data['targetId'])
         if rating:
             return jsonify({"calculated rating": rating}) 

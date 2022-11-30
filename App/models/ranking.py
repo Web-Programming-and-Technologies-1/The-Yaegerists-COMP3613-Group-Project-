@@ -16,7 +16,7 @@ class Ranking(db.Model):
 
     def toJSON(self):
         return {
-            'id': self.id,
+            'id': self.rankingId,
             'rankerId': self.rankerId,
             'imageId': self.imageId,
             'ratingId': self.ratingId,

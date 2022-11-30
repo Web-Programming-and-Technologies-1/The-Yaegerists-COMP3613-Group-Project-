@@ -1,7 +1,8 @@
 from App.database import db
 
+
 # stores the user defined amount of randomly distributed profiles
-class ProfileFeed(db.model):
+class ProfileFeed(db.Model):
     feedId = db.Column(db.Integer, primary_key=True)
     senderId = db.Column(db.Integer, db.ForeignKey(
         'profile.profileId'), nullable=False)

@@ -72,7 +72,7 @@ def get_calculated_rating(receiverId):
 def get_level(id):
     ratings = get_ratings_by_creator(id)
     if ratings:
-        level = 0;
+        level = 0
         for rating in ratings:
             level = level + 1
         return level

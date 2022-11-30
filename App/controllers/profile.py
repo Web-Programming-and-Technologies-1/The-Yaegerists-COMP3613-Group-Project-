@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 '''Create operations'''
 
-#Create a new profile using the specified information
+#Create a new profile using the specified information USED
 def create_profile(username, email,  password):
     new_profile = Profile(username=username, email=email, password=password)
     try:
@@ -16,24 +16,25 @@ def create_profile(username, email,  password):
     return None  
 
 '''Read operations'''
-# Return profile with the specified username
+# Return profile with the specified username USED
 def get_profile_by_username(username):
     return Profile.query.filter_by(username=username).first()
    
-# Return profile with the specified Id 
+# Return profile with the specified Id USED
 def get_profile(profileId):
     return Profile.query.filter_by(profileId=profileId).first()
 
-# Return all profile
-def get_all_profile():
-    return Profiles.query.all()
 
-#Return all profile in JSON format
+# Return all profile USED
+def get_all_profiles():
+    return Profile.query.all()
+
+#Return all profile in JSON format USED
 def get_all_profiles_json():
-    profiles = get_all_profile()
+    profiles = get_all_profiles()
     if profiles:
         profiles = [profile.toJSON() for profile in profiles]
-    return None
+    return []
 
 '''Update operations'''
 # Get a profile based on profile ID
