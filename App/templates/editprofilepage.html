@@ -1,7 +1,7 @@
 {% extends "temp.html" %}
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-{% block title %} <title>BeRealER. MyProfilePage </title>{% endblock %}
+{% block title %} <title>BeRealER. EditProfilePage </title>{% endblock %}
 
 {% block header %}
 
@@ -14,7 +14,7 @@
 {% block header2 %}
 
 <header2>
- <ph2> My Profile </ph2>
+ <ph2> Edit Profile </ph2>
 </header2>
 
 {% endblock %}
@@ -32,7 +32,7 @@
 
     <liright><a class ="active2" href="/login">Logout</a></liright> 
 
-    <liright><a href="#">My Profile</a></liright> 
+    <liright><a href="/profilepage">My Profile</a></liright> 
 
   </ul>  
 
@@ -46,15 +46,19 @@
 
   <body>
 
-<div class="home" title="MyProfilePage">
-  
+<div class="editprofile" title="EditProfilePage">
   <box>  	
   <ph3>Username</ph3>
   </box>
 
-  <box2><ph4>Name: | Rank: </ph4></box2>
+ </h1> Username </h1>
 
-  <button2 onclick="window.location.href='/editprofile';"><h4>Edit Profile</h4></button2>
+  <input type="username" name="username" placeholder="Username" required="">
+</h3> Name </h3>
+  <input type="name" name="name" placeholder="Name" required="">
+  <input type="email" name="email" placeholder="Email" required="">
+
+  <button2><h4>Save Changes</h4></button2>
   <div class="responsive">
     <div class="gallery">
       <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
@@ -97,4 +101,3 @@
 </div>
 </body>
 {% endblock %} 
-

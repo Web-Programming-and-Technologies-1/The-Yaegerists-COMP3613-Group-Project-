@@ -30,3 +30,7 @@ def myprofile_page():
 @index_views.route('/toprated', methods=['GET'])
 def toprated_page():
     return render_template('topratedprofiles.html')
+
+@index_views.route('/editprofile', methods=['GET'])
+def editprofile_page():
+    return render_template('editprofilepage.html')    
