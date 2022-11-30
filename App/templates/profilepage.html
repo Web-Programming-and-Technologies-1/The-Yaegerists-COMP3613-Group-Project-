@@ -1,23 +1,17 @@
 {% extends "temp.html" %}
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-{% block title %} <title>BeRealER. MyProfilePage </title>{% endblock %}
-
-{% block header %}
-
-<header>
- <ph1> BeRealER. </ph1>
-</header>
-
-{% endblock %}
-
-{% block header2 %}
-
-<header2>
- <ph2> My Profile </ph2>
-</header2>
-
-{% endblock %}
+    {% block title %}
+    My Profile Page
+    {% endblock %}
+    
+    {% block header %}
+    BeRealER.
+    {% endblock %}
+    
+    {% block header2 %}
+    My Profile
+    {% endblock %}
 
 {{ super() }}
 
@@ -44,57 +38,52 @@
 
 {% block content %}
 
-  <body>
-
-<div class="home" title="MyProfilePage">
-  
-  <box>  	
-  <ph3>Username</ph3>
-  </box>
-
-  <box2><ph4>Name: | Rank: </ph4></box2>
-
-  <button2 onclick="window.location.href='/editprofile';"><h4>Edit Profile</h4></button2>
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
-        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
-  
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
-        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
-        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
-        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
-  
-
-
+<div class='parent'>
+  <box><p class="ph2">Username</p></box> 
+  <div class='child'> <p class="ph3">Name:</p></div>
+  <div class='child'> <p class="ph3">Rank:</p></div>
 </div>
-</body>
+  
+  
+ 
+
+  <button2 onclick="window.location.href='/editprofile';"><p class="ph3">Edit Profile </p></button2>
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
+  <div class="responsive">
+    <div class="gallery">
+      <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+        <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+      </a>
+      <div class="desc">rating</div>
+    </div>
+  </div>
+  
 {% endblock %} 
 

@@ -1,22 +1,17 @@
 {% extends "temp.html" %}
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-{% block title %} <title>BeRealER. HomePage</title>{% endblock %}
-
-{% block header %}
-
-<header>
- <ph1> BeRealER. </ph1>
-</header>
-
-{% endblock %}
-
-{% block header2 %}
-<header2>
- <ph2> For You Page </ph2>
-</header2>
-
-{% endblock %}
+    {% block title %}
+    Homepage
+    {% endblock %}
+    
+    {% block header %}
+    BeRealER.
+    {% endblock %}
+    
+    {% block header2 %}
+    For you
+    {% endblock %}
 
 {{ super() }}
 
@@ -45,10 +40,10 @@
 {% block content %}
 	
   
-<body>
-<div class="home" title="homepage">
+
+
     	
-  <box><ph3> Profiles </ph3></box>
+  <box><p class="ph2">Profiles</p></box>
 
   <table id="profiles">
     <tr>
@@ -60,31 +55,30 @@
     <tr>
       <td>Rank 6</td>
       <td>John</td>
-      <td><button>profile</button></td>
+      <td><p><button>profile</button><p></td>
       <td>4</td>
     </tr>
     <tr>
       <td>Rank 2</td>
       <td>Tamika</td>
-      <td><button>profile</button></td>
+      <td><p><button>profile</button></p></td>
       <td>15</td>
     </tr>
     <tr>
       <td>Rank 4</td>
       <td>Josh</td>
-      <td><button>profile</button></td>
+      <td><p><button>profile</button></p></td>
       <td>5</td>
     </tr>
     <tr>
       <td>Rank 10</td>
       <td>Rocky</td>
-      <td><button>profile</button></td>
+      <td><p><button>profile</button></p></td>
       <td>1</td>
     </tr>
   </table>
 
-</div>
-</body>
+
 {% endblock %} 
 
 

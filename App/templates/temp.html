@@ -4,33 +4,27 @@
 <head>
 	
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
     body{
-	margin: 0;
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	font-family: 'Jost', sans-serif;
-	background-image: url("{{url_for('static', filename='background.jpg')}}");
-}
+	    background-image: url("{{url_for('static', filename='background.jpg')}}");
+    }
 
 
 .main{
-	width: 400px;
-	height: 600px;
+	width: 350px;
+	height: 500px;
 	background: red;
 	overflow: hidden;
 	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 	box-shadow: 5px 20px 50px #000;
 }
 .home{
-	width: 80%;
-	margin: 80px;
-	padding: 70px;
-	height: 700px;
+	width: 60%;
+  height: 70vh;
+  margin-left:auto;
+  margin-right:auto;
+  align-content: center;
   align-items: center;
 	overflow: hidden;
 	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
@@ -38,19 +32,20 @@
 	box-shadow: 5px 20px 50px #000;
 }
 
-.editprofile{
-	width: 80%;
-	margin: 80px;
-	padding: 70px;
-	height: 700px;
-  padding-top: 20%;
-  padding-bottom: 30%;
+.editpage{
+  margin-top: 5%;
+	width: 60%;
+  height: 90vh;
+  margin-left:auto;
+  margin-right:auto;
+  align-content: center;
   align-items: center;
 	overflow: hidden;
 	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
 }
+
 .container{
 
 	border: 10px solid gray;
@@ -61,15 +56,16 @@
 	align-items: center;
 }
 
-header {
+.header {
   width: 100%;
-  height: 250px;
-  top: 0;
+  height: 100px;
+  margin-top: 0px;
   text-align: center;
   align-items: center;
+  color:white;
   justify-content: center;
   background:linear-gradient(to bottom, black, black, #302b63);
-  position: fixed;
+  
 }
 header2 {
   width: 100%;
@@ -118,76 +114,73 @@ h4 {
   font-size: 25px;
 }
 
-ph1{
-	font-weight: normal;
-	margin: 0;
-  text-align: center;
-  color: #fff;
-  font-size: 90px;
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
-}
-
-ph2 {
-	font-weight: normal;
-	margin: 0;
+.ph1{
+	font-weight:bold;
   text-align: center;
   color: #fff;
   font-size: 50px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-ph3{
+.ph2 {
 	font-weight: normal;
-	margin: 0;
   text-align: center;
-  margin-bottom: 10px;
   color: #fff;
-  font-size: 50px;
+  font-size:30px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-ph4{
+.ph3{
 	font-weight: normal;
-	margin: 0;
   text-align: center;
   color: #fff;
-  font-size: 25px;
+  font-size:20px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.ph4{
+  padding-top: 5%;
+	font-weight: normal;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 
 box {
-   height: auto;
-   width:auto;
-   padding-top: 2.5%;
-   padding-bottom: 1%;
-   padding-right: 1%;
-   padding-left: 1%;
-   border: 3px solid lavender;
-   border-radius: 15px;
-   align-content: center;
-   justify-content: center;
-   margin-left: 44%;
-   margin-right: 36%;
-
-
+  margin-top: 5%;
+  width: 25%;
+  border: 2px solid lavender;
+  border-radius: 15px;
+  margin-left: 37%;
+  justify-content: center;
+  display: flex;
+  box-shadow: 5px 20px 50px #000;
 }
 
 box2 {
-   width:auto;
-   height: auto;
-   padding-top: 1%;
-   padding-bottom: 1%;
-   padding-right: 1%;
-   padding-left: 1%;
-   border: 2px solid lavender;
-   border-radius: 15px;
-   align-content: center;
-   justify-content: center;
-   margin-left: 65%;
-   margin-bottom: 30%;
+  margin-top: 5%;
+  width: 20%;
+  border: 1px solid lavender;
+  border-radius: 15px;
+  margin-left: 30%;
+  justify-content: center;
+  display: flex;
+  box-shadow: 5px 20px 50px #000;
   
 
+}
+
+box3 {
+  width: 20%;
+  border: 1px solid lavender;
+  border-radius: 15px;
+  margin-left: 70%;
+  justify-content: center;
+  display: flex;
+  box-shadow: 5px 20px 50px #000;
+  margin-inline: 10%  ;
 
 }
 
@@ -226,9 +219,10 @@ input{
 	border-radius: 5px;
 }
 button{
-	width: 60%;
-	height: 40px;
-	margin: 10px auto;
+	width: 40%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+	margin: 3% auto;
 	justify-content: center;
 	display: block;
 	color: #fff;
@@ -242,16 +236,16 @@ button{
 	transition: .2s ease-in;
 }
 input{
-	width: 60%;
+	width: 30%;
 	height: 40px;
-	margin: 10px auto;
+	margin: 5px auto;
 	justify-content: center;
 	display: block;
 	color: #fff;
 	background: #573b8a;
 	font-size: 1em;
 	font-weight: bold;
-	margin-top: 20px;
+	margin-top: 40px;
 	outline: none;
 	border: none;
 	border-radius: 5px;
@@ -264,18 +258,17 @@ button:hover{
 }
 
 button2{
-	width: 20%;
-	height: 50px;
-	margin: 10px auto;
+	width: 10%;
+  padding-top: .002%;
+  padding-bottom: .002%;
+	margin: 3% auto;
 	justify-content: center;
-	text-align: center;
 	display: block;
 	color: #fff;
 	background: #573b8a;
 	font-size: 1em;
 	font-weight: bold;
-	margin-top: 30px;
-  margin-bottom: 30px;
+	margin-top: 20px;
 	outline: none;
 	border: none;
 	border-radius: 5px;
@@ -293,23 +286,31 @@ p {
     font-size: 12px;
 }
 
-text{
-  font-size: 12px;
-
-}
-
 ul {
-  list-style-type: none;
-  position: fixed;
-  width: 100%;
-  top: 250px;
+  list-style-type:none;
+  width: auto;
+  top: 0;
+  overflow: hidden;
+  background-color: transparent;
+  transition: .2s ease-in;
   margin: 0;
   padding: 0px;
-  overflow: hidden;
-  background-image: url("{{url_for('static', filename='taskbar.jpg')}}")
+  padding-bottom: 2%;
 }
 
-
+.parent {
+  text-align: center;
+}
+.child {
+  display: inline-block;
+  width: 20%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border: 1px solid lavender;
+  border-radius: 15px;
+  box-shadow: 5px 20px 50px #000;
+  vertical-align: middle;
+}
 
 li {
    float: left;
@@ -359,32 +360,38 @@ li a:hover {
 #profiles {
   font-family: Arial, Helvetica, sans-serif;
   position: sticky;
-  margin-top: 40px;
-  margin-left: 15%;
+  margin-top: 5%;
+  margin-left: 10%;
   margin-right: 85%;
-  border-collapse:collapse;
-  width: 70%;
-  height: 200px;
+  padding-bottom: .25% ;
+  border-collapse:separate #6d44b8;
+  border-style:groove #6d44b8;
+  width: 80%;
   justify-content: center;
+  box-shadow: 5px 20px 50px #000;
+ 
 }
 
 #profiles td, #users th {
   border: 1px solid black;
-  padding: 5px;
+  padding: 1%;
   text-align: center;
   color: black;
   font-weight: bold;
 }
 
-#profiles tr{background-color: lavenderblush;}
+#profiles tr{
+  background-color: lavenderblush;
+  padding: 2%;
+}
 
 #profiles tr:hover {background-color: linen;}
 
 #profiles th {
   height: 30px;
   border: 1px solid black;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 1%;
+  padding-bottom: 2%;
   text-align: center;
   background-color:#6d44b8;
   color: white;
@@ -392,15 +399,10 @@ li a:hover {
 }
 
 .footer {
-   position: fixed;
+   margin-top: 10px;
    height: 5vh;
-   left: 0;
-   bottom: 0;
-   width: 100%;
-   background: linear-gradient(to top, #0f0c29, #302b63, #24243e);
    color: white;
    text-align: center;
-   box-shadow: 5px 20px 50px #000;
 }
 
 div.gallery {
@@ -414,6 +416,11 @@ div.gallery:hover {
 div.gallery img {
   width: 100%;
   height: auto;
+}
+.centergallary
+{
+ padding-top: 10%;
+ padding-left: 33%;
 }
 
 div.desc {
@@ -434,34 +441,52 @@ div.desc {
   width: 24.99999%;
 }
 
-.clearfix:after {
+.row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-				                
-body{margin-top:20px;}
 
-.avatar{
-width:200px;
-height:200px;
-}				              
-
+.hello{
+  font-size: 30px;
+}
+.hi{
+  background:linear-gradient(to bottom, black, black, #302b63);
+}
+  
+  .icon{
+    color:#fff;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 10px;
+  }
 </style>
+  <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+  <div>
+    <p class="ph1">{% block header %}{% endblock %}</p>
+    <p class="ph2">{% block header2 %}{% endblock %}</p>
+  </div>
 
 
-{% block title %}{% endblock %}
-{% block header %}{% endblock %}
-{% block header2 %}{% endblock %}
 {% block navbar %}{% endblock %}
-{% block content %}{% endblock %}
 
-{% block footer %}
+  <div class="home">
+    {% block content %}{% endblock %}
+  </div>
+  {% block additionalcontent %}{% endblock %}
+ 
+  
+  
 
 <div class="footer">
   <h2> Copyright @ 2022 BeRealER. All Rights Reserved. </h2>
  </div>
+  
+</body>
 
-{% endblock %}
 
+</html>
