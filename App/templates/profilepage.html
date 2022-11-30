@@ -1,16 +1,23 @@
 {% extends "temp.html" %}
-
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
 {% block title %} <title>BeRealER. MyProfilePage </title>{% endblock %}
 
 {% block header %}
 
 <header>
-<ph1>BeRealER.</ph1>
-<ph2> My Profile </ph2>
+ <ph1> BeRealER. </ph1>
 </header>
 
 {% endblock %}
 
+{% block header2 %}
+
+<header2>
+ <ph2> My Profile </ph2>
+</header2>
+
+{% endblock %}
 
 {{ super() }}
 
@@ -36,16 +43,17 @@
 
 
 {% block content %}
-	
+
   <body>
 
 <div class="home" title="MyProfilePage">
-    	
-  <h3>Username</h3>
-  <h3>Name</h3>
-  <h3>Rank No.</h3>
+  <box>  	
+  <ph3>Username</ph3>
+  </box>
+  <ph4>Name</ph4>
+  <ph4>Rank</ph4>
 
-  <button2><h1>Edit Profile</h1></button2>
+  <button2><h4>Edit Profile</h4></button2>
   <div class="responsive">
     <div class="gallery">
       <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">

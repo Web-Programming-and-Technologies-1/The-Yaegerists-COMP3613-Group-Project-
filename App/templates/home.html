@@ -1,16 +1,22 @@
 {% extends "temp.html" %}
-
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
 {% block title %} <title>BeRealER. HomePage</title>{% endblock %}
 
 {% block header %}
 
 <header>
-<ph1>BeRealER.</ph1>
-<ph2>For You Page </ph2>
+ <ph1> BeRealER. </ph1>
 </header>
 
 {% endblock %}
 
+{% block header2 %}
+<header2>
+ <ph2> For You Page </ph2>
+</header2>
+
+{% endblock %}
 
 {{ super() }}
 
@@ -38,12 +44,11 @@
 
 {% block content %}
 	
- 
   
 <body>
 <div class="home" title="homepage">
     	
-  <ph3>Profiles</ph3>
+  <box><ph3> Profiles </ph3></box>
 
   <table id="profiles">
     <tr>

@@ -1,16 +1,23 @@
 {% extends "temp.html" %}
-
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
 {% block title %} <title>BeRealER. Top Rated</title>{% endblock %}
 
 {% block header %}
 
 <header>
-<ph1>BeRealER.</ph1>
-<ph2>Top Rated Profiles </ph2>
+ <ph1> BeRealER. </ph1>
 </header>
 
 {% endblock %}
 
+{% block header2 %}
+
+<header2>
+  <ph2> Top Rated Profiles </ph2>
+</header2>
+
+{% endblock %}
 
 {{ super() }}
 
@@ -43,7 +50,7 @@
 <body>
 <div class="home" title="homepage">
     	
-  <ph3>Top 4 Ranks</ph3>
+  <box><ph3>Rankings</ph3></box>
 
   <table id="profiles">
     <tr>

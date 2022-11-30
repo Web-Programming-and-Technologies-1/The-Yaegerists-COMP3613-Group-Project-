@@ -31,8 +31,7 @@
 	margin: 80px;
 	padding: 70px;
 	height: 700px;
-	background: red;
-    align-items: center;
+  align-items: center;
 	overflow: hidden;
 	background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
 	border-radius: 10px;
@@ -58,6 +57,14 @@ header {
   background:linear-gradient(to bottom, black, black, #302b63);
   position: fixed;
 }
+header2 {
+  width: 100%;
+  top: 90px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+}
 
 h1 {
 	font-weight: normal;
@@ -67,15 +74,6 @@ h1 {
     font-size: 18px;
 }
 
-h3 {
-	font-weight: normal;
-	margin: 0;
-    text-align: center;
-	justify-content: center;
-	align-content: center;
-    color: #fff;
-    font-size: 25px;
-}
 
 h2 {
 	font-weight: normal;
@@ -85,55 +83,77 @@ h2 {
     font-size: 15px;
 }
 
-ph1{
-    position: fixed; 
-	top: 0;
-	color: #fff;
-	text-align: center;
-	left: 1000px;
+h3 {
+	font-weight: normal;
+	margin: 0;
+  text-align: center;
 	justify-content: center;
-	margin: 0px;
-	font-weight: bold;
-	transition: .5s ease-in-out;
-	font-size: 120px;
-	height: 15vh;
+	align-content: center;
+  color: #fff;
+  font-size: 25px;
+}
+
+h4 {
+	font-weight: normal;
+	margin: 0;
+  padding-top: 5px;
+  text-align: center;
+	justify-content: center;
+	align-content: center;
+  color: #fff;
+  font-size: 25px;
+}
+
+ph1{
+	font-weight: normal;
+	margin: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 90px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 ph2 {
 	font-weight: normal;
-	position: fixed;
 	margin: 0;
-	top: 150px;
-	left: 1150px;
-    text-align: center;
-	justify-content: center;
-    color: #fff;
-    font-size: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 50px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-
 }
 
 ph3{
-	width: 100%;
-	height: 15vh;
-	color: #fff;
-	display: flex;
-	align-content: center;
-	justify-content: center;
-	margin: 0px;
-	font-weight: bold;
-	transition: .5s ease-in-out;
-	font-size: 70px;
+	font-weight: normal;
+	margin: 0;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 50px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+ph4{
+	font-weight: normal;
+  padding-left: 62%;
+  padding-right: 48%;
+  color: #fff;
+  font-size: 25px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
 box {
-   width: 320px;
-   padding: 10px;
-   border: 5px solid black;
+   width:auto;
+   padding-top: 2.5%;
+   padding-bottom: 1%;
+   padding-right: 1%;
+   padding-left: 1%;
+   border: 5px solid lavender;
+   border-radius: 15px;
    align-content: center;
    justify-content: center;
+   margin-left: 45%;
+   margin-right: 45%;
+
 }
 
 .signup{
@@ -155,7 +175,6 @@ label{
 	display: flex;
 	margin: 60px;
 	font-weight: bold;
-	cursor: pointer;
 	transition: .5s ease-in-out;
 }
 
@@ -186,7 +205,6 @@ button{
 	border: none;
 	border-radius: 5px;
 	transition: .2s ease-in;
-	cursor: pointer;
 }
 input{
 	width: 60%;
@@ -222,11 +240,11 @@ button2{
 	font-size: 1em;
 	font-weight: bold;
 	margin-top: 20px;
+  margin-bottom: 30px;
 	outline: none;
 	border: none;
 	border-radius: 5px;
 	transition: .2s ease-in;
-	cursor: pointer;
 }
 
 
@@ -255,17 +273,17 @@ ul {
 
 li {
    float: left;
-   border-right: 1px solid blue;
+   border-right: 1px solid white;
 }
 
 liright {
    float: right;
-   border-right: 1px solid blue;
+   border-right: 1px solid white;
 }
 
 liright a {
      display: block;
-     color:#573b8a;
+     color:white;
      font-size:20px;
      text-align: center;
      padding: 10px 50px;
@@ -274,12 +292,12 @@ liright a {
 
 liright a:hover {
            background-color:#6d44b8;
-           color: white;
+           color: lavender;
 }
 
 li a {
      display: block;
-     color:#573b8a;
+     color:white;
      font-size:20px;
      text-align: center;
      padding: 10px 50px;
@@ -295,16 +313,19 @@ li a {
 }
 li a:hover {
            background-color:#6d44b8;
-           color: white;
+           color: lavender;
 }
 
 #profiles {
   font-family: Arial, Helvetica, sans-serif;
   position: sticky;
+  margin-top: 40px;
+  margin-left: 15%;
+  margin-right: 85%;
   border-collapse:collapse;
   width: 70%;
   height: 200px;
-  left: 250px;
+  justify-content: center;
 }
 
 #profiles td, #users th {
@@ -358,6 +379,7 @@ div.gallery img {
 div.desc {
   padding: 15px;
   text-align: center;
+  color: lavender;
 }
 
 * {
@@ -368,19 +390,6 @@ div.desc {
   padding: 0 6px;
   float: left;
   width: 24.99999%;
-}
-
-@media only screen and (max-width: 700px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .responsive {
-    width: 100%;
-  }
 }
 
 .clearfix:after {
@@ -395,6 +404,7 @@ div.desc {
 
 {% block title %}{% endblock %}
 {% block header %}{% endblock %}
+{% block header2 %}{% endblock %}
 {% block navbar %}{% endblock %}
 {% block content %}{% endblock %}
 
