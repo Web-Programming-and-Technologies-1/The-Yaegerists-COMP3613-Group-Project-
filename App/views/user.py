@@ -20,8 +20,8 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 
 @user_views.route('/users', methods=['GET'])
-def get_user_page():
-    users = get_all_users()
+def get_profile_page():
+    users = get_all_profiles()
     return render_template('users.html', users=users)
 
 @user_views.route('/static/users')

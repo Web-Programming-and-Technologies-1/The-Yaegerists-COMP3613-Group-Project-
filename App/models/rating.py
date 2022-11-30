@@ -7,7 +7,7 @@ class Rating(db.Model):
     ratingId = db.Column(db.Integer, primary_key=True)
     senderId = db.Column(db.Integer, db.ForeignKey(
         'profile.profileId'), nullable=False)
-    receivedId = db.Column(db.Integer, db.ForeignKey(
+    receiverId = db.Column(db.Integer, db.ForeignKey(
         'profile.profileId'), nullable=False)  
     score = db.Column(db.Integer, nullable=False)
     timeStamp = db.Column(db.Date, nullable=False)
@@ -20,7 +20,7 @@ class Rating(db.Model):
         return {
             'id': self.id,
             'senderId': self.senderId,
-            'receivedId': self.receivedId,
+            'receiverId': self.receiverId,
             'score': self.score,
             'timeStamp': self.timeStamp
         }
