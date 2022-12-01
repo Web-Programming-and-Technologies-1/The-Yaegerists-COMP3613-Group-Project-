@@ -37,17 +37,36 @@
 
 
 {% block content %}
+<div>
+  <i class="material-icons icon" style="font-size: 130px">account_circle</i>
+ 
+      <p class="hello">Username</p>
+ 
+  
+  <div style="margin-top: 10px">
 
-<div class='parent'>
+  </div>
+      <p class="hello">Full Name</p>
+  <div style="margin-top: 10px">
+
+  </div>
+      <p class="hello">Rating</p>
+  
+</div>
+
+<!-- <div class='parent'>
   <box><p class="ph2">Username</p></box> 
   <div class='child'> <p class="ph3">Name:</p></div>
   <div class='child'> <p class="ph3">Rank:</p></div>
-</div>
+</div> -->
   
   
- 
 
-  <button2 onclick="window.location.href='/editprofile';"><p class="ph3">Edit Profile </p></button2>
+  <button2 onclick="window.location.href='/editprofile';">
+    <p class="ph3">Edit Profile </p>
+  </button2>
+
+  
   <div class="responsive">
     <div class="gallery">
       <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">

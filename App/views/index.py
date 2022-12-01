@@ -1,4 +1,5 @@
 from flask import Blueprint, redirect, render_template, request, send_from_directory
+from App.controllers import *
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
@@ -21,7 +22,8 @@ def start_page():
 
 @index_views.route('/home', methods=['GET'])
 def home_page():
-    return render_template('home.html')
+    users = get_all_profiles()
+    return render_template('home.html', activeusers=users)
 
 @index_views.route('/myprofile', methods=['GET'])
 def myprofile_page():
@@ -35,6 +37,7 @@ def toprated_page():
 def editprofile_page():
     return render_template('editprofilepage.html')  
 
-@index_views.route('/otheruserprofile', methods=['GET'])
-def otheruserprofile_page():
-    return render_template('otheruserprofile.html')  
+@index_views.route('/otheruserprofile/<id>', methods=['GET'])
+def otheruserprofile_page(id):
+    user = get_profile(id)
+    return render_template('otheruserprofile.html', user=user)  

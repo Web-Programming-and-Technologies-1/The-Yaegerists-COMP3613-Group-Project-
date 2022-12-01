@@ -21,9 +21,9 @@
 
 <ul>  
 
-    <li><a class="active" href="/home">Home</a></li>
+    <li><a href="/home">Home</a></li>
 
-    <li><a href="toprated">Top Rated</a></li> 
+    <li><a class="active" href="toprated">Top Rated</a></li> 
 
     <liright><a class ="active2" href="/login">Logout</a></liright> 
 
@@ -38,40 +38,45 @@
 
 
 {% block content %}
-	
-<box><p class="ph2">Top 4 Rated</p></box>  	
+<div>
+  <i class="material-icons icon" style="font-size: 130px">trending_up</i>
+
+      <p class="hello">Top 3 Rated Profiles</p>
+
+
+  <div style="margin-top: 10px">
+
+  </div>
+      
+
+</div>	
 
   <table id="profiles">
     <tr>
-      <th>Ranking</th>
+      <th>Number</th>
       <th>Username </th>
       <th>View Profile</th>
       <th>Rating</th>
     </tr>
     <tr>
-      <td>Rank 1</td>
+      <td>1</td>
       <td>JoshuaAli</td>
       <td><p><button>profile</button></p></td>
       <td>20</td>
     </tr>
     <tr>
-      <td>Rank 2</td>
+      <td>2</td>
       <td>Tamika</td>
       <td><p><button>profile</button></p></td>
       <td>15</td>
     </tr>
     <tr>
-      <td>Rank 3</td>
+      <td>3</td>
       <td>Rae</td>
       <td><p><button>profile</button></p></td>
       <td>10</td>
     </tr>
-    <tr>
-      <td>Rank 4</td>
-      <td>Josh</td>
-      <td><p><button>profile</button></p></td>
-      <td>5</td>
-    </tr>
+    
   </table>
 
 

@@ -38,19 +38,33 @@ Edit My Profile
 
 
 {% block content %}
+<div>
+  <i class="material-icons icon" style="font-size: 130px">account_circle</i>
+ 
+      <!-- <p class="hello">Username</p>
+ 
+  
+  <div style="margin-top: 10px">
 
-<div class='parent'>
-  <box><p class="ph2">Change Info</p></box> 
-  <div class='child'> <p class="ph3">Username:</p></div>
-  <div class='child'> <p class="ph3">Name:</p></div>
-  <div class='child'> <p class="ph3">Rank:</p></div>
+  </div>
+      <p class="hello">Full Name</p>
+  <div style="margin-top: 10px">
+
+  </div>
+      <p class="hello">Rating</p> -->
+  
 </div>
+
 
   <input type="username" name="username" placeholder="New Username (Optional)" required="">
   <input type="name" name="name" placeholder="New Name (Optional)" required="">
   <input type="email" name="email" placeholder="New Email (Optional)" required="">
 
+  <div style="margin-top: 10px">
 
+  </div>
+  
+  <p class="hello">Update/ Remove Pictures</p>
 {% endblock %} 
 
 
@@ -107,4 +121,4 @@ Edit My Profile
 <button2 onclick="window.location.href='/myprofile';"><p class="ph3">Save Changes</p></button2>
 
 </div>
-{% endblock %} 
+{% endblock %}

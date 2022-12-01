@@ -38,44 +38,37 @@
 
 
 {% block content %}
-	
+  <div>
+    <i class="material-icons icon" style="font-size: 130px">account_circle</i>
+ 
+        <p class="hello">Profiles</p>
+ 
   
+    <div style="margin-top: 10px">
 
-
-    	
-  <box><p class="ph2">Profiles</p></box>
-
+    </div>
+        
+  
+  </div> 	
+  
   <table id="profiles">
     <tr>
-      <th>Ranking</th>
       <th>Username </th>
       <th>View Profile</th>
       <th>Rating</th>
     </tr>
+
+    <!--{% for user in activeusers %}
     <tr>
-      <td>Rank 6</td>
-      <td>John</td>
-      <td><p><button>profile</button><p></td>
-      <td>4</td>
+      <td>{{user.username}}</td>
+      <td><a href="/otheruserprofile/{{user.id}}">
+            <button>profile</button>
+          </a>
+      </td>
+      <td>{{user.ratings}}</td>
     </tr>
-    <tr>
-      <td>Rank 2</td>
-      <td>Tamika</td>
-      <td><p><button>profile</button></p></td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <td>Rank 4</td>
-      <td>Josh</td>
-      <td><p><button>profile</button></p></td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <td>Rank 10</td>
-      <td>Rocky</td>
-      <td><p><button>profile</button></p></td>
-      <td>1</td>
-    </tr>
+    {% endfor %}-->
+    
   </table>
 
 

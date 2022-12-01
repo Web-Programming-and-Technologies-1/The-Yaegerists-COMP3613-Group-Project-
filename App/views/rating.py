@@ -2,18 +2,20 @@ from flask import Blueprint, render_template, jsonify, request, send_from_direct
 from flask_jwt import jwt_required
 
 
-from App.controllers import (
-    create_rating, 
-    get_all_ratings,
-    get_all_ratings_json,
-    get_rating,
-    get_ratings_by_target,
-    get_ratings_by_creator,
-    get_rating_by_actors,
-    update_rating,
-    get_profile,
-    get_calculated_rating
-)
+#from App.controllers import (
+ #   create_rating, 
+  #  get_all_ratings,
+  #  get_all_ratings_json,
+   # get_rating,
+    #get_ratings_by_target,
+    #get_ratings_by_creator,
+    #get_rating_by_actors,
+    #update_rating,
+    #get_profile,
+    #get_calculated_rating
+#)
+
+from App.controllers import *
 
 rating_views = Blueprint('rating_views', __name__, template_folder='../templates')
 
