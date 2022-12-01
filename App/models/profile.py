@@ -3,7 +3,7 @@ from App.database import db
 from .profile_feed import *
 from flask import jsonify
 
-
+#Stores the users details 
 class Profile(db.Model):
     profileId = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)

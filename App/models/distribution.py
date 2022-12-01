@@ -1,7 +1,7 @@
 from App.database import db
 from datetime import date
 
-#Distributes a randomly selected group of user defined profiles from the database
+#Distributes a randomly selected group of user defined amount of profiles from the database
 class Distribution(db.Model):
     distributeId = db.Column(db.Integer, primary_key=True)
     numProfiles = db.Column(db.Integer, nullable=False)

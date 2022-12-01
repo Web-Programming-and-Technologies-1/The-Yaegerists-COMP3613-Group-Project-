@@ -1,7 +1,7 @@
 from App.database import db
 
 
-# Images uploaded by users
+# Stores the Images uploaded by users
 class Image(db.Model):
     imageId = db.Column(db.Integer, primary_key=True)
     profileId = db.Column(db.Integer, db.ForeignKey('profile.profileId'), nullable=False)
