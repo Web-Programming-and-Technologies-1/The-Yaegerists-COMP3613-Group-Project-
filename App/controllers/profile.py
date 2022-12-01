@@ -33,7 +33,7 @@ def get_all_profiles():
 def get_all_profiles_json():
     profiles = get_all_profiles()
     if profiles:
-        profiles = [profile.toJSON() for profile in profiles]
+        return [profile.toJSON() for profile in profiles]
     return []
 
 '''Update operations'''

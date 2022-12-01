@@ -5,47 +5,8 @@ from datetime import date, datetime
 
 from App.main import create_app
 from App.database import create_db
-from App.models import User, Image, Rating, Ranking
-from App.controllers import (
-    create_user,
-    get_user,
-    get_user_by_username,
-    get_all_users,
-    get_all_users_json,
-    update_user,
-    delete_user,
-
-    create_image,
-    get_all_images,
-    get_all_images_json,
-    get_images_by_userid_json,
-    get_image,
-    get_image_json,
-    delete_image,
-
-    create_rating, 
-    get_all_ratings,
-    get_all_ratings_json,
-    get_rating,
-    get_ratings_by_target,
-    get_ratings_by_creator,
-    get_rating_by_actors,
-    update_rating,
-    get_calculated_rating,
-    get_level,
-
-    create_ranking, 
-    get_all_rankings,
-    get_all_rankings_json,
-    get_ranking,
-    get_rankings_by_image,
-    get_rankings_by_creator,
-    get_ranking_by_actors,
-    get_calculated_ranking,
-    update_ranking,
-
-    authenticate
-)
+from App.models import *
+from App.controllers import *
 
 from wsgi import app
 
@@ -55,60 +16,60 @@ LOGGER = logging.getLogger(__name__)
 '''
    Unit Tests
 '''
-class UserUnitTests(unittest.TestCase):
+# class UserUnitTests(unittest.TestCase):
 
-    def test_new_user(self):
-        user = User("bob", "bobpass")
-        assert user.username == "bob"
+#     def test_new_user(self):
+#         user = User("bob", "bobpass")
+#         assert user.username == "bob"
 
-    def test_toJSON(self):
-        user = User("bob", "bobpass")
-        user_json = user.toJSON()
-        self.assertDictEqual(user_json, {"id":None, "username":"bob", "images": [], "ratings": []})
+#     def test_toJSON(self):
+#         user = User("bob", "bobpass")
+#         user_json = user.toJSON()
+#         self.assertDictEqual(user_json, {"id":None, "username":"bob", "images": [], "ratings": []})
     
-    def test_hashed_password(self):
-        password = "mypass"
-        hashed = generate_password_hash(password, method='sha256')
-        user = User("bob", password)
-        assert user.password != password
+#     def test_hashed_password(self):
+#         password = "mypass"
+#         hashed = generate_password_hash(password, method='sha256')
+#         user = User("bob", password)
+#         assert user.password != password
 
-    def test_check_password(self):
-        password = "mypass"
-        user = User("bob", password)
-        assert user.check_password(password)
+#     def test_check_password(self):
+#         password = "mypass"
+#         user = User("bob", password)
+#         assert user.check_password(password)
 
-class ImageUnitTests(unittest.TestCase):
+# class ImageUnitTests(unittest.TestCase):
 
-    def test_new_image(self):
-        image = Image(1)
-        assert image.rankings == []
+#     def test_new_image(self):
+#         image = Image(1)
+#         assert image.rankings == []
 
-    def test_toJSON(self):
-        image = Image(1)
-        image_json = image.toJSON()
-        self.assertDictEqual(image_json, {"id":None, "rankings":[], "userId": 1})
+#     def test_toJSON(self):
+#         image = Image(1)
+#         image_json = image.toJSON()
+#         self.assertDictEqual(image_json, {"id":None, "rankings":[], "userId": 1})
 
-class RatingUnitTests(unittest.TestCase):
+# class RatingUnitTests(unittest.TestCase):
 
-    def test_new_rating(self):
-        rating = Rating(1, 2, 3)
-        assert rating.score == 3
+#     def test_new_rating(self):
+#         rating = Rating(1, 2, 3)
+#         assert rating.score == 3
 
-    def test_toJSON(self):
-        rating = Rating(1, 2, 3)
-        rating_json = rating.toJSON()
-        self.assertDictEqual(rating_json, {"id":None, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()})
+#     def test_toJSON(self):
+#         rating = Rating(1, 2, 3)
+#         rating_json = rating.toJSON()
+#         self.assertDictEqual(rating_json, {"id":None, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()})
 
-class RankingUnitTests(unittest.TestCase):
+# class RankingUnitTests(unittest.TestCase):
 
-    def test_new_ranking(self):
-        ranking = Ranking(1, 2, 3)
-        assert ranking.score == 3
+#     def test_new_ranking(self):
+#         ranking = Ranking(1, 2, 3)
+#         assert ranking.score == 3
 
-    def test_toJSON(self):
-        ranking = Ranking(1, 2, 3)
-        ranking_json = ranking.toJSON()
-        self.assertDictEqual(ranking_json, {"id":None, "creatorId":1, "imageId": 2, "score":3})
+#     def test_toJSON(self):
+#         ranking = Ranking(1, 2, 3)
+#         ranking_json = ranking.toJSON()
+#         self.assertDictEqual(ranking_json, {"id":None, "creatorId":1, "imageId": 2, "score":3})
 
 '''
     Integration Tests
@@ -123,163 +84,159 @@ def empty_db():
     yield app.test_client()
     os.unlink(os.getcwd()+'/App/test.db')
 
+@pytest.mark.run(order=1)
 def test_authenticate():
-        user = create_user("bob", "bobpass")
+        profile = create_profile(username="bob", email="bob@gmail.com", password="bobpass")
         assert authenticate("bob", "bobpass") != None
 
 
-class UsersIntegrationTests(unittest.TestCase):
-
+class ProfileIntegrationTests(unittest.TestCase):
+    @pytest.mark.run(order=2)
     def test_create_user(self):
-        user = create_user("rick", "bobpass")
-        assert user.username == "rick"
+        profile = create_profile(username="rick", email="rick@mail.com", password="rickpass")
+        assert profile.username == "rick"
 
-    def test_get_user(self):
-        user = get_user(1)
-        assert user.username == "bob"
+    @pytest.mark.run(order=3)
+    def test_get_all_profiles_json(self):
+        profile_json = get_all_profiles_json()
+        self.assertListEqual([{"profileId":1, "username":"bob", "email": "bob@gmail.com", "recipients": [],"feeds":[]}, {"profileId":2, "username":"rick", "email": "rick@mail.com", "recipients": [],"feeds":[]}], profile_json)
 
-    def test_get_user_by_username(self):
-        user = get_user_by_username("rick")
-        assert user["username"] == "rick"
+    @pytest.mark.run(order=4)
+    def test_update_profile(self):
+        profile = update_profile(profileId=1, username="ronnie", email="ronnie@mail.com", password="ronniepass")
+        assert profile.username == "ronnie"
 
-    def test_get_all_users(self):
-        userList = []
-        userList.append(get_user(1))
-        userList.append(get_user(2))
-        self.assertEqual(get_all_users(), userList)
-
-    def test_get_all_users_json(self):
-        users_json = get_all_users_json()
-        self.assertListEqual([{"id":1, "username":"bob", "images": [], "ratings": []}, {"id":2, "username":"rick", "images": [], "ratings": []}], users_json)
-
-    def test_update_user(self):
-        update_user(1, "ronnie")
-        user = get_user(1)
-        assert user.username == "ronnie"
-
-    def test_delete_user(self):
-        create_user("phil", "philpass")
-        delete_user(3)
-        user = get_user(3)
-        assert user == None
+    @pytest.mark.run(order=5)
+    def test_delete_profile(self):
+        is_deleted = delete_profile(profileId=1)
+        assert is_deleted == True
 
 class ImageIntegrationTests(unittest.TestCase):
 
+    @pytest.mark.run(order=6)
     def test_create_image(self):
-        image = create_image(2)
-        assert image.id == 1
+        image = create_image(profileId=2, url ='https://i.pcmag.com/imagery/reviews/03aizylUVApdyLAIku1AvRV-39.fit_scale.size_760x427.v1605559903.png')
+        assert image.imageId == 1
 
-    def test_get_image(self):
-        image = get_image(1)
-        assert image.userId == 2
-
-    def test_get_all_images(self):
-        image = create_image(1)
-        imageList = []
-        imageList.append(get_image(1))
-        imageList.append(get_image(2))
-        self.assertListEqual(get_all_images(), imageList)
-
+    @pytest.mark.run(order=7)
+    def test_get_image_json(self):
+        image_json = get_image_json(imageId=1)
+        assert {"id":1, "profileId":2, "url":'https://i.pcmag.com/imagery/reviews/03aizylUVApdyLAIku1AvRV-39.fit_scale.size_760x427.v1605559903.png',"rankings":[]} == image_json
+       
+       
+    @pytest.mark.run(order=8)   
+    def test_get_images_by_profileId_json(self):
+        images_json = get_images_by_profileId_json(profileId=2)
+        self.assertListEqual([{"id":1, "profileId":2, "url":'https://i.pcmag.com/imagery/reviews/03aizylUVApdyLAIku1AvRV-39.fit_scale.size_760x427.v1605559903.png',"rankings":[]}],images_json)
+       
+    @pytest.mark.run(order=9) 
     def test_get_all_images_json(self):
+        image = create_image(profileId=2, url="https://media.newyorker.com/photos/6226b3a193b7d1ae15fad583/4:3/w_1032,h_774,c_limit/Chayka_google_v2.gif")
         images_json = get_all_images_json()
-        self.assertListEqual([{"id":1, "rankings":[], "userId": 2}, {"id":2, "rankings":[], "userId": 1}], images_json)
+        self.assertListEqual([{"id":1, "profileId":2, "url":'https://i.pcmag.com/imagery/reviews/03aizylUVApdyLAIku1AvRV-39.fit_scale.size_760x427.v1605559903.png',"rankings":[]}, {"id":2, "profileId":2, "url":'https://media.newyorker.com/photos/6226b3a193b7d1ae15fad583/4:3/w_1032,h_774,c_limit/Chayka_google_v2.gif',"rankings":[]}], images_json)
 
-    def test_get_images_by_userid_json(self):
-        images_json = get_images_by_userid_json(2)
-        self.assertListEqual(images_json, [{"id":1, "rankings":[], "userId": 2}])
-
+    @pytest.mark.run(order=10) 
+    def test_update_image(self):
+        new_image = update_image(imageId=1, url="https://www.shutterstock.com/image-photo/valencia-spain-march-05-2017-260nw-593204357.jpg")
+        assert new_image.url == "https://www.shutterstock.com/image-photo/valencia-spain-march-05-2017-260nw-593204357.jpg"
+   
+    @pytest.mark.run(order=11) 
     def test_delete_image(self):
-        image = create_image(1)
-        delete_image(image.id)
-        image = get_image(image.id)
-        assert image == None
+        is_deleted = delete_image(id=1)
+        assert is_deleted == True
+       
+# class RatingIntegrationTests(unittest.TestCase):
 
-    
-class RatingIntegrationTests(unittest.TestCase):
+#     def test_create_rating(self):
+#         rating = create_rating(1, 2, 3)
+#         assert rating.id == 1
 
-    def test_create_rating(self):
-        rating = create_rating(1, 2, 3)
-        assert rating.id == 1
+#     def test_get_rating(self):
+#         rating = get_rating(1)
+#         assert rating.creatorId == 1
 
-    def test_get_rating(self):
-        rating = get_rating(1)
-        assert rating.creatorId == 1
+#     def test_get_all_ratings(self):
+#         rating = create_rating(2, 1, 4)
+#         ratingList = []
+#         ratingList.append(get_rating(1))
+#         ratingList.append(get_rating(2))
+#         self.assertListEqual(get_all_ratings(), ratingList)
 
-    def test_get_all_ratings(self):
-        rating = create_rating(2, 1, 4)
-        ratingList = []
-        ratingList.append(get_rating(1))
-        ratingList.append(get_rating(2))
-        self.assertListEqual(get_all_ratings(), ratingList)
+#     def test_get_all_ratings_json(self):
+#         ratings_json = get_all_ratings_json()
+#         self.assertListEqual([{"id":1, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()}, {"id":2, "creatorId":2, "targetId": 1, "score":4, "timeStamp": date.today()}], ratings_json)
 
-    def test_get_all_ratings_json(self):
-        ratings_json = get_all_ratings_json()
-        self.assertListEqual([{"id":1, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()}, {"id":2, "creatorId":2, "targetId": 1, "score":4, "timeStamp": date.today()}], ratings_json)
+#     def test_get_ratings_by_creatorid(self):
+#         ratings = get_ratings_by_creator(2)
+#         self.assertListEqual(ratings, [{"id":2, "creatorId":2, "targetId": 1, "score":4, "timeStamp": date.today()}])
 
-    def test_get_ratings_by_creatorid(self):
-        ratings = get_ratings_by_creator(2)
-        self.assertListEqual(ratings, [{"id":2, "creatorId":2, "targetId": 1, "score":4, "timeStamp": date.today()}])
+#     def test_get_ratings_by_targetid(self):
+#         ratings = get_ratings_by_target(2)
+#         self.assertListEqual(ratings, [{"id":1, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()}])
 
-    def test_get_ratings_by_targetid(self):
-        ratings = get_ratings_by_target(2)
-        self.assertListEqual(ratings, [{"id":1, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()}])
+#     def test_get_rating_by_actors(self):
+#         rating = get_rating_by_actors(1, 2)
+#         assert rating.id == 1
 
-    def test_get_rating_by_actors(self):
-        rating = get_rating_by_actors(1, 2)
-        assert rating.id == 1
+#     def test_update_rating(self):
+#         rating = update_rating(1, 5)
+#         assert rating.score == 5
 
-    def test_update_rating(self):
-        rating = update_rating(1, 5)
-        assert rating.score == 5
+#     def test_try_calculate_rating(self):
+#         user = create_user("phil", "philpass")
+#         rating = create_rating(user.id, 2, 5)
+#         calculated = get_calculated_rating(2)
+#         assert calculated == 4
 
-    def test_try_calculate_rating(self):
-        user = create_user("phil", "philpass")
-        rating = create_rating(user.id, 2, 5)
-        calculated = get_calculated_rating(2)
-        assert calculated == 4
-
-    def test_get_level(self):
-        assert get_level(1) == 1
+#     def test_get_level(self):
+#         assert get_level(1) == 1
 
 
-class RankingIntegrationTests(unittest.TestCase):
+# class RankingIntegrationTests(unittest.TestCase):
 
-    def test_create_rating(self):
-        ranking = create_ranking(1, 2, 3)
-        assert ranking.id == 1
+#     def test_create_rating(self):
+#         ranking = create_ranking(1, 2, 3)
+#         assert ranking.id == 1
 
-    def test_get_ranking(self):
-        ranking = get_ranking(1)
-        assert ranking.creatorId == 1
+#     def test_get_ranking(self):
+#         ranking = get_ranking(1)
+#         assert ranking.creatorId == 1
 
-    def test_get_all_rankings(self):
-        ranking = create_ranking(2, 1, 4)
-        rankingList = []
-        rankingList.append(get_ranking(1))
-        rankingList.append(get_ranking(2))
-        self.assertListEqual(get_all_rankings(), rankingList)
+#     def test_get_all_rankings(self):
+#         ranking = create_ranking(2, 1, 4)
+#         rankingList = []
+#         rankingList.append(get_ranking(1))
+#         rankingList.append(get_ranking(2))
+#         self.assertListEqual(get_all_rankings(), rankingList)
 
-    def test_get_all_rankings_json(self):
-        rankings_json = get_all_rankings_json()
-        self.assertListEqual([{"id":1, "creatorId":1, "imageId": 2, "score":3}, {"id":2, "creatorId":2, "imageId": 1, "score":4}], rankings_json)
+#     def test_get_all_rankings_json(self):
+#         rankings_json = get_all_rankings_json()
+#         self.assertListEqual([{"id":1, "creatorId":1, "imageId": 2, "score":3}, {"id":2, "creatorId":2, "imageId": 1, "score":4}], rankings_json)
 
-    def test_get_rankings_by_creatorid(self):
-        rankings = get_rankings_by_creator(2)
-        self.assertListEqual(rankings, [{"id":2, "creatorId":2, "imageId": 1, "score":4}])
+#     def test_get_rankings_by_creatorid(self):
+#         rankings = get_rankings_by_creator(2)
+#         self.assertListEqual(rankings, [{"id":2, "creatorId":2, "imageId": 1, "score":4}])
 
-    def test_get_rankings_by_imageid(self):
-        rankings = get_rankings_by_image(2)
-        self.assertListEqual(rankings, [{"id":1, "creatorId":1, "imageId": 2, "score":3}])
+#     def test_get_rankings_by_imageid(self):
+#         rankings = get_rankings_by_image(2)
+#         self.assertListEqual(rankings, [{"id":1, "creatorId":1, "imageId": 2, "score":3}])
 
-    def test_get_ranking_by_actors(self):
-        ranking = get_ranking_by_actors(1, 2)
-        assert ranking.id == 1
+#     def test_get_ranking_by_actors(self):
+#         ranking = get_ranking_by_actors(1, 2)
+#         assert ranking.id == 1
 
-    def test_update_ranking(self):
-        ranking = update_ranking(1, 5)
-        assert ranking.score == 5
+#     def test_update_ranking(self):
+#         ranking = update_ranking(1, 5)
+#         assert ranking.score == 5
 
-    def test_try_calculate_ranking(self):
-        ranking = create_ranking(3, 2, 5)
-        calculated = get_calculated_ranking(2)
-        assert calculated == 4
+#     def test_try_calculate_ranking(self):
+#         ranking = create_ranking(3, 2, 5)
+#         calculated = get_calculated_ranking(2)
+#         assert calculated == 4
+
+
+# class DistributionIntegrationTests(unittest.TestCase):
+#     pass
+
+# class ProfileFeedIntegrationTests(unittest.TestCase):
+#     pass
