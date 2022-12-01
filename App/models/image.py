@@ -9,6 +9,9 @@ class Image(db.Model):
     rankings = db.relationship(
         'Ranking', backref='ranking', lazy=True, cascade="all, delete-orphan")
 
+    def __init__(self, profileId,url):
+        self.profileId =profileId
+        self.url = url
 
     def toJSON(self):
         return {
