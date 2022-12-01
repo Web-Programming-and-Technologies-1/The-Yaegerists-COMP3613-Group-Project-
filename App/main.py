@@ -6,7 +6,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from datetime import timedelta
-
+from .forms import *
 
 from App.database import create_db
 

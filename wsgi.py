@@ -6,6 +6,7 @@ from App.database import create_db, get_migrate
 from App.main import create_app
 from App.controllers import ( create_profile, get_all_profiles_json, get_all_profiles )
 
+from App.forms import *
 # This commands file allow you to create convenient CLI commands for testing controllers
 
 
