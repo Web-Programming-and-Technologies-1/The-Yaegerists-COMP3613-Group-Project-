@@ -14,8 +14,8 @@ def identity(payload):
     return Profile.query.get(payload['identity'])
 
 #Remember a user login details 
-def login_user(user, remember):
-    return flask_login.login_user(user, remember=remember)
+# def login_user(user, remember):
+#     return flask_login.login_user(user, remember=remember)
 
 #Allow user to logout of the system once logged in
 def logout_user():

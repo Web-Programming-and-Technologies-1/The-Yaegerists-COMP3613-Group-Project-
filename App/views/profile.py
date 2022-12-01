@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory
+from flask_login import LoginManager, current_user, login_user, login_required, login_manager
 from flask_jwt import jwt_required
 
 
@@ -19,7 +20,7 @@ def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
 
-@user_views.route('/api/users', methods=['POST'])
+@user_views.route('/api/createUsers', methods=['POST'])
 def create_profile_action():
     data = request.json
     user = get_profile_by_username(data['username'])
@@ -29,10 +30,10 @@ def create_profile_action():
     return jsonify({"message":"User Created"}) 
 
 
-@user_views.route('/api/all', methods=['GET'])
+@user_views.route('/api/allProfiles', methods=['GET'])
 def get_all_profiles_action():
-    users = get_all_profiles()
-    return users.toJSON()
+    users = get_all_profiles_json()
+    return jsonify(users)
 
 
 @user_views.route('/api/users/byid', methods=['GET'])
@@ -54,15 +55,15 @@ def get_profile_action():
 
 
 
-@user_views.route('/api/users', methods=['PUT'])
+@user_views.route('/api/updateUsers', methods=['PUT'])
 def update_profile_action():
     data = request.json
-    user = update_profile(data['id'], data['username'])
+    user = update_profile(data['id'], data['username'], data['email'], data['password'])
     if user:
         return jsonify({"message":"User Updated"})
     return jsonify({"message":"User Not Found"})
 
-@user_views.route('/api/users', methods=['DELETE'])
+@user_views.route('/api/deleteUsers', methods=['DELETE'])
 def delete_profile_action():
     data = request.json
     if get_profile(data['id']):
@@ -80,21 +81,20 @@ def identify_user_action():
 #left as user because auth uses USER
 @user_views.route('/auth', methods=['POST'])
 def login_profile_action():
-    data = request.get_json()
-    user = authenticate(data['username'], data['password'])
-    if user:
-        login_user(user, False)
-        session["username"] = user.username
-        session["user_id"] = user.id
-        return jsonify({"message": f"{user.username} logged in"}) 
-    return jsonify({"message":"Username and password do not match"}) 
+    userData = request.get_json()
+    user= authenticate(username = userData['username'], password= userData['password'])
+    if user == None:
+        return 'ERROR: Wrong username or password!'
+    else:
+        #login_user(user)
+        return 'SUCCESS: User logged in successfully'
 
 
-@user_views.route('/api/users/level', methods=['GET'])
-def get_level_action():
-    data = request.json
-    user = get_profile(data['userId'])
-    if user:
-        level = get_level(user.id)
-        return jsonify({"level":f"{level}"})
-    return jsonify({"message":"User Not Found"})
+# @user_views.route('/api/users/level', methods=['GET'])
+# def get_level_action():
+#     data = request.json
+#     user = get_profile(data['userId'])
+#     if user:
+#         level = get_level(user.id)
+#         return jsonify({"level":f"{level}"})
+#     return jsonify({"message":"User Not Found"})
