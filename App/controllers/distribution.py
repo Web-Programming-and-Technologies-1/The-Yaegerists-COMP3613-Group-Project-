@@ -45,6 +45,7 @@ def distribute(numProfiles, senderId):
                 displayProfile.append(profile)               
                 create_distribution(availableProfiles)
                 create_profile_Feed(senderId, rand)
-        return displayProfile 
+        return displayProfile
+         
     return None
 
