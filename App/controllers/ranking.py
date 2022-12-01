@@ -1,8 +1,17 @@
-from App.models import Ranking, Profile, Image
+from App.models import Ranking
 from App.database import db
 from sqlalchemy.exc import IntegrityError
 
+from .profile import(
+    get_profile
+)
+
+from .image import (
+    get_image
+)
+
 '''Create operations'''
+#Create a ranking to a specific image
 def create_ranking(rankerId, imageId, score):
     new_ranking = Ranking(rankerId=rankerId, imageId=imageId, score=score)
     try:
@@ -14,42 +23,54 @@ def create_ranking(rankerId, imageId, score):
     return None 
 
 '''Read operations'''
+# Return ranking with the specified ranker Id 
 def get_rankings_by_ranker(rankerId):
     return Ranking.query.filter_by(rankerId=rankerId)
 
+# Return ranking with the specified image Id 
 def get_rankings_by_image(imageId):
     return Ranking.query.filter_by(imageId=imageId)
 
+# Return ranking with the specified rank Id 
 def get_ranking(id):
     return Ranking.query.get(id)
-    
+
+# Return all rankings
 def get_all_rankings():
     return Ranking.query.all()
 
+# gets all rankings and return the rankings in JSON format or None otherwise
 def get_all_rankings_json():
-    rankings = Ranking.query.all()
+    rankings = get_all_rankings()
     if rankings: 
         return [ranking.toJSON() for ranking in rankings]
     return None
 
-def get_rankings_by_ranker(rankerId):
-    rankings = Ranking.query.filter_by(rankerId=rankerId)
+# gets all rankings by ranker ID and return the rankings in JSON format or None otherwise
+def get_rankings_by_ranker_json(rankerId):
+    rankings = get_rankings_by_ranker(rankerId)
     if rankings:   
         return[ranking.toJSON() for ranking in rankings]
     return None
 
-def get_rankings_by_image(imageId):
-    rankings = Ranking.query.filter_by(imageId=imageId)
+# gets all rankings by image ID and return the rankings in JSON format or None otherwise
+def get_rankings_by_image_json(imageId):
+    rankings = get_rankings_by_image(imageId)
     if rankings:
         return [ranking.toJSON() for ranking in rankings]
     return None
 
+# gets all rankings made by a Profile  and return the rankings  or None otherwise
 def get_ranking_by_actors(rankerId, imageId):
-    if Profile.query.get(rankerId) and Image.query.get(imageId):
+    if get_profile(rankerId) and get_image(imageId):
         return Ranking.query.filter_by(rankerId=rankerId, imageId=imageId).first()
     return None
 
 '''Update operations'''
+# Get a rank based on rank ID
+# Return none if rank not found
+# Updates the rank details if found
+# Returns the updated rank or None otherwise
 def update_ranking(id, score):
     ranking = get_ranking(id)
     try:
@@ -62,12 +83,27 @@ def update_ranking(id, score):
     except:
         db.session.rollback()
     return None
-    
 
-#what Use case is this - can be removed
-    
+'''Delete Operations''' 
+# Get a rank based n rank ID
+# Return false if rank not found
+# Deletes the rank if found and return true  
+def delete_rank(id):
+    rank = get_ranking(id)
+    try:
+        if rank:
+            db.session.delete(rank)
+            db.session.commit()
+            return True
+        return False
+    except:
+        db.session.rollback()
+    return False
+
+
+# Get all image rankings and get avergae rankings 
 def get_calculated_ranking(imageId):
-    rankings = Ranking.query.filter_by(imageId=imageId)
+    rankings = get_rankings_by_image(imageId)
     total = 0
     if rankings:
         for ranking in rankings:

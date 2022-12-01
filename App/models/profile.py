@@ -1,5 +1,6 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
+from .profile_feed import *
 from flask import jsonify
 
 
@@ -8,9 +9,11 @@ class Profile(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    recipients = db.relationship('ProfileFeed', backref='recipients',
-                                 lazy=True, cascade="all, delete-orphan")
-    feeds = db.relationship('ProfileFeed', backref='feeds',
+    recipients = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.senderId")
+#    feeds = db.relationship('ProfileFeed', backref='feeds', foreign_keys=[profilefeed.receiverId],
+#                           lazy=True, cascade="all, delete-orphan")
+    feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
+    image = db.relationship('Image', backref='image',
                            lazy=True, cascade="all, delete-orphan")
 
     def __init__(self, username, email, password):
@@ -20,7 +23,7 @@ class Profile(db.Model):
 
     def toJSON(self):
         return {
-            'profileId': self.id,
+            'profileId': self.profileId,
             'username': self.username,
             'email': self.email,
             'recipients': [recipient.toJSON() for recipient in self.recipients],

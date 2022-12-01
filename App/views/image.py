@@ -6,11 +6,11 @@ from App.controllers import (
     create_image, 
     get_all_images,
     get_all_images_json,
-    get_images_by_userid_json,
+    get_images_by_profileId_json,
     get_image,
     get_image_json,
     delete_image,
-    get_user
+    get_profile
 )
 
 image_views = Blueprint('image_views', __name__, template_folder='../templates')
@@ -24,7 +24,7 @@ def get_image_page():
 @image_views.route('/api/images', methods=['POST'])
 def create_image_action():
     data = request.json
-    user = get_user(data['userId'])
+    user = get_profile(data['userId'])
     if user:
         image = create_image(data['userId'])
         return jsonify({"message":"Image created"}) 
@@ -36,9 +36,9 @@ def get_images_all_action():
     return jsonify(images)
 
 @image_views.route('/api/images/user', methods=['GET'])
-def get_images_by_user_action():
+def get_images_by_profile_action():
     data = request.json
-    images = get_images_by_userid_json(data['userId'])
+    images = get_images_by_profileId_json(data['userId'])
     return jsonify(images)
 
 @image_views.route('/api/images/id', methods=['GET'])
