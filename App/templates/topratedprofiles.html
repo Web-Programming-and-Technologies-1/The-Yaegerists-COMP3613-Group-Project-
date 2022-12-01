@@ -1,0 +1,84 @@
+{% extends "temp.html" %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    {% block title %}
+    Top Rated
+    {% endblock %}
+    
+    {% block header %}
+    BeRealER.
+    {% endblock %}
+    
+    {% block header2 %}
+    Top Rated
+    {% endblock %}
+
+{{ super() }}
+
+
+{% block navbar %} 
+
+
+<ul>  
+
+    <li><a href="/home">Home</a></li>
+
+    <li><a class="active" href="toprated">Top Rated</a></li> 
+
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
+
+    <liright><a href="/myprofile">My Profile</a></liright> 
+
+  </ul>  
+
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<div>
+  <i class="material-icons icon" style="font-size: 130px">trending_up</i>
+
+      <p class="hello">Top 3 Rated Profiles</p>
+
+
+  <div style="margin-top: 10px">
+
+  </div>
+      
+
+</div>	
+
+  <table id="profiles">
+    <tr>
+      <th>Number</th>
+      <th>Username </th>
+      <th>View Profile</th>
+      <th>Rating</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>JoshuaAli</td>
+      <td><p><button>profile</button></p></td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Tamika</td>
+      <td><p><button>profile</button></p></td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Rae</td>
+      <td><p><button>profile</button></p></td>
+      <td>10</td>
+    </tr>
+    
+  </table>
+
+
+{% endblock %} 
+

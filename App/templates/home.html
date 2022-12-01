@@ -1,0 +1,120 @@
+{% extends "temp.html" %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    {% block title %}
+    Homepage
+    {% endblock %}
+    
+    {% block header %}
+    BeRealER.
+    {% endblock %}
+    
+    {% block header2 %}
+    For you
+    {% endblock %}
+
+{{ super() }}
+
+
+{% block navbar %} 
+
+
+<ul>  
+
+    <li><a class="active" href="/home">Home</a></li>
+
+    <li><a href="/toprated">Top Rated</a></li> 
+
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
+
+    <liright><a href="/myprofile">My Profile</a></liright> 
+
+  </ul>  
+
+
+{% endblock %}
+
+
+
+
+{% block content %}
+  <div>
+    <i class="material-icons icon" style="font-size: 130px">account_circle</i>
+ 
+        <p class="hello">Profiles</p>
+ 
+  
+    <div style="margin-top: 10px">
+
+    </div>
+        
+  
+  </div> 	
+  
+  <table id="profiles">
+    <tr>
+      <th>Username </th>
+      <th>View Profile</th>
+      <th>Rating</th>
+    </tr>
+
+    <!--{% for user in activeusers %}
+    <tr>
+      <td>{{user.username}}</td>
+      <td><a href="/otheruserprofile/{{user.id}}">
+            <button>profile</button>
+          </a>
+      </td>
+      <td>{{user.ratings}}</td>
+    </tr>
+    {% endfor %}-->
+    
+  </table>
+
+
+{% endblock %} 
+
+
+
+<!--
+<body>
+<ph3>Profiles</ph3> 
+
+<table id="profiles">
+  <tr>
+    <th>Ranking</th>
+    <th>Username </th>
+    <th>View Profile</th>
+    <th>Rating</th>
+  </tr>
+  <tr>
+    <td>Rank 1</td>
+    <td>JoshuaAli</td>
+    <td><button>profile</button></td>
+    <td>20</td>
+  </tr>
+  <tr>
+    <td>Rank 2</td>
+    <td>Tamika</td>
+    <td><button>profile</button></td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>Rank 3</td>
+    <td>Rae</td>
+    <td><button>profile</button></td>
+    <td>10</td>
+  </tr>
+  <tr>
+    <td>Rank 4</td>
+    <td>Josh</td>
+    <td><button>profile</button></td>
+    <td>5</td>
+  </tr>
+</table>
+
+
+</body>
+-->
+
+
