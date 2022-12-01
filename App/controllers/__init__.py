@@ -4,3 +4,4 @@ from .image import *
 from .rating import *
 from .ranking import *
 from .profile_feed import *
+from .distribution import *

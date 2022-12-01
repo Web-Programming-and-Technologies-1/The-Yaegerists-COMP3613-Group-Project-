@@ -4,8 +4,8 @@ from sqlalchemy.exc import IntegrityError
 
 '''Create operations'''
 #Upload an image to a specific profile
-def create_image(profileId):
-    new_image = Image(profileId=profileId)
+def create_image(profileId, url):
+    new_image = Image(profileId=profileId,url=url)
     try:
         db.session.add(new_image)
         db.session.commit()
