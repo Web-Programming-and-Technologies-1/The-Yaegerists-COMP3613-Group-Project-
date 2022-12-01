@@ -1,6 +1,6 @@
 from App.database import db
 
-# Rankings are created by users when they rate other users' pictures
+# Stores the Ranking details created by users when they rate other users' images
 class Ranking(db.Model):
     rankingId = db.Column(db.Integer, primary_key=True)
     rankerId = db.Column(db.Integer, db.ForeignKey(
