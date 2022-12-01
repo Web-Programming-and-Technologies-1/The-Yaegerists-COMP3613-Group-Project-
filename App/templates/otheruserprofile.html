@@ -1,0 +1,95 @@
+{% extends "temp.html" %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    {% block title %}
+    Profile Page
+    {% endblock %}
+    
+    {% block header %}
+    BeRealER.
+    {% endblock %}
+    
+    {% block header2 %}
+    Full Name
+    {% endblock %}
+
+{{ super() }}
+
+{% block navbar %} 
+
+
+<ul>  
+
+    <li><a  href="/home">Home</a></li>
+
+    <li><a href="/toprated">Top Rated</a></li> 
+
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
+
+    <liright><a href="/myprofile">My Profile</a></liright> 
+
+  </ul>  
+
+
+{% endblock %}
+
+{% block content %} 
+    <div>
+        <i class="material-icons icon" style="font-size: 130px">account_circle</i>
+       
+            <p class="hello">Username</p>
+       
+        
+        <div style="margin-top: 10px">
+
+        </div>
+            <p class="hello">Rating</p>
+        
+    </div>
+    
+        <p class="h">Rank User's Pictures</p>
+    <div>
+       
+        <div class="responsive">
+            <div class="gallery">
+                <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+                  <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+                </a>
+                <div class="desc">Rank</div>
+              </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+                  <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+                </a>
+                <div class="desc">Rank</div>
+              </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+                  <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+                </a>
+                <div class="desc">Rank</div>
+              </div>
+        </div>
+
+        <div class="responsive">
+            <div class="gallery">
+                <a target="_blank" href="{{url_for('static', filename='background.jpg')}}">
+                  <img src="{{url_for('static', filename='background.jpg')}}" alt="picture" width="600" height="400">
+                </a>
+                <div class="desc">Rank</div>
+              </div>
+        </div>
+
+        
+
+        
+    </div>
+
+    
+{% endblock %}

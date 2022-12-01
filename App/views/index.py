@@ -33,4 +33,8 @@ def toprated_page():
 
 @index_views.route('/editprofile', methods=['GET'])
 def editprofile_page():
-    return render_template('editprofilepage.html')    
+    return render_template('editprofilepage.html')  
+
+@index_views.route('/otheruserprofile', methods=['GET'])
+def otheruserprofile_page():
+    return render_template('otheruserprofile.html')  

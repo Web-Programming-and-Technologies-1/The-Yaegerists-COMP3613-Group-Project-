@@ -118,15 +118,16 @@ h4 {
 	font-weight:bold;
   text-align: center;
   color: #fff;
-  font-size: 50px;
+  font-size: 25px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .ph2 {
+  border: 1px #fff;
 	font-weight: normal;
   text-align: center;
   color: #fff;
-  font-size:30px;
+  font-size: 14px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -149,14 +150,14 @@ h4 {
 
 
 box {
-  margin-top: 5%;
-  width: 25%;
+  margin-top: 1%;
+  width: 15%;
   border: 2px solid lavender;
   border-radius: 15px;
-  margin-left: 37%;
   justify-content: center;
+  align-items: center;
   display: flex;
-  box-shadow: 5px 20px 50px #000;
+  box-shadow: 5px 20px 20px #000;
 }
 
 box2 {
@@ -345,7 +346,7 @@ liright {
 liright a {
      display: block;
      color:white;
-     font-size:20px;
+     font-size:14px;
      text-align: center;
      padding: 10px 50px;
      text-decoration: none;
@@ -359,7 +360,7 @@ liright a:hover {
 li a {
      display: block;
      color:white;
-     font-size:20px;
+     font-size:14px;
      text-align: center;
      padding: 10px 50px;
      text-decoration: none;
@@ -444,10 +445,10 @@ div.gallery img {
 }
 
 div.desc {
-  padding: 15px;
+  padding: 5px;
   text-align: center;
   color: lavender;
-  font-size: 25px;
+  font-size: 15px;
 	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
@@ -456,9 +457,13 @@ div.desc {
 }
 
 .responsive {
-  padding: 0 6px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
   float: left;
-  width: 24.99999%;
+  width: 27%;
+  
 }
 
 .row:after {
@@ -469,12 +474,22 @@ div.desc {
 
 
 .hello{
-  font-size: 30px;
+  margin: auto;
+  width: 20%;
+  border: 2px solid white;
+  border-radius: 5px;
+  font-size: 20px;
 }
 .hi{
   background:linear-gradient(to bottom, black, black, #302b63);
 }
 
+.h{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-size: 25px;
+  text-decoration: underline;
+}
 input2[type="file"]{
  display: none;
  width: 20%;
@@ -515,7 +530,7 @@ input2[type="file"]{
 
 {% block navbar %}{% endblock %}
 
-  <div class="home">
+  <div class="home" style="overflow: auto">
     {% block content %}{% endblock %}
   </div>
   {% block additionalcontent %}{% endblock %}
