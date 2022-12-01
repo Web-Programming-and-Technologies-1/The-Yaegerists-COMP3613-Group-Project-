@@ -29,7 +29,7 @@ def get_profile(profileId):
 def get_all_profiles():
     return Profile.query.all()
 
-#Return all profile in JSON format USED
+#Gets and returns all profile in JSON format USED
 def get_all_profiles_json():
     profiles = get_all_profiles()
     if profiles:
