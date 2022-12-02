@@ -1,0 +1,21 @@
+{% extends "temp.html" %}
+
+{% block title %}
+Upload Picture
+{% endblock %}
+
+{% block header %}
+BeRealER.
+{% endblock %}
+
+{% block header2 %}
+Create Account
+{% endblock %}
+
+{{ super() }}
+
+{% block content %} 
+    <i class="material-icons icon" style="font-size: 150px">account_circle</i>
+    <p>Upload Picture</p>
+    <input type="file" accept="file"></input> 
+{% endblock %}
