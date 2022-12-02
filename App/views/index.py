@@ -1,6 +1,9 @@
-from flask import Blueprint, redirect, render_template, request, send_from_directory
+from flask import Blueprint, session, redirect, render_template, request, send_from_directory, url_for
 from App.controllers import *
-from App.forms import SignUp
+from App.forms import SignUp, LogIn
+from flask_sqlalchemy_session import current_session
+from flask_login import LoginManager, current_user, login_manager, login_required
+from flask import Flask
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
@@ -10,7 +13,21 @@ def createaccount_page():
 
 @index_views.route('/login', methods=['GET'])
 def login_page():
-    return render_template('login.html')
+    form = LogIn()
+    return render_template('login.html', form=form)
+    
+@index_views.route('/login', methods=['POST'])
+def loginAction():
+  form = LogIn()
+  if form.validate_on_submit(): # respond to form submission
+      data = request.form
+      profile = Profile.query.filter_by(username = data['username']).first()
+      if profile and profile.check_password(data['password']): # check credentials
+        #flash('Logged in successfully.') # send message to next page
+        login_user(profile, remember=True) # login the user
+        return render_template('home.html', activeusers=get_all_profiles()) # redirect to main page if login successful
+  #flash('Invalid credentials')
+  return render_template('login.html')
 
 @index_views.route('/signup', methods=['GET'])
 def signup_page():
@@ -26,7 +43,7 @@ def signupAction():
     db.session.add(newprofile) # save new user
     db.session.commit()
     ##flash('Account Created!')# send message
-    return render_template('login.html')# redirect to login page
+    return render_template('login.html', form= LogIn())# redirect to login page
   ##flash('Error invalid input!')
   return render_template('signup.html', form = form)
 
@@ -40,8 +57,10 @@ def home_page():
     return render_template('home.html', activeusers=users)
 
 @index_views.route('/myprofile', methods=['GET'])
+@login_required
 def myprofile_page():
-    return render_template('profilepage.html')
+    
+    return render_template('profilepage.html', profile=current_user)
 
 @index_views.route('/toprated', methods=['GET'])
 def toprated_page():
