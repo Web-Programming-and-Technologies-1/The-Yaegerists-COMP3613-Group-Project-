@@ -145,51 +145,45 @@ class ImageIntegrationTests(unittest.TestCase):
         is_deleted = delete_image(id=1)
         assert is_deleted == True
        
-# class RatingIntegrationTests(unittest.TestCase):
+class RatingIntegrationTests(unittest.TestCase):
 
-#     def test_create_rating(self):
-#         rating = create_rating(1, 2, 3)
-#         assert rating.id == 1
+    @pytest.mark.run(order=12) 
+    def test_create_rating(self):
+        rating = create_rating(senderId=1, receiverId=2, score=4)
+        assert rating.ratingId == 1
 
-#     def test_get_rating(self):
-#         rating = get_rating(1)
-#         assert rating.creatorId == 1
+    @pytest.mark.run(order=13) 
+    def test_get_ratings_by_receiver_json(self):
+        ratings = get_ratings_by_receiver_json(receiverId=2)
+        self.assertListEqual(ratings, [{"id":1, "senderId":1, "receiverId": 2, "score":4, "timeStamp": date.today()}])
+    
+    @pytest.mark.run(order=14) 
+    def test_get_ratings_by_sender_json(self):
+        ratings = get_ratings_by_sender_json(senderId=1)
+        self.assertListEqual(ratings, [{"id":1, "senderId":1, "receiverId": 2, "score":4, "timeStamp": date.today()}])
 
-#     def test_get_all_ratings(self):
-#         rating = create_rating(2, 1, 4)
-#         ratingList = []
-#         ratingList.append(get_rating(1))
-#         ratingList.append(get_rating(2))
-#         self.assertListEqual(get_all_ratings(), ratingList)
+    @pytest.mark.run(order=15) 
+    def test_get_all_ratings_json(self):
+        ratings_json = get_all_ratings_json()
+        self.assertListEqual([{"id":1, "senderId":1, "receiverId": 2, "score":4, "timeStamp": date.today()}], ratings_json)
 
-#     def test_get_all_ratings_json(self):
-#         ratings_json = get_all_ratings_json()
-#         self.assertListEqual([{"id":1, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()}, {"id":2, "creatorId":2, "targetId": 1, "score":4, "timeStamp": date.today()}], ratings_json)
+    # @pytest.mark.run(order=16)
+    # def test_get_rating_by_actors(self):
+    #     rating = get_rating_by_actors(senderId=1, receiverId=2)
+    #     assert rating.score == 4
 
-#     def test_get_ratings_by_creatorid(self):
-#         ratings = get_ratings_by_creator(2)
-#         self.assertListEqual(ratings, [{"id":2, "creatorId":2, "targetId": 1, "score":4, "timeStamp": date.today()}])
+    # def test_update_rating(self):
+    #     rating = update_rating(1, 5)
+    #     assert rating.score == 5
 
-#     def test_get_ratings_by_targetid(self):
-#         ratings = get_ratings_by_target(2)
-#         self.assertListEqual(ratings, [{"id":1, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()}])
+    # def test_try_calculate_rating(self):
+    #     user = create_user("phil", "philpass")
+    #     rating = create_rating(user.id, 2, 5)
+    #     calculated = get_calculated_rating(2)
+    #     assert calculated == 4
 
-#     def test_get_rating_by_actors(self):
-#         rating = get_rating_by_actors(1, 2)
-#         assert rating.id == 1
-
-#     def test_update_rating(self):
-#         rating = update_rating(1, 5)
-#         assert rating.score == 5
-
-#     def test_try_calculate_rating(self):
-#         user = create_user("phil", "philpass")
-#         rating = create_rating(user.id, 2, 5)
-#         calculated = get_calculated_rating(2)
-#         assert calculated == 4
-
-#     def test_get_level(self):
-#         assert get_level(1) == 1
+    # def test_get_level(self):
+    #     assert get_level(1) == 1
 
 
 # class RankingIntegrationTests(unittest.TestCase):

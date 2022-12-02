@@ -12,8 +12,10 @@ class Rating(db.Model):
     score = db.Column(db.Integer, nullable=False)
     timeStamp = db.Column(db.Date, nullable=False)
 
-    def __init__(self):
-        self.score = 0
+    def __init__(self,senderId, receiverId ,score):
+        self.senderId = senderId
+        self.receiverId = receiverId
+        self.score = score
         self.timeStamp = date.today()
 
     def toJSON(self):

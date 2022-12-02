@@ -1,4 +1,4 @@
-from App.models import Rating
+from App.models import Rating, Profile
 from App.database import db
 from sqlalchemy.exc import IntegrityError
 
@@ -58,7 +58,8 @@ def get_ratings_by_sender_json(senderId):
 
 # get ratings based on actors ID and returns the ratings in JSON format or None otherwise
 def get_rating_by_actors(senderId, receiverId):
-    if get_profile(senderId) and get_profile(receiverId):
+    # if get_profile(senderId) and get_profile(receiverId):
+    if Profile.query.get(senderId) and Profile.query.get(receiverId):
         return  Rating.query.filter_by(senderId=senderId, receiverId=receiverId).first()  
     return None
 
@@ -97,7 +98,7 @@ def delete_rating(id):
         db.session.rollback()
     return False
 
-#Gets rating base don receiver Id and the average rating and return the avg rating or None otherwise
+#Gets rating based on receiver Id and the average rating and return the avg rating or None otherwise
 def get_calculated_rating(receiverId):
     ratings = get_ratings_by_receiver(receiverId)
     total = 0

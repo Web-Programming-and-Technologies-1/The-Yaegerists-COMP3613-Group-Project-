@@ -1,9 +1,11 @@
 from flask import Blueprint, session, redirect, render_template, request, send_from_directory, url_for
-from App.controllers import *
-from App.forms import SignUp, LogIn
-from flask_sqlalchemy_session import current_session
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user, login_manager, login_required
 from flask import Flask
+from App.controllers import *
+from App.forms import SignUp, LogIn
+# from flask_sqlalchemy_session import current_session
+
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
