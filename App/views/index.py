@@ -19,16 +19,18 @@ def uploadpicturesAction():
     form = UploadPicture()
     if form.validate_on_submit():
        data=request.form
-       url=request.file['url']
-       imagedata = create_image(profileid=data['profileid'], url=url)
+       imagedata = create_image(profileId=current_user.profileId,url=data['url'])
        #return render_template('Home.html')   
        return render_template('uploadpictures.html',form=form)  
+
 
 @index_views.route('/login', methods=['GET'])
 def login_page():
     form = LogIn()
     return render_template('login.html', form=form)
     
+
+
 @index_views.route('/login', methods=['POST'])
 def loginAction():
   form = LogIn()
@@ -41,6 +43,7 @@ def loginAction():
         return render_template('home.html', activeusers=get_all_profiles()) # redirect to main page if login successful
   #flash('Invalid credentials')
   return render_template('login.html')
+
 
 @index_views.route('/signup', methods=['GET'])
 def signup_page():
@@ -73,7 +76,7 @@ def home_page():
 @login_required
 def myprofile_page():
     
-    return render_template('profilepage.html', profile=current_user)
+    return render_template('profilepage.html',images=get_images_by_profileId(current_user.profileId) ,profile=current_user)
 
 @index_views.route('/toprated', methods=['GET'])
 def toprated_page():
@@ -86,8 +89,8 @@ def editprofile_page():
 @index_views.route('/otheruserprofile/<id>', methods=['GET'])
 def otheruserprofile_page(id):
     user = get_profile(id)
-    #userImages = get_images_by_profileId(id)
-    return render_template('otheruserprofile.html', user=user)  
+    userImages = get_images_by_profileId(id)
+    return render_template('otheruserprofile.html', user=user, images=userImages)  
 
 @index_views.route('/allprofiles', methods=['GET'])
 def p_page():

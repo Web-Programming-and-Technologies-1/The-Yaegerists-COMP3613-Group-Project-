@@ -14,13 +14,32 @@ Create Account
 
 {{ super() }}
 
+{% block navbar %} 
+
+
+<ul>  
+
+    <li><a class="active" href="/home">Home</a></li>
+
+    <li><a href="/toprated">Top Rated</a></li> 
+
+    <li><a href="#"> Upload Picture</a></li>
+
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
+
+    <liright><a href="/myprofile">My Profile</a></liright> 
+
+  </ul>  
+
+
+{% endblock %}
+
 {% block content %} 
     <i class="material-icons icon" style="font-size: 150px">account_circle</i>
     <form method="POST" action="/uploadpictures" enctype="multipart/form-data">
     {{ form.csrf_token }}
-    {{ form.image.label }}
-    {{ form.image(size=20, class="validate") }}
-    {{profile.image}}
+    {{form.url.label}}
+    {{ form.url(size=20, class="validate") }} 
     
     
     {{form.submit(class="button")}}

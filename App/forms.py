@@ -17,6 +17,7 @@ class LogIn(FlaskForm):
     submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
 class UploadPicture(FlaskForm):
-    username = StringField('Username')
-    image = FileField("Upload Profile Image:")
+    #username = StringField('Username')
+    url = StringField('URL:')
+    #image = FileField("Upload Profile Image:")
     submit = SubmitField('Upload Image', render_kw={'class': 'btn waves-effect waves-light white-text'})

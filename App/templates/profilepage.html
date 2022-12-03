@@ -20,13 +20,15 @@
 
 <ul>  
 
-    <li><a  href="/home">Home</a></li>
+    <li><a class="active" href="/home">Home</a></li>
 
     <li><a href="/toprated">Top Rated</a></li> 
 
+    <li><a href="/uploadpictures"> Upload Picture</a></li>
+
     <liright><a class ="active2" href="/login">Logout</a></liright> 
 
-    <liright><a class="active" href="/myprofile">My Profile</a></liright> 
+    <liright><a href="/myprofile">My Profile</a></liright> 
 
   </ul>  
 
@@ -66,43 +68,17 @@
     <p class="ph3">Edit Profile </p>
   </button2>
 
-  
+  {% for image in images %}
   <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
+      <div class="gallery">
+          <a target="_blank" href="{{image.url}}">
+            <img src="{{image.url}}" alt="picture" width="600" height="400">
+          </a>
+          <div class="desc">Rank</div>
+        </div>
   </div>
-  
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc">rating</div>
-    </div>
-  </div>
+  {% endfor %}
+
   
 {% endblock %} 
 
