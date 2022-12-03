@@ -7,41 +7,46 @@ from App.forms import SignUp, LogIn, UploadPicture
 # from flask_sqlalchemy_session import current_session
 
 
-index_views = Blueprint('index_views', __name__, template_folder='../templates')
+index_views = Blueprint('index_views', __name__,
+                        template_folder='../templates')
+
 
 @index_views.route('/uploadpictures', methods=['GET'])
 def uploadpictures_page():
     form = UploadPicture()
-    return render_template('uploadpictures.html',form=form)
+    return render_template('uploadpictures.html', form=form)
+
 
 @index_views.route('/uploadpictures', methods=['POST'])
 def uploadpicturesAction():
     form = UploadPicture()
     if form.validate_on_submit():
-       data=request.form
-       imagedata = create_image(profileId=current_user.profileId,url=data['url'])
-       #return render_template('Home.html')   
-       return render_template('uploadpictures.html',form=form)  
+       data = request.form
+       imagedata = create_image(
+           profileId=current_user.profileId, url=data['url'])
+       # return render_template('Home.html')
+       return render_template('uploadpictures.html', form=form)
 
 
 @index_views.route('/login', methods=['GET'])
 def login_page():
     form = LogIn()
     return render_template('login.html', form=form)
-    
 
 
 @index_views.route('/login', methods=['POST'])
 def loginAction():
   form = LogIn()
-  if form.validate_on_submit(): # respond to form submission
-      data = request.form
-      profile = Profile.query.filter_by(username = data['username']).first()
-      if profile and profile.check_password(data['password']): # check credentials
-        #flash('Logged in successfully.') # send message to next page
-        login_user(profile, remember=True) # login the user
+  if form.validate_on_submit():  # respond to form submission
+    data = request.form
+    #   profile = get_profile_by_username(username = data['username'])
+    #   if profile and profile.check_password(data['password']): # check credentials USE CONTROLLERS    
+    user = authenticate(username= data['username'], password=data['password'])
+    if user :
+        # flash('Logged in successfully.') # send message to next page
+        # login_user(profile, remember=True) # login the user
         return render_template('home.html', activeusers=get_all_profiles(),form=form) # redirect to main page if login successful
-  #flash('Invalid credentials')
+  # flash('Invalid credentials')
   return render_template('login.html',form=form)
 
 
@@ -55,12 +60,10 @@ def signupAction():
   form = SignUp() # create form object
   if form.validate_on_submit():
     data = request.form # get data from form submission
-    newprofile = Profile(username=data['username'], email=data['email'], password=data['password']) # create user object
-    db.session.add(newprofile) # save new user
-    db.session.commit()
-    ##flash('Account Created!')# send message
+    newprofile = create_profile(username=data['username'], email=data['email'], password=data['password']) # create user object
+    # flash('Account Created!')# send message
     return render_template('login.html', form= LogIn())# redirect to login page
-  ##flash('Error invalid input!')
+  # flash('Error invalid input!')
   return render_template('signup.html', form = form)
 
 @index_views.route('/', methods=['GET'])

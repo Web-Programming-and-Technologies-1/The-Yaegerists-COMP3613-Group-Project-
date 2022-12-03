@@ -6,6 +6,8 @@ from sqlalchemy.exc import IntegrityError
 
 #Create a new profile using the specified information USED
 def create_profile(username, email,  password):
+    if get_profile_by_username(username=username):
+        return None
     new_profile = Profile(username=username, email=email, password=password)
     try:
         db.session.add(new_profile)
