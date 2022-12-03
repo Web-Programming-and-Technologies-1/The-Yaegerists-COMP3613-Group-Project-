@@ -1,15 +1,20 @@
 from App.models import Image
 from App.database import db
 from sqlalchemy.exc import IntegrityError
+from .profile import (
+    get_profile
+)
 
 '''Create operations'''
 #Upload an image to a specific profile
 def create_image(profileId, url):
-    new_image = Image(profileId=profileId,url=url)
+    profile = get_profile(profileId)
     try:
-        db.session.add(new_image)
-        db.session.commit()
-        return new_image
+        if profile:
+            new_image = Image(profileId=profileId,url=url)
+            db.session.add(new_image)
+            db.session.commit()
+            return new_image
     except IntegrityError:
         db.session.rollback()
     return None 
@@ -83,3 +88,5 @@ def delete_image(id):
     except:
         db.session.rollback()
     return False
+
+

@@ -23,6 +23,31 @@ def create_distribution(numProfiles):
         db.session.rollback()
     return None 
 
+'''Read Operation'''
+def get_distribution(distributeId):
+    return Distribution.query.filter_by(distributeId=distributeId).first()
+
+def get_distribution_json(distributionId):
+    distribution = get_distribution(distributionId)
+    if distribution:
+        return distribution.toJSON()
+    return None
+
+def get_all_distributions():
+    return Distribution.query.all()
+
+def get_all_distributions_json():
+    distributions = get_all_distributions()
+    if distributions:
+        return[distribution.toJSON() for distribution in distributions]
+    return None
+
+def get_profile_feeds(distributeId):
+    profile_feed = get_distribution(distributeId)
+    if profile_feed:
+        return profile_feed.profileFeeds
+    return None
+
 # query all profiles
 # shuffles all profiles found
 # find the minimum number between available profiles and profiles requested
