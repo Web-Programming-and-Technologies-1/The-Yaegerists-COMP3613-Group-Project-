@@ -1,7 +1,11 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
+from flask_login import UserMixin
+from .profile_feed import*
+from flask import jsonify 
 
-class Profile(db.Model):
+
+class Profile(db.Model, UserMixin):
     profileId = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)

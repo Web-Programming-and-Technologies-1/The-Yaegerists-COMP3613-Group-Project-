@@ -41,10 +41,10 @@ def loginAction():
     data = request.form
     #   profile = get_profile_by_username(username = data['username'])
     #   if profile and profile.check_password(data['password']): # check credentials USE CONTROLLERS    
-    user = authenticate(username= data['username'], password=data['password'])
-    if user :
+    profile = authenticate(username= data['username'], password=data['password'])
+    if profile :
         # flash('Logged in successfully.') # send message to next page
-        # login_user(profile, remember=True) # login the user
+        login_user(profile, remember=True) # login the user
         return render_template('home.html', activeusers=get_all_profiles(),form=form) # redirect to main page if login successful
   # flash('Invalid credentials')
   return render_template('login.html',form=form)
