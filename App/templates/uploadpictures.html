@@ -16,6 +16,14 @@ Create Account
 
 {% block content %} 
     <i class="material-icons icon" style="font-size: 150px">account_circle</i>
-    <p>Upload Picture</p>
-    <input type="file" accept="file"></input> 
+    <form method="POST" action="/uploadpictures" enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    {{ form.image.label }}
+    {{ form.image(size=20, class="validate") }}
+    {{profile.image}}
+    
+    
+    {{form.submit(class="button")}}
+
+   </form>
 {% endblock %}

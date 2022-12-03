@@ -3,15 +3,26 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user, login_manager, login_required
 from flask import Flask
 from App.controllers import *
-from App.forms import SignUp, LogIn
+from App.forms import SignUp, LogIn, UploadPicture
 # from flask_sqlalchemy_session import current_session
 
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
-@index_views.route('/createaccount', methods=['GET'])
-def createaccount_page():
-    return render_template('index.html')
+@index_views.route('/uploadpictures', methods=['GET'])
+def uploadpictures_page():
+    form = UploadPicture()
+    return render_template('uploadpictures.html',form=form)
+
+@index_views.route('/uploadpictures', methods=['POST'])
+def uploadpicturesAction():
+    form = UploadPicture()
+    if form.validate_on_submit():
+       data=request.form
+       url=request.file['url']
+       imagedata = create_image(profileid=data['profileid'], url=url)
+       #return render_template('Home.html')   
+       return render_template('uploadpictures.html',form=form)  
 
 @index_views.route('/login', methods=['GET'])
 def login_page():
@@ -75,6 +86,7 @@ def editprofile_page():
 @index_views.route('/otheruserprofile/<id>', methods=['GET'])
 def otheruserprofile_page(id):
     user = get_profile(id)
+    #userImages = get_images_by_profileId(id)
     return render_template('otheruserprofile.html', user=user)  
 
 @index_views.route('/allprofiles', methods=['GET'])

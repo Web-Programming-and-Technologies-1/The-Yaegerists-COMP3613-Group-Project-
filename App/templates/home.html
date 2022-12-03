@@ -58,7 +58,7 @@
       <th>Rating</th>
     </tr>
 
-    <{% for user in activeusers %}
+    {% for user in activeusers %}
     <tr>
       <td>{{user.username}}</td>
       <td><a href="/otheruserprofile/{{user.profileId}}">
