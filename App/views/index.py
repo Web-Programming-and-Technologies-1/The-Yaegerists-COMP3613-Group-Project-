@@ -86,11 +86,17 @@ def toprated_page():
 def editprofile_page():
     return render_template('editprofilepage.html')  
 
-@index_views.route('/otheruserprofile/<id>', methods=['GET'])
+@index_views.route('/otheruserprofile/<id>', methods=['GET', 'POST'])
 def otheruserprofile_page(id):
     user = get_profile(id)
     userImages = get_images_by_profileId(id)
-    return render_template('otheruserprofile.html', user=user, images=userImages)  
+    rating = get_ratings_by_sender(current_user.profileId)
+    if request.method == "POST":
+        data = request.form
+        rating = create_rating(current_user.profileId, user.profileId, data['rating'])
+        return render_template('home.html', user=user, images=userImages, ratings = rating)
+    return render_template('otheruserprofile.html', user=user, images=userImages, ratings = rating)  
+
 
 @index_views.route('/allprofiles', methods=['GET'])
 def p_page():

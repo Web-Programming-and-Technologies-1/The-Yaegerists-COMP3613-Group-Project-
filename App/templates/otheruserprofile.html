@@ -46,10 +46,31 @@
 
         </div>
             <p class="hello">Rating</p>
-        
+            <p>{{ratings.score}}</p>
+            <form method="POST" action="/otheruserprofile/{{user.id}}">
+                <div class="row">
+                    <input type="radio" class="radio" name="x" value="1" id="a" />
+                    <p for="a">1 Star</p>
+
+                    <input type="radio" class="radio" name="x" value="2" id="b" />
+                    <p for="b">2 Star</>
+                    
+                    <input type="radio" class="radio" name="x" value="3" id="c" />
+                    <p for="c">3 Star</p>
+                
+                    <input type="radio" class="radio" name="x" value="4" id="d" />
+                    <p for="d">4 Star</>
+                
+                    <input type="radio" class="radio" name="x" value="5" id="e" />
+                    <p for="e">5 Star</>
+
+                    <input type="submit" value="Submit">
+                  </div>
+                
+            </form>
     </div>
     
-        <p class="h">Rank User's Pictures</p>
+        <div><p class="h">Rank User's Pictures</p></div>
   
        {% for image in images %}
         <div class="responsive">
