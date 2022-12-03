@@ -16,60 +16,54 @@ LOGGER = logging.getLogger(__name__)
 '''
    Unit Tests
 '''
-# class UserUnitTests(unittest.TestCase):
+class ProfileUnitTests(unittest.TestCase):
 
-#     def test_new_user(self):
-#         user = User("bob", "bobpass")
-#         assert user.username == "bob"
+    def test_new_profile(self):
+        profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
+        assert profile.username == "bob"
 
-#     def test_toJSON(self):
-#         user = User("bob", "bobpass")
-#         user_json = user.toJSON()
-#         self.assertDictEqual(user_json, {"id":None, "username":"bob", "images": [], "ratings": []})
+    def test_toJSON(self):
+        profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
+        profile_json = profile.toJSON()
+        self.assertDictEqual(profile_json, {"profileId":None, "username":"bob", "email":"bob@mail.com",  "recipients": [], "feeds": []})
     
-#     def test_hashed_password(self):
-#         password = "mypass"
-#         hashed = generate_password_hash(password, method='sha256')
-#         user = User("bob", password)
-#         assert user.password != password
+    def test_hashed_password(self):
+        password = "mypass"
+        hashed = generate_password_hash(password, method='sha256')
+        profile = Profile(username="bob", email="bob@mail.com", password=password)
+        assert profile.password != password
 
-#     def test_check_password(self):
-#         password = "mypass"
-#         user = User("bob", password)
-#         assert user.check_password(password)
+    def test_set_password(self):
+        password = "bobpass"
+        hashed = generate_password_hash(password, method='sha256')
+        profile = Profile(username="bob", email="bob@mail.com", password=password)
+        assert profile.password != password
 
-# class ImageUnitTests(unittest.TestCase):
+    def test_check_password(self):
+        password = "mypass"
+        profile = Profile(username="bob", email="bob@mail.com", password=password)
+        assert profile.check_password(password)
 
-#     def test_new_image(self):
-#         image = Image(1)
-#         assert image.rankings == []
+class ImageUnitTests(unittest.TestCase):
 
-#     def test_toJSON(self):
-#         image = Image(1)
-#         image_json = image.toJSON()
-#         self.assertDictEqual(image_json, {"id":None, "rankings":[], "userId": 1})
+    def test_toJSON(self):
+        image = Image(profileId=1, url="https://play.google.com/store/apps/dev?id=5700313618786177705&hl=en_US&gl=US")
+        image_json = image.toJSON()
+        self.assertDictEqual(image_json, {"id":None, "profileId": 1, "url":"https://play.google.com/store/apps/dev?id=5700313618786177705&hl=en_US&gl=US","rankings":[]})
 
-# class RatingUnitTests(unittest.TestCase):
+class RatingUnitTests(unittest.TestCase):
 
-#     def test_new_rating(self):
-#         rating = Rating(1, 2, 3)
-#         assert rating.score == 3
-
-#     def test_toJSON(self):
-#         rating = Rating(1, 2, 3)
-#         rating_json = rating.toJSON()
-#         self.assertDictEqual(rating_json, {"id":None, "creatorId":1, "targetId": 2, "score":3, "timeStamp": date.today()})
+    def test_toJSON(self):
+        rating = Rating(senderId=1, receiverId=2, score=4)
+        rating_json = rating.toJSON()
+        self.assertDictEqual(rating_json, {"id":None, "senderId":1, "receiverId": 2, "score":4, "timeStamp": date.today()})
 
 # class RankingUnitTests(unittest.TestCase):
 
-#     def test_new_ranking(self):
-#         ranking = Ranking(1, 2, 3)
-#         assert ranking.score == 3
-
 #     def test_toJSON(self):
-#         ranking = Ranking(1, 2, 3)
+#         ranking = Ranking()
 #         ranking_json = ranking.toJSON()
-#         self.assertDictEqual(ranking_json, {"id":None, "creatorId":1, "imageId": 2, "score":3})
+#         self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":3})
 
 '''
     Integration Tests
