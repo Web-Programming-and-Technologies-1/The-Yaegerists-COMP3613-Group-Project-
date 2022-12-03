@@ -96,9 +96,11 @@ def otheruserprofile_page(id):
     rating = get_ratings_by_sender(current_user.profileId)
     if request.method == "POST":
         data = request.form
-        rating = create_rating(current_user.profileId, user.profileId, data['rating'])
-        return render_template('home.html', user=user, images=userImages, ratings = rating)
-    return render_template('otheruserprofile.html', user=user, images=userImages, ratings = rating)  
+        rating = create_rating(senderId=current_user.profileId, receiverId=user.profileId, score=data['rating'])
+        #return render_template('home.html', user=user, images=userImages, ratings = rating)
+        return render_template('otheruserprofile.html', user=user, images=userImages, ratings = rating)
+    if request.method == "GET":
+       return render_template('otheruserprofile.html', user=user, images=userImages, ratings = rating)  
 
 
 @index_views.route('/allprofiles', methods=['GET'])

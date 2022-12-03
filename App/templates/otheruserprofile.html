@@ -43,34 +43,41 @@
        
         
         <div style="margin-top: 10px">
-
+  
         </div>
-            <p class="hello">Rating</p>
-            <p>{{ratings.score}}</p>
-            <form method="POST" action="/otheruserprofile/{{user.id}}">
+            <p class="hello">Rating:{{ratings.score}}</p>
+            <div><p class="h">Rank User's Pictures</p></div>
+            <p2>{{ratings.score}}</p2>
+            <form method="POST" action="/otheruserprofile/{{user.profileId}}">
                 <div class="row">
-                    <input type="radio" class="radio" name="x" value="1" id="a" />
-                    <p for="a">1 Star</p>
+                 <div class="column">
+                    <input type="radio" class="radio" name="rating" value="1" id="a" />
+                    <p2 for="a"> 1 Star </p2>
+                 </div>
+                 <div class="column">
+                    <input type="radio" class="radio" name="rating" value="2" id="b" />
+                    <p2 for="b"> 2 Star </p2>
+                </div>
+           
+                 <div class="column"> 
+                    <input type="radio" class="radio" name="rating" value="3" id="c" />
+                    <p2 for="c"> 3 Star </p2>
+                </div>
 
-                    <input type="radio" class="radio" name="x" value="2" id="b" />
-                    <p for="b">2 Star</>
-                    
-                    <input type="radio" class="radio" name="x" value="3" id="c" />
-                    <p for="c">3 Star</p>
-                
-                    <input type="radio" class="radio" name="x" value="4" id="d" />
-                    <p for="d">4 Star</>
-                
-                    <input type="radio" class="radio" name="x" value="5" id="e" />
-                    <p for="e">5 Star</>
-
+                <div class="column">
+                    <input type="radio" class="radio" name="rating" value="4" id="d" />
+                    <p2 for="d"> 4 Star </p2>
+                </div>
+                <div class="column">
+                    <input type="radio" class="radio" name="rating" value="5" id="e" />
+                    <p2 for="e">5 Star</p2>
+                </div>
+                </div>
                     <input type="submit" value="Submit">
-                  </div>
                 
             </form>
     </div>
     
-        <div><p class="h">Rank User's Pictures</p></div>
   
        {% for image in images %}
         <div class="responsive">

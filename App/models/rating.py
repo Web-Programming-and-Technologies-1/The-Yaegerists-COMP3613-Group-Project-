@@ -9,7 +9,7 @@ class Rating(db.Model):
         'profile.profileId'), nullable=False)
     receiverId = db.Column(db.Integer, db.ForeignKey(
         'profile.profileId'), nullable=False)  
-    score = db.Column(db.Integer, nullable=False)
+    score = db.Column(db.Integer,unique=False, nullable=False)
     timeStamp = db.Column(db.Date, nullable=False)
 
     def __init__(self,senderId, receiverId ,score):
