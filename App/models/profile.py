@@ -12,8 +12,7 @@ class Profile(db.Model, UserMixin):
     password = db.Column(db.String(120), nullable=False)
     recipients = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.senderId")
     feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
-    image = db.relationship('Image', backref='image',
-                           lazy=True, cascade="all, delete-orphan")
+    image = db.relationship('Image', backref='image',lazy=True, cascade="all, delete-orphan")
     
 
     def __init__(self, username, email, password):

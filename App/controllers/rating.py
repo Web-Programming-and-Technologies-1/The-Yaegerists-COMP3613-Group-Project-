@@ -110,6 +110,16 @@ def get_calculated_rating(receiverId):
         return total
     return None
 
+#Gets total rating based on receiver Id and returns the total or None otherwise
+def get_total_rating(receiverId):
+    ratings = get_ratings_by_receiver(receiverId)
+    total = 0
+    if ratings:
+        for rating in ratings:
+            total = total + rating.score
+        return total
+    return None
+    
 #Gets the sender ratings and calculates the profile tier and returns the tier or None otherwise
 def get_level(id):
     ratings = get_ratings_by_sender_json(id)

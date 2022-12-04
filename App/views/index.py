@@ -93,14 +93,18 @@ def editprofile_page():
 def otheruserprofile_page(id):
     user = get_profile(id)
     userImages = get_images_by_profileId(id)
-    rating = get_ratings_by_sender(current_user.profileId)
+    rating = get_ratings_by_receiver(id)
+    average = get_calculated_rating(id)
+    average=round(average,2)
     if request.method == "POST":
         data = request.form
         rating = create_rating(senderId=current_user.profileId, receiverId=user.profileId, score=data['rating'])
+        average = get_calculated_rating(id)
+        average=round(average,2)
         #return render_template('home.html', user=user, images=userImages, ratings = rating)
-        return render_template('otheruserprofile.html', user=user, images=userImages, ratings = rating)
+        return render_template('otheruserprofile.html',average=average, user=user, images=userImages, ratings = rating)
     if request.method == "GET":
-       return render_template('otheruserprofile.html', user=user, images=userImages, ratings = rating)  
+       return render_template('otheruserprofile.html',average=average, user=user, images=userImages, ratings = rating)  
 
 
 @index_views.route('/allprofiles', methods=['GET'])
