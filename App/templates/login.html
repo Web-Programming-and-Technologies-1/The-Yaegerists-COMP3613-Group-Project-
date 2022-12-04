@@ -15,7 +15,7 @@
 				<form method="POST" action="/login">
 					{{ form.csrf_token }}
                     <h1 aria-hidden="true">BeRealER.</h1>
-                    <h1>Welcome back to the better BeReal :)</h1>
+                    <h2>Welcome back to the better BeReal :)</h2>
 
 					{{ form.username.label }}
 					{{ form.username(size=20, class="validate") }}
@@ -23,7 +23,9 @@
 					{{ form.password.label }}
 					{{ form.password(size=20, class="validate") }}
               		
-					{{form.submit}}
+					<div class="button:hover">
+						{{form.submit(class="button")}}
+						</div>
 					<!-- <input type="text" name="username" placeholder="Username" required="">
 					<input type="password" name="password" placeholder="Password" required="">
 					 <button onclick="window.location.href='/home';">Login</button> 

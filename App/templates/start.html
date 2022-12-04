@@ -9,16 +9,20 @@
 {% block content %} 
 
 <body>
-	<div class="main2" title="Start">  	
+	<div class="main3" title="Start">  	
 			<div class="start" aria-hidden="true">
 				<form>
 
-                    <label aria-hidden="true">BeRealER.</label>
-                    <h1>Welcome to BeRealER!</h1>
+                    <h1 aria-hidden="true">BeRealER.</h1>
+                    <h2>Welcome to BeRealER!</h2>
 					<h2>Sign Up or Login to start sharing and ranking photos :)</h2>
-					<input type="button" onclick="window.location.href='/signup';"  value="Sign Up"/>
+					<div class="button:hover">
+						<input type="button" class="button" onclick="window.location.href='/signup';"  value="Sign Up"/>
+					</div>
 					<h1>OR</h1>
-					<input type="button" onclick="window.location.href='/login';"  value="Login"/>
+					<div class="button:hover">
+						<input type="button" class ="button" onclick="window.location.href='/login';"  value="Login"/>
+					</div>
 				</form>
 			</div>
 	</div>
