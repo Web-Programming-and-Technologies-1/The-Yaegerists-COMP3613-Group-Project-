@@ -71,9 +71,21 @@ def start_page():
     return render_template('start.html')
 
 @index_views.route('/home', methods=['GET'])
+@login_required
 def home_page():
-    users = get_all_profiles()
-    return render_template('home.html', activeusers=users)
+    profiles = get_all_profiles()
+
+    ###Trying the profile feed here
+    numProfiles=0
+    for profile in profiles:
+        numProfiles=numProfiles+1
+
+    distribution=create_distribution(numProfiles=numProfiles)
+    for profile in profiles:
+        profile=create_profile_Feed(profile.profileId,current_user.profileId,distribution.distributeId)
+    ###
+    #profiles.feeds = get_all_profile_feed()                                        
+    return render_template('home.html', activeusers=profiles)
 
 @index_views.route('/myprofile', methods=['GET'])
 @login_required
@@ -94,19 +106,35 @@ def editprofile_page():
 @index_views.route('/otheruserprofile/<id>', methods=['GET', 'POST'])
 def otheruserprofile_page(id):
     user = get_profile(id)
-    userImages = get_images_by_profileId(id)
+    ###ImageRanking here
+    rankingtotal=0
+    allrankings=get_all_rankings()
+    images = get_images_by_profileId(id)
+        #for image in images:
+         #ranking=Ranking(current_user,image.imageId,score=data2['ranking'])
+    ###
+    ###ProfileRating
     rating = get_ratings_by_receiver(id)
     average = get_calculated_rating(id)
     average=round(average,2)
+    ###
     if request.method == "POST":
+        ###ProfileRating
         data = request.form
         rating = create_rating(senderId=current_user.profileId, receiverId=user.profileId, score=data['rating'])
         average = get_calculated_rating(id)
         average=round(average,2)
+        ###
+        ###ImageRanking
+        for image in images:
+           ranking=create_ranking(rankerId=current_user.profileId,imageId=image.imageId,score=data['ranking'])
+           rankingtotal=get_total_ranking(imageId=image.imageId)
+        allrankings=get_all_rankings()
+        ###   
         #return render_template('home.html', user=user, images=userImages, ratings = rating)
-        return render_template('otheruserprofile.html',average=average, user=user, images=userImages, ratings = rating)
+        return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating, rankings=allrankings, rankingtotal=rankingtotal)
     if request.method == "GET":
-       return render_template('otheruserprofile.html',average=average, user=user, images=userImages, ratings = rating)  
+       return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating, rankings=allrankings, rankingtotal=rankingtotal)  
 
 
 @index_views.route('/allprofiles', methods=['GET'])

@@ -112,3 +112,14 @@ def get_calculated_ranking(imageId):
             total = total / rankings.count()
         return total
     return None
+
+def get_total_ranking(imageId):
+    rankings = get_rankings_by_image(imageId)
+    total = 0
+    if rankings:
+        for ranking in rankings:
+            total = total + ranking.score
+        return total
+    return None
+
+
