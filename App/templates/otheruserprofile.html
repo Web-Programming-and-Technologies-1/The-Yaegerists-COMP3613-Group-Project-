@@ -102,7 +102,7 @@
             <div class="row">
                 {% for n in range(loop.length) %}
                 <div class="column">
-                    <input type="radio" class="radio" name="ranking" value="{{n+1}}" id="f" />
+                    <input type="radio" class="radio" name="ranking{{n+1}}" onClick="getRanking({{n+1}})" value={{n+1}} id="f" />
                     <p3 for="f"> {{n+1}} </p3>
                 </div>
                 {% endfor %} 
@@ -123,6 +123,9 @@
 
                 
         <script>
+            let ranking = [];
+            let image= {{images}};
+
             function saveRating() {
                 var ele = document.getElementsByName('rating');
               
@@ -133,14 +136,19 @@
                 }
             }
 
-            function saveRanking(){
-                var ele = document.getElementsByName('ranking');
-
-                for(i=0; i<ele.length; i++){
-                    if(ele[i].checked)
-                    document.getElementById("r").innerHTML
-                        = "Ranking: "+ele[i].value;
+            function getRanking(n){
+                var ele = document.getElementsByName('ranking'+ n);
+                if(ele.checked){
+                    ranking.push(n)
+     
                 }
+            
+            }
+
+            function saveRanking(){
+                const request = new XMLHttpRequest()
+                request.open('POST', '/')
+                
             }
             
         </script>
