@@ -85,15 +85,7 @@ def myprofile_page():
 def toprated_page():
     profiles = get_top_rated_Profiles()
     ratings = get_all_ratings()
-    highratings = get_top_rated_profiles()
-    #average=[]
-    #for profile in profiles:
-        #avg_rating = get_calculated_rating(profile.profileId)
-        #average = avg_rating
-    #average = get_calculated_rating()
-    #if profile.profileId == ratings.receiverId:
-         #totalrating=get_total_rating(profile.profileId)
-    return render_template('topratedprofiles.html',profiles=profiles,ratings=ratings, highratings = highratings)
+    return render_template('topratedprofiles.html',profiles=profiles,ratings=ratings)
 
 @index_views.route('/editprofile', methods=['GET'])
 def editprofile_page():
