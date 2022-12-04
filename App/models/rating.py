@@ -9,12 +9,14 @@ class Rating(db.Model):
         'profile.profileId'), nullable=False)
     receiverId = db.Column(db.Integer, db.ForeignKey(
         'profile.profileId'), nullable=False)  
+    username = db.Column(db.String(120), db.ForeignKey('profile.username'), unique=False, nullable=False)
     score = db.Column(db.Integer,unique=False, nullable=False)
     timeStamp = db.Column(db.Date, nullable=False)
 
     def __init__(self,senderId, receiverId ,score):
         self.senderId = senderId
         self.receiverId = receiverId
+        self.username = username
         self.score = score
         self.timeStamp = date.today()
 
@@ -23,6 +25,7 @@ class Rating(db.Model):
             'id': self.ratingId,
             'senderId': self.senderId,
             'receiverId': self.receiverId,
+            'username': self.username,
             'score': self.score,
             'timeStamp': self.timeStamp
         }
