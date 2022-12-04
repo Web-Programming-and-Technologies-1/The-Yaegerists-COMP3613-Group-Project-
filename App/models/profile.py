@@ -12,7 +12,8 @@ class Profile(db.Model, UserMixin):
     password = db.Column(db.String(120), nullable=False)
     recipients = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.senderId")
     feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
-    image = db.relationship('Image', backref='image',lazy=True, cascade="all, delete-orphan")
+    image = db.relationship('Image', backref='profile',lazy=True, cascade="all, delete-orphan")
+    ratings = db.relationship( "Rating", backref="profile", lazy=True, cascade="all, delete-orphan")
     
 
     def __init__(self, username, email, password):
@@ -29,7 +30,8 @@ class Profile(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'recipients': [recipient.toJSON() for recipient in self.recipients],
-            'feeds': [feed.toJSON() for feed in self.feeds]
+            'feeds': [feed.toJSON() for feed in self.feeds],
+            'ratings': [rate.toJSON() for rate in self.ratings]
         }
 
     def check_password(self, password):
