@@ -55,30 +55,18 @@
 
   <table id="profiles">
     <tr>
-      <th>Number</th>
+      <th>Rank</th>
       <th>Username </th>
       <th>View Profile</th>
-      <th>Rating</th>
     </tr>
+    {% for profile in profiles %}
     <tr>
-      <td>1</td>
-      <td>JoshuaAli</td>
-      <td><p><button>profile</button></p></td>
-      <td>20</td>
+      <td>{{loop.index}}</td>
+      <td>{{profile.username}}</td>
+      <td><a href="/otheruserprofile/{{profile.profileId}}">
+        <button>profile</button></td>
     </tr>
-    <tr>
-      <td>2</td>
-      <td>Tamika</td>
-      <td><p><button>profile</button></p></td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Rae</td>
-      <td><p><button>profile</button></p></td>
-      <td>10</td>
-    </tr>
-    
+    {% endfor %}
   </table>
 
 

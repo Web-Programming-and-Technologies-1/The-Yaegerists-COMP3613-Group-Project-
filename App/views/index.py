@@ -83,7 +83,11 @@ def myprofile_page():
 
 @index_views.route('/toprated', methods=['GET'])
 def toprated_page():
-    return render_template('topratedprofiles.html')
+    profiles=get_top_rated_profiles()
+    ratings=get_all_ratings()
+    #if profile.profileId == ratings.receiverId:
+         #totalrating=get_total_rating(profile.profileId)
+    return render_template('topratedprofiles.html',profiles=profiles,ratings=ratings)
 
 @index_views.route('/editprofile', methods=['GET'])
 def editprofile_page():

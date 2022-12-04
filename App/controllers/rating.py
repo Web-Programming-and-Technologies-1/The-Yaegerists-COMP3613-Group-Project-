@@ -1,7 +1,7 @@
 from App.models import Rating, Profile
 from App.database import db
 from sqlalchemy.exc import IntegrityError
-
+from sqlalchemy import desc
 from .profile import(
     get_profile
 )
@@ -119,7 +119,7 @@ def get_total_rating(receiverId):
             total = total + rating.score
         return total
     return None
-    
+
 #Gets the sender ratings and calculates the profile tier and returns the tier or None otherwise
 def get_level(id):
     ratings = get_ratings_by_sender_json(id)
