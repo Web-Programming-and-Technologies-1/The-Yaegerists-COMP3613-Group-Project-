@@ -6,7 +6,7 @@ class Distribution(db.Model):
     distributeId = db.Column(db.Integer, primary_key=True)
     numProfiles = db.Column(db.Integer, nullable=False)
     timeStamp = db.Column(db.Date , nullable=False)
-    profileFeeds = db.relationship('ProfileFeed', backref='feeds',
+    profileFeeds = db.relationship('ProfileFeed', backref='distribution',
                            lazy=True, cascade="all, delete-orphan")
 
     def __init__(self, numProfiles):
