@@ -16,7 +16,6 @@ class Rating(db.Model):
     def __init__(self,senderId, receiverId ,score):
         self.senderId = senderId
         self.receiverId = receiverId
-        self.username = username
         self.score = score
         self.timeStamp = date.today()
 
@@ -25,7 +24,6 @@ class Rating(db.Model):
             'id': self.ratingId,
             'senderId': self.senderId,
             'receiverId': self.receiverId,
-            'username': self.username,
             'score': self.score,
             'timeStamp': self.timeStamp
         }

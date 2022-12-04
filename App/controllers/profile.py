@@ -1,7 +1,7 @@
 from App.models import Profile, Rating
 from App.database import db
 from sqlalchemy.exc import IntegrityError
-from App.controllers import *
+from .rating import *
 
 '''Create operations'''
 

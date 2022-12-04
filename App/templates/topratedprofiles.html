@@ -57,40 +57,19 @@
     <tr>
       <th>Rank</th>
       <th>Username </th>
-      <th>Rating Score/th>
+      <th>View Profile</th>
+      <th>Rating Score</th>
       
     </tr>
     {% for profile in profiles %}
     <tr>
       <td>{{loop.index}}</td>
       <td>{{profile.username}}</td>
+      <td><a href="/otheruserprofile/{{profile.profileId}}"><button>profile</button></a></td>
       <td>{{profile.overall_rating}}</td>
     </tr>
     {% endfor %}
-    <!--{% for profile in profiles %}
-    <tr>
-      <td>{{loop.index}}</td>
-      <td>{{profile.username}}</td>
-      <td><a href="/otheruserprofile/{{profile.profileId}}">
-        <button>profile</button></td>
-      <td>{{average}}</td>
-      
-    </tr>
-    {% endfor %}-->
-
-    <!--{% for rating in ratings %}
-    <tr>
-      <td>{{loop.index}}</td>
-      <td>{{rating.id}}</td>
-      <td>{{rating.receiverId}}</td>
-      {% for profile in profiles %}
-      {% if rating.receiverId == profile.profileId %}
-      <td>{{profile.username}}</td>
-      {% endif %}
-      {% endfor %}
-      <td>{{average[index]}}</td>
-    </tr>
-    {% endfor %}-->
+ 
   </table>
 
 

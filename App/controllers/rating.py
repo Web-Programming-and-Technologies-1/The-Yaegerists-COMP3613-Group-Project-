@@ -2,9 +2,7 @@ from App.models import Rating, Profile
 from App.database import db
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
-from .profile import(
-    get_profile
-)
+from .profile import *
 
 '''Create operations'''
 #Create a rating to a specific profile
