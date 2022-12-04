@@ -78,7 +78,7 @@ class RankingUnitTests(unittest.TestCase):
     def test_toJSON(self):
         ranking = Ranking(rankerId=1, imageId=2, score=7)
         ranking_json = ranking.toJSON()
-        self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":7})
+        self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":7, "overall_ranking": None})
 
 class DistributionUnitTests(unittest.TestCase):
 
@@ -213,11 +213,12 @@ class RatingIntegrationTests(unittest.TestCase):
     #     assert get_level(1) == 1
 
 
-# class RankingIntegrationTests(unittest.TestCase):
+class RankingIntegrationTests(unittest.TestCase):
 
-#     def test_create_rating(self):
-#         ranking = create_ranking(1, 2, 3)
-#         assert ranking.id == 1
+    @pytest.mark.run(order=16) 
+    def test_create_rating(self):
+        ranking = create_ranking(rankerId=1, imageId=2, score=3)
+        assert ranking.rankingId == 1
 
 #     def test_get_ranking(self):
 #         ranking = get_ranking(1)
