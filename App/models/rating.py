@@ -9,7 +9,7 @@ class Rating(db.Model):
         'profile.profileId'), nullable=False)
     receiverId = db.Column(db.Integer, db.ForeignKey(
         'profile.profileId'), nullable=False)  
-    username = db.Column(db.String(120), db.ForeignKey('profile.username'), unique=False, nullable=False)
+    username = db.Column(db.String(120), db.ForeignKey('profile.username'))
     score = db.Column(db.Integer,unique=False, nullable=False)
     timeStamp = db.Column(db.Date, nullable=False)
 

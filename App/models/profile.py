@@ -13,7 +13,7 @@ class Profile(db.Model, UserMixin):
     recipients = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.senderId")
     feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
     image = db.relationship('Image', backref='profile',lazy=True, cascade="all, delete-orphan")
-    ratings = db.relationship( "Rating", backref="profile", lazy=True, cascade="all, delete-orphan")
+    score = db.relationship( "Rating", backref="profile", lazy=True, cascade="all, delete-orphan")
     
 
     def __init__(self, username, email, password):
