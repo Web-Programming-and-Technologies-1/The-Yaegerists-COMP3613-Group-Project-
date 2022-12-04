@@ -14,6 +14,7 @@ class Profile(db.Model, UserMixin):
     feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
     image = db.relationship('Image', backref='image',
                            lazy=True, cascade="all, delete-orphan")
+    score = db.relationship('Rating', backref='profile', lazy=True,cascade="all, delete-orphan" )
 
     def __init__(self, username, email, password):
         self.username = username

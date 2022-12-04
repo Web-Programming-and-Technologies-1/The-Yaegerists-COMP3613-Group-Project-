@@ -119,3 +119,7 @@ def get_level(id):
             level = level + 1
         return level
     return None
+
+
+def get_top_rated_profiles():
+    return Rating.query.order_by(desc(Rating.score))

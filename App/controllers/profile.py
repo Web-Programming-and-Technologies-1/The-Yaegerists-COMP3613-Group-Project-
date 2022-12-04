@@ -1,4 +1,4 @@
-from App.models import Profile
+from App.models import Profile, Rating
 from App.database import db
 from sqlalchemy.exc import IntegrityError
 
@@ -73,4 +73,7 @@ def delete_profile(profileId):
     except:
         db.session.rollback()
     return False
+
+
+
    
