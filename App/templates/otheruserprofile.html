@@ -82,10 +82,10 @@
        {% for image in images %}
         <div class="responsive">
             <div class="desc">
-                <p3 class="hello">Current Ranking:{{score}}</p3>
+                <p3 class="hello">Current Ranking:{{image.rankings.overall_ranking}}</p3>
                 <div style="margin-bottom: 15px"></div>
                 <div style="margin-top: 15px"></div>
-                <p2 >Your Ranking:{{image.rankings}}</p2>
+                <p2 >Your Ranking:{{image.rankings.score}}</p2>
                 <div style="margin-top: 15px"></div>
             </div>
             <div class="gallery">

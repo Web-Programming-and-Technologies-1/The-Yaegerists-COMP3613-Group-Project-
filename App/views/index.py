@@ -110,6 +110,7 @@ def otheruserprofile_page(id):
     rankingtotal=0
     allrankings=get_all_rankings()
     images = get_images_by_profileId(id)
+    images.rankings=get_rankings_by_ranker(id)
         #for image in images:
          #ranking=Ranking(current_user,image.imageId,score=data2['ranking'])
     ###
@@ -117,6 +118,7 @@ def otheruserprofile_page(id):
     rating = get_ratings_by_receiver(id)
     average = get_calculated_rating(id)
     average=round(average,2)
+    
     ###
     if request.method == "POST":
         ###ProfileRating
@@ -127,14 +129,19 @@ def otheruserprofile_page(id):
         ###
         ###ImageRanking
         for image in images:
-           ranking=create_ranking(rankerId=current_user.profileId,imageId=image.imageId,score=data['ranking'])
-           rankingtotal=get_total_ranking(imageId=image.imageId)
-        allrankings=get_all_rankings()
+           image.ranking=create_ranking(rankerId=current_user.profileId,imageId=image.imageId,score=data['ranking'])
+           print("Image User Ranking:",image.ranking.score) ##watch terminal for output
+           image.overall_ranking=get_total_ranking(imageId=image.imageId)
+           print("Total Rating:",image.overall_ranking)
+        #allrankings=get_all_rankings()
         ###   
         #return render_template('home.html', user=user, images=userImages, ratings = rating)
-        return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating, rankings=allrankings, rankingtotal=rankingtotal)
+        return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating)
+
     if request.method == "GET":
-       return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating, rankings=allrankings, rankingtotal=rankingtotal)  
+       images.rankings=get_rankings_by_ranker(id)
+       rating = get_ratings_by_receiver(id)
+       return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating)  
 
 
 @index_views.route('/allprofiles', methods=['GET'])
