@@ -22,6 +22,12 @@ class Profile(db.Model, UserMixin):
 
     def get_id(self):
         return (self.profileId)
+
+    def set_overall_rating(self, rating):
+        self.overall_rating = rating
+
+    def get_overall_rating(self):
+        return (self.overall_rating)
         
     def toJSON(self):
         return {

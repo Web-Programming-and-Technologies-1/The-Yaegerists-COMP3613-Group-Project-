@@ -7,18 +7,18 @@ class Ranking(db.Model):
         'profile.profileId'), nullable=False)
     imageId = db.Column(db.Integer, db.ForeignKey(
         'image.imageId'), nullable=False)
-    ratingId = db.Column(db.Integer, db.ForeignKey(
-        'rating.ratingId'), nullable=False)
+    
     score = db.Column(db.Integer, nullable=False)
 
-    def __init__(self):
-        self.score = 0
+    def __init__(self, rankerId, imageId, score):
+        self.rankerId= rankerId
+        self.imageId = imageId
+        self.score = score
 
     def toJSON(self):
         return {
             'id': self.rankingId,
             'rankerId': self.rankerId,
             'imageId': self.imageId,
-            'ratingId': self.ratingId,
             'score': self.score,
         }

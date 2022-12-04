@@ -21,11 +21,26 @@ class ProfileUnitTests(unittest.TestCase):
     def test_new_profile(self):
         profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
         assert profile.username == "bob"
+    
+    def test_get_id(self):
+        profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
+        assert profile.profileId == None
+
+    def test_set_overall_rating(self):
+        profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
+        profile.set_overall_rating(1)
+        assert profile.overall_rating == 1
+        
+    def test_get_overall_rating(self):
+        profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
+        profile.set_overall_rating(10)
+        rating = profile.get_overall_rating()
+        assert profile.overall_rating == 10
 
     def test_toJSON(self):
         profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
         profile_json = profile.toJSON()
-        self.assertDictEqual(profile_json, {"profileId":None, "username":"bob", "email":"bob@mail.com",  "recipients": [], "feeds": []})
+        self.assertDictEqual(profile_json, {"profileId":None, "username":"bob", "email":"bob@mail.com",  "recipients": [], "feeds": [], "overall_rating":None})
     
     def test_hashed_password(self):
         password = "mypass"
@@ -58,13 +73,31 @@ class RatingUnitTests(unittest.TestCase):
         rating_json = rating.toJSON()
         self.assertDictEqual(rating_json, {"id":None, "senderId":1, "receiverId": 2, "score":4, "timeStamp": date.today()})
 
-# class RankingUnitTests(unittest.TestCase):
+class RankingUnitTests(unittest.TestCase):
 
-#     def test_toJSON(self):
-#         ranking = Ranking()
-#         ranking_json = ranking.toJSON()
-#         self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":3})
+    def test_toJSON(self):
+        ranking = Ranking(rankerId=1, imageId=2, score=7)
+        ranking_json = ranking.toJSON()
+        self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":7})
 
+class DistributionUnitTests(unittest.TestCase):
+
+    def test_toJSON(self):
+        distribution = Distribution(numProfiles=10)
+        distribution_json = distribution.toJSON()
+        self.assertDictEqual(distribution_json, {"distributeId":None, "numProfiles":10, "timeStamp": date.today(), "profileFeeds":[]})
+
+class ProfileFeedUnitTests(unittest.TestCase):
+
+    def test_setSeen(self):
+        profile_feed = ProfileFeed(senderId=1, receiverId=2, distributorId=3)
+        profile_feed.setSeen()
+        assert profile_feed.seen == True
+
+    def test_toJSON(self):
+        profile_feed = ProfileFeed(senderId=2, receiverId=1, distributorId=3)
+        profile_feed_json = profile_feed.toJSON()
+        self.assertDictEqual(profile_feed_json, {"feedId":None, "senderId":2, "receiverId": 1, "distributeId":3, "seen":False})
 '''
     Integration Tests
 '''
@@ -93,7 +126,7 @@ class ProfileIntegrationTests(unittest.TestCase):
     @pytest.mark.run(order=3)
     def test_get_all_profiles_json(self):
         profile_json = get_all_profiles_json()
-        self.assertListEqual([{"profileId":1, "username":"bob", "email": "bob@gmail.com", "recipients": [],"feeds":[]}, {"profileId":2, "username":"rick", "email": "rick@mail.com", "recipients": [],"feeds":[]}], profile_json)
+        self.assertListEqual([{"profileId":1, "username":"bob", "email": "bob@gmail.com", "recipients": [],"feeds":[],"overall_rating":None}, {"profileId":2, "username":"rick", "email": "rick@mail.com", "recipients": [],"feeds":[],"overall_rating":None}], profile_json)
 
     @pytest.mark.run(order=4)
     def test_update_profile(self):

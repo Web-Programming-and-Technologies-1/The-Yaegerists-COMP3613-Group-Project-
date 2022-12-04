@@ -15,7 +15,7 @@ class Distribution(db.Model):
 
     def toJSON(self):
         return{
-            'profileId': self.profileId,
+            'distributeId': self.distributeId,
             'numProfiles':self.numProfiles,
             'timeStamp':self.timeStamp,
             'profileFeeds': [profileFeed.toJSON() for profileFeed in self.profileFeeds]

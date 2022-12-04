@@ -19,6 +19,7 @@ class Rating(db.Model):
         self.score = score
         self.timeStamp = date.today()
 
+
     def toJSON(self):
         return {
             'id': self.ratingId,
