@@ -48,11 +48,11 @@
   <div style="margin-top: 10px">
 
   </div>
-      <p class="hello">Full Name</p>
+      
   <div style="margin-top: 10px">
 
   </div>
-      <p class="hello">Rating</p>
+      <p class="hello">Your Rating: {{ratings}}</p>
   
 </div>
 
@@ -65,7 +65,7 @@
   
 
   <button2 onclick="window.location.href='/editprofile';">
-    <p class="ph3">Edit Profile </p>
+    <p class="ph3">My Pictures</p>
   </button2>
 
   {% for image in images %}
@@ -74,7 +74,7 @@
           <a target="_blank" href="{{image.url}}">
             <img src="{{image.url}}" alt="picture" width="600" height="400">
           </a>
-          <div class="desc">Rank</div>
+          <!--<div class="desc">Rank</div>-->
         </div>
   </div>
   {% endfor %}

@@ -90,8 +90,8 @@ def home_page():
 @index_views.route('/myprofile', methods=['GET'])
 @login_required
 def myprofile_page():
-    
-    return render_template('profilepage.html',images=get_images_by_profileId(current_user.profileId) ,profile=current_user)
+    ratings = get_calculated_rating(current_user.profileId)
+    return render_template('profilepage.html',images=get_images_by_profileId(current_user.profileId) ,profile=current_user, ratings = ratings)
 
 @index_views.route('/toprated', methods=['GET'])
 def toprated_page():
@@ -105,6 +105,7 @@ def editprofile_page():
 
 @index_views.route('/otheruserprofile/<id>', methods=['GET', 'POST'])
 def otheruserprofile_page(id):
+    """
     user = get_profile(id)
     ###ImageRanking here
     rankingtotal=0
@@ -132,7 +133,7 @@ def otheruserprofile_page(id):
            image.ranking=create_ranking(rankerId=current_user.profileId,imageId=image.imageId,score=data['ranking'])
            print("Image User Ranking:",image.ranking.score) ##watch terminal for output
            image.overall_ranking=get_total_ranking(imageId=image.imageId)
-           print("Total Rating:",image.overall_ranking)
+           print("Total Ranking:",image.overall_ranking)
         #allrankings=get_all_rankings()
         ###   
         #return render_template('home.html', user=user, images=userImages, ratings = rating)
@@ -142,7 +143,13 @@ def otheruserprofile_page(id):
        images.rankings=get_rankings_by_ranker(id)
        rating = get_ratings_by_receiver(id)
        return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating)  
-
+    """
+    if request.method == "GET":
+        user = get_profile(id)
+        images = get_images_by_profileId(id)
+        images.rankings=get_rankings_by_ranker(id)
+        rating = get_ratings_by_receiver(id)
+    return render_template('otheruserprofile.html', user=user, images=images, ratings = rating)
 
 @index_views.route('/allprofiles', methods=['GET'])
 def p_page():

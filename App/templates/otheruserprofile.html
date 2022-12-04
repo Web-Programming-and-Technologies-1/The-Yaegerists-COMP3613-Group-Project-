@@ -73,15 +73,21 @@
                     <p2 for="e"> 5 Star </p2>
                 </div>
                 </div>
-                    <input class="button" type="submit" value="Submit">
-                
+                    <input class="button" type="submit" onclick="saveRating()" name="RatingSubmit" value="Submit Rating">
+                <p id="result"></p>
+                </form>   
     </div>
+
+
     <div style="margin-top: 10px"></div>
      <div><p class="h">Rank User's Profile</p></div>
      <div style="margin-top: 20px"></div>
+     
        {% for image in images %}
+       <form id="rankingForm">
         <div class="responsive">
             <div class="desc">
+                       
                 <p3 class="hello">Current Ranking:{{image.rankings.overall_ranking}}</p3>
                 <div style="margin-bottom: 15px"></div>
                 <div style="margin-top: 15px"></div>
@@ -92,44 +98,51 @@
                 <a target="_blank" href="{{image.url}}">
                   <img src="{{image.url}}" alt="picture" width="600" height="400">
                 </a>
-                <div class="desc">
-                    <div class="row">
-                        
-                        <div class="column">
-                           <input type="radio" class="radio" name="ranking" value="1" id="f" />
-                           <p3 for="f"> 1 Star </p3>
-                        </div>
-                        <div class="column">
-                           <input type="radio" class="radio" name="ranking" value="2" id="g" />
-                           <p3 for="g"> 2 Star </p3>
-                       </div>
-                  
-                        <div class="column"> 
-                           <input type="radio" class="radio" name="ranking" value="3" id="h" />
-                           <p3 for="h"> 3 Star </p3>
-                       </div>
-       
-                       <div class="column">
-                           <input type="radio" class="radio" name="ranking" value="4" id="i" />
-                           <p3 for="i"> 4 Star </p3>
-                       </div>
-                       <div class="column">
-                           <input type="radio" class="radio" name="ranking" value="5" id="j" />
-                           <p3 for="j"> 5 Star </p3>
-                       </div>
-                       </div>
-                           <input class="button2" type="submit" value="Submit">
-
+            </div>
+            <div class="row">
+                {% for n in range(loop.length) %}
+                <div class="column">
+                    <input type="radio" class="radio" name="ranking" value="{{n+1}}" id="f" />
+                    <p3 for="f"> {{n+1}} </p3>
                 </div>
-              </div>
+                {% endfor %} 
+            </div>
         </div>
-    </form>
-        {% endfor %}
-
-
         
 
+        </form> 
+            {% endfor %}
+          <!--<input   value="Submit">  -->
+        <div class="responsive">
+            <button type="submit" form="rankingForm" onclick="saveRanking()">Submit</button>
+        </div>
+             
+        <p id="r"></p>
+    
         
- 
+
+                
+        <script>
+            function saveRating() {
+                var ele = document.getElementsByName('rating');
+              
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("result").innerHTML
+                        = "Rating: "+ele[i].value;
+                }
+            }
+
+            function saveRanking(){
+                var ele = document.getElementsByName('ranking');
+
+                for(i=0; i<ele.length; i++){
+                    if(ele[i].checked)
+                    document.getElementById("r").innerHTML
+                        = "Ranking: "+ele[i].value;
+                }
+            }
+            
+        </script>
     
 {% endblock %}
