@@ -77,13 +77,8 @@ def delete_profile(profileId):
 
 def get_top_rated_Profiles():
     profiles = get_all_profiles()
-    #total = 0
     for profile in profiles:
-        profile.overall_rating = get_calculated_rating(profile.profileId)
-     #   total = total + profile.overall_rating
-      #  if profiles.count() != 0:
-       #     total = total / profiles.count()
-    #return total
+        profile.overall_rating = get_total_rating(profile.profileId)
     return Profile.query.order_by(desc(Profile.overall_rating))
 
 
