@@ -78,7 +78,7 @@ def home_page():
     ###Trying the profile feed here
 
     
-    profiles=distribute(numProfiles=len(profiles),senderId=current_user)
+    profiles=distribute(numProfiles=len(profiles),senderId=current_user.profileId)
     ###
     #profiles.feeds = get_all_profile_feed()                                        
     return render_template('home.html', activeusers=profiles)
