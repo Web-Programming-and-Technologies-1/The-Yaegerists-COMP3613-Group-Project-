@@ -45,7 +45,9 @@ def loginAction():
     if profile :
         # flash('Logged in successfully.') # send message to next page
         login_user(profile, remember=True) # login the user
-        return render_template('home.html', activeusers=get_all_profiles(),form=form) # redirect to main page if login successful
+        profiles=get_all_profiles()
+        profiles.remove(profile)
+        return render_template('home.html', activeusers=profiles,form=form) # redirect to main page if login successful
   # flash('Invalid credentials')
   return render_template('login.html',form=form)
 
