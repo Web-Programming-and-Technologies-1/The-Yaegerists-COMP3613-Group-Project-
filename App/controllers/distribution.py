@@ -64,12 +64,16 @@ def distribute(numProfiles, senderId):
         displayProfile= []  
         availableProfiles = min(numProfiles, len(distributeProfiles))    
         while len(displayProfile) < availableProfiles:          
-            rand = random.randint(0, totalProfileNum)
+            rand = random.randint(0, len(distributeProfiles)-1)
             profile = get_profile(rand)
+            print("P",type(profile))
             if rand != senderId:
                 displayProfile.append(profile)               
-                create_distribution(availableProfiles)
-                create_profile_Feed(senderId, rand)
+                profile2=create_distribution(availableProfiles)
+                print("Profile",profile2.distributeId)
+                print("DisplayProfile",displayProfile)
+                displayProfile2=create_profile_Feed(senderId, rand,profile2.distributeId)
+    
         return displayProfile
          
     return None
