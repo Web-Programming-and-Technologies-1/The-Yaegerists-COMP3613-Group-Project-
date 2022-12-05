@@ -79,12 +79,14 @@
     </div>
 
     <div style="margin-top: 10px"></div>
+    <input class="button" type="button" onclick="window.location.href='/rankimage/{{user.profileId}}';" value="Rank Images here">
     <p class="hello">All Pictures</p>
     <div style="margin-bottom: 20px"></div>
     {% for image in images %}
      <div class="responsive">
          <div class="desc"> 
-             <p3 class="hello">Ranking</p3>
+             <p3 class="hello">Rank:{{image.rankings}}</p3>
+             
          </div>
          <div style="margin-top: 10px"></div>
          <div class="gallery">
@@ -94,8 +96,8 @@
          </div>
      </div>
      {% endfor %}
-
-     <input class="button" type="button" onclick="window.location.href='/rankimage/{{user.profileId}}';" value="Rank Images here">
+     <div style="margin-bottom: 20px"></div>
+     <div style="margin-bottom: 20px"></div>
      <div style="margin-bottom: 20px"></div>
        
     </input>

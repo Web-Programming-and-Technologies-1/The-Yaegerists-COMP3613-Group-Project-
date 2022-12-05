@@ -47,22 +47,18 @@
             <div style="margin-top: 10px"></div>
             <p class="hello">Your Rating:{{ratings.score}}</p>
             <div style="margin-top: 10px"></div>
-            <form method="POST" action="/rankimage/{{user.profileId}}">
+            
 
                 <div style="margin-top: 10px"></div>
                 <div><p class="h">Rank User's Pictures</p></div>
                 <div style="margin-top: 20px"></div>
                 
                   {% for image in images %}
-                  <form id="rankingForm">
                    <div class="responsive">
                        <div class="desc">
-                                  
-                           <p3 class="hello">Current Ranking:{{image.rankings.overall_ranking}}</p3>
+                         <form method="POST" action="/rankimage/{{user.profileId}}">    
+                           <p3 class="hello">Image ID Number:{{image.imageId}}</p3>
                            <div style="margin-bottom: 15px"></div>
-                           <div style="margin-top: 15px"></div>
-                           <p2 >Your Ranking:{{image.rankings.score}}</p2>
-                           <div style="margin-top: 15px"></div>
                        </div>
                        <div class="gallery">
                            <a target="_blank" href="{{image.url}}">
@@ -73,20 +69,22 @@
                        <div class="row">
                            {% for n in range(loop.length) %}
                            <div class="column">
-                               <input type="radio" class="radio" name="ranking" onClick="ranking" value="ranking" id=a />
+                               <input type="radio" class="radio" name="{{image.imageId}}" value="{{n+1}}" id=a />
                                <p3 for=a> {{n+1}} Star </p3>
                            </div>
                            {% endfor %} 
         
-                        
+                           
                         </div>
                         <input class="button" type="submit" value="Submit"></input>
                        </div> 
+                       
                    </div>
                    
-           
+                    
                    </form> 
                        {% endfor %}
+                       
                      <!--<input   value="Submit">  -->
                 
                        
@@ -95,7 +93,7 @@
                    <p id="r"></p>
 
 
-                </form>   
+                  
     </div>
 
 
