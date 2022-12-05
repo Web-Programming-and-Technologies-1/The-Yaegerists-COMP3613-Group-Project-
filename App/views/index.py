@@ -103,21 +103,13 @@ def editprofile_page():
 
 @index_views.route('/otheruserprofile/<id>', methods=['GET', 'POST'])
 def otheruserprofile_page(id):
-    """
     user = get_profile(id)
-    ###ImageRanking here
-    rankingtotal=0
-    allrankings=get_all_rankings()
-    images = get_images_by_profileId(id)
-    images.rankings=get_rankings_by_ranker(id)
-        #for image in images:
-         #ranking=Ranking(current_user,image.imageId,score=data2['ranking'])
     ###
     ###ProfileRating
+    images=get_images_by_profileId(id)
     rating = get_ratings_by_receiver(id)
     average = get_calculated_rating(id)
     average=round(average,2)
-    
     ###
     if request.method == "POST":
         ###ProfileRating
@@ -126,28 +118,39 @@ def otheruserprofile_page(id):
         average = get_calculated_rating(id)
         average=round(average,2)
         ###
-        ###ImageRanking
-        for image in images:
-           image.ranking=create_ranking(rankerId=current_user.profileId,imageId=image.imageId,score=data['ranking'])
-           print("Image User Ranking:",image.ranking.score) ##watch terminal for output
-           image.overall_ranking=get_total_ranking(imageId=image.imageId)
-           print("Total Ranking:",image.overall_ranking)
-        #allrankings=get_all_rankings()
-        ###   
-        #return render_template('home.html', user=user, images=userImages, ratings = rating)
         return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating)
-
+    
     if request.method == "GET":
+        rating = get_ratings_by_receiver(id)
+        return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating) 
+ 
+
+@index_views.route('/rankimage/<id>', methods=['GET','POST'])
+def rankimage_page(id):
+
+       user = get_profile(id)
+       images = get_images_by_profileId(id)
        images.rankings=get_rankings_by_ranker(id)
        rating = get_ratings_by_receiver(id)
-       return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating)  
-    """
-    if request.method == "GET":
-        user = get_profile(id)
-        images = get_images_by_profileId(id)
-        images.rankings=get_rankings_by_ranker(id)
-        rating = get_ratings_by_receiver(id)
-    return render_template('otheruserprofile.html', user=user, images=images, ratings = rating)
+       average = get_calculated_rating(id)
+       average=round(average,2)
+       i=0
+       temp=[]
+       rankingtotal=0
+       allrankings=get_all_rankings()
+       images = get_images_by_profileId(id)
+
+       if request.method == "GET":
+          return render_template('rankingimagepage.html', user=user, images=images, ratings = rating, average=average)
+       
+       if request.method == "POST":
+          data=request.form
+          if image in images:
+             image.rankings=create_ranking(rankerId=current_user.profileId,imageId=image.imageId,score=data['ranking'])
+             print("Image ID:",image.imageId)
+             print("Image Rank:",image.rankings.score)
+             allrankings=get_all_rankings()
+          return render_template('rankingimagepage.html', user=user, images=images, ratings = rating, average=average)
 
 @index_views.route('/allprofiles', methods=['GET'])
 def p_page():

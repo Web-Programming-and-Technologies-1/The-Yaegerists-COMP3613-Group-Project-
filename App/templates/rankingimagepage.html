@@ -1,0 +1,139 @@
+{% extends "layout.html" %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    {% block title %}
+    Profile Page
+    {% endblock %}
+    
+    {% block header %}
+    BeRealER.
+    {% endblock %}
+    
+    {% block header2 %}
+    {{user.username}}
+    {% endblock %}
+
+{{ super() }}
+
+{% block navbar %} 
+
+
+<ul>  
+
+    <li><a href="/home">Home</a></li>
+
+    <li><a href="/toprated">Top Rated</a></li> 
+
+    <li><a href="/uploadpictures"> Upload Picture</a></li>
+
+    <liright><a class ="active2" href="/login">Logout</a></liright> 
+
+    <liright><a href="/myprofile">My Profile</a></liright> 
+
+  </ul>  
+
+
+{% endblock %}
+
+{% block content %} 
+    <div>
+        <i class="material-icons icon" style="font-size: 130px">account_circle</i>
+       
+            <p class="hello">{{user.username}}</p>
+       
+        
+            <div style="margin-top: 10px"></div>
+            <p class="hello">Average Rating:{{average}}</p>
+            <div style="margin-top: 10px"></div>
+            <p class="hello">Your Rating:{{ratings.score}}</p>
+            <div style="margin-top: 10px"></div>
+            <form method="POST" action="/rankimage/{{user.profileId}}">
+
+                <div style="margin-top: 10px"></div>
+                <div><p class="h">Rank User's Pictures</p></div>
+                <div style="margin-top: 20px"></div>
+                
+                  {% for image in images %}
+                  <form id="rankingForm">
+                   <div class="responsive">
+                       <div class="desc">
+                                  
+                           <p3 class="hello">Current Ranking:{{image.rankings.overall_ranking}}</p3>
+                           <div style="margin-bottom: 15px"></div>
+                           <div style="margin-top: 15px"></div>
+                           <p2 >Your Ranking:{{image.rankings.score}}</p2>
+                           <div style="margin-top: 15px"></div>
+                       </div>
+                       <div class="gallery">
+                           <a target="_blank" href="{{image.url}}">
+                             <img src="{{image.url}}" alt="picture" width="600" height="400">
+                           </a>
+                       </div>
+                       <div class="desc">
+                       <div class="row">
+                           {% for n in range(loop.length) %}
+                           <div class="column">
+                               <input type="radio" class="radio" name="ranking" onClick="ranking" value="ranking" id=a />
+                               <p3 for=a> {{n+1}} Star </p3>
+                           </div>
+                           {% endfor %} 
+        
+                        
+                        </div>
+                        <input class="button" type="submit" value="Submit"></input>
+                       </div> 
+                   </div>
+                   
+           
+                   </form> 
+                       {% endfor %}
+                     <!--<input   value="Submit">  -->
+                
+                       
+        
+                        
+                   <p id="r"></p>
+
+
+                </form>   
+    </div>
+
+
+    
+    
+        
+
+        <!--        
+        <script>
+            let ranking = [];
+            let image= {{images}};
+
+            function saveRating() {
+                var ele = document.getElementsByName('rating');
+              
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                document.getElementById("result").innerHTML
+                        = "Rating: "+ele[i].value;
+                }
+            }
+
+            function getRanking(n){
+                var ele = document.getElementsByName('ranking'+ n);
+                if(ele.checked){
+                    ranking.push(n)
+     
+                }
+            
+            }
+
+            function saveRanking(){
+                const request = new XMLHttpRequest()
+                console.log(ranking)
+                request.open('POST', '/otheruserprofile/${JSON.stringify()}')
+                request.send()
+            }
+            
+        </script>
+       -->
+{% endblock %}

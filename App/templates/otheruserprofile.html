@@ -10,7 +10,7 @@
     {% endblock %}
     
     {% block header2 %}
-    Full Name
+    {{user.username}}
     {% endblock %}
 
 {{ super() }}
@@ -73,84 +73,31 @@
                     <p2 for="e"> 5 Star </p2>
                 </div>
                 </div>
-                    <input class="button" type="submit" onclick="saveRating()" name="RatingSubmit" value="Submit Rating">
+                    <input class="button" type="submit"  name="RatingSubmit" value="Submit Rating">
                 <p id="result"></p>
                 </form>   
     </div>
 
-
     <div style="margin-top: 10px"></div>
-     <div><p class="h">Rank User's Profile</p></div>
-     <div style="margin-top: 20px"></div>
-     
-       {% for image in images %}
-       <form id="rankingForm">
-        <div class="responsive">
-            <div class="desc">
-                       
-                <p3 class="hello">Current Ranking:{{image.rankings.overall_ranking}}</p3>
-                <div style="margin-bottom: 15px"></div>
-                <div style="margin-top: 15px"></div>
-                <p2 >Your Ranking:{{image.rankings.score}}</p2>
-                <div style="margin-top: 15px"></div>
-            </div>
-            <div class="gallery">
-                <a target="_blank" href="{{image.url}}">
-                  <img src="{{image.url}}" alt="picture" width="600" height="400">
-                </a>
-            </div>
-            <div class="row">
-                {% for n in range(loop.length) %}
-                <div class="column">
-                    <input type="radio" class="radio" name="ranking{{n+1}}" onClick="getRanking({{n+1}})" value={{n+1}} id="f" />
-                    <p3 for="f"> {{n+1}} </p3>
-                </div>
-                {% endfor %} 
-            </div>
-        </div>
-        
+    <p class="hello">All Pictures</p>
+    <div style="margin-bottom: 20px"></div>
+    {% for image in images %}
+     <div class="responsive">
+         <div class="desc"> 
+             <p3 class="hello">Ranking</p3>
+         </div>
+         <div style="margin-top: 10px"></div>
+         <div class="gallery">
+             <a target="_blank" href="{{image.url}}">
+               <img src="{{image.url}}" alt="picture" width="600" height="400">
+             </a>
+         </div>
+     </div>
+     {% endfor %}
 
-        </form> 
-            {% endfor %}
-          <!--<input   value="Submit">  -->
-        <div class="responsive">
-            <button type="submit" form="rankingForm" onclick="saveRanking()">Submit</button>
-        </div>
-             
-        <p id="r"></p>
-    
-        
-
-                
-        <script>
-            let ranking = [];
-            let image= {{images}};
-
-            function saveRating() {
-                var ele = document.getElementsByName('rating');
-              
-            for(i = 0; i < ele.length; i++) {
-                if(ele[i].checked)
-                document.getElementById("result").innerHTML
-                        = "Rating: "+ele[i].value;
-                }
-            }
-
-            function getRanking(n){
-                var ele = document.getElementsByName('ranking'+ n);
-                if(ele.checked){
-                    ranking.push(n)
-     
-                }
-            
-            }
-
-            function saveRanking(){
-                const request = new XMLHttpRequest()
-                request.open('POST', '/')
-                
-            }
-            
-        </script>
+     <input class="button" type="button" onclick="window.location.href='/rankimage/{{user.profileId}}';" value="Rank Images here">
+     <div style="margin-bottom: 20px"></div>
+       
+    </input>
     
 {% endblock %}
