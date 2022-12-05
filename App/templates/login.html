@@ -10,12 +10,26 @@
 {% block content %} 
 
 <body>
-	<div class="main2" title="Login">  	
+	
+	<div class="main2" title="Login"> 
+		
 			<div class="signup" aria-hidden="true">
 				<form method="POST" action="/login">
 					{{ form.csrf_token }}
                     <h1 aria-hidden="true">BeRealER.</h1>
                     <h2>Welcome back to the better BeReal :)</h2>
+
+					{% with messages = get_flashed_messages() %}
+					{% if messages %}
+					  
+						  
+						  {% for message in messages %}
+							<p style="color: yellow">{{ message }}</p>
+						  {% endfor %}
+						  
+					  
+					{% endif %}
+				  {% endwith %}
 
 					{{ form.username.label }}
 					{{ form.username(size=20, class="validate") }}

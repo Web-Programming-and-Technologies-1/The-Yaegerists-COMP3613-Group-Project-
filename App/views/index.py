@@ -1,7 +1,7 @@
 from flask import Blueprint, session, redirect, render_template, request, send_from_directory, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user, login_manager, login_required
-from flask import Flask
+from flask import Flask, flash
 from App.controllers import *
 from App.forms import SignUp, LogIn, UploadPicture
 # from flask_sqlalchemy_session import current_session
@@ -12,20 +12,25 @@ index_views = Blueprint('index_views', __name__,
 
 
 @index_views.route('/uploadpictures', methods=['GET'])
+@login_required
 def uploadpictures_page():
     form = UploadPicture()
     return render_template('uploadpictures.html', form=form)
 
 
 @index_views.route('/uploadpictures', methods=['POST'])
+@login_required
 def uploadpicturesAction():
     form = UploadPicture()
+    data = request.form
+    if data == None or data == '':
+        flash('Input an Image URL')
+        return render_template('uploadpictures.html', form=form)
     if form.validate_on_submit():
-       data = request.form
-       imagedata = create_image(
+        imagedata = create_image(
            profileId=current_user.profileId, url=data['url'])
-       # return render_template('Home.html')
-       return render_template('uploadpictures.html', form=form)
+        flash('Uploaded Picture, Check Profile')
+        return render_template('uploadpictures.html', form=form)
 
 
 @index_views.route('/login', methods=['GET'])
@@ -43,12 +48,12 @@ def loginAction():
     #   if profile and profile.check_password(data['password']): # check credentials USE CONTROLLERS    
     profile = authenticate(username= data['username'], password=data['password'])
     if profile :
-        # flash('Logged in successfully.') # send message to next page
+        flash('Logged in successfully.') # send message to next page
         login_user(profile, remember=True) # login the user
         profiles=get_all_profiles()
         profiles.remove(profile)
         return render_template('home.html', activeusers=profiles,form=form) # redirect to main page if login successful
-  # flash('Invalid credentials')
+  flash('Invalid credentials')
   return render_template('login.html',form=form)
 
 
@@ -63,9 +68,9 @@ def signupAction():
   if form.validate_on_submit():
     data = request.form # get data from form submission
     newprofile = create_profile(username=data['username'], email=data['email'], password=data['password']) # create user object
-    # flash('Account Created!')# send message
+    flash('Account Created, Now Login!')# send message
     return render_template('login.html', form= LogIn())# redirect to login page
-  # flash('Error invalid input!')
+  flash('Error invalid input! Retry')
   return render_template('signup.html', form = form)
 
 @index_views.route('/', methods=['GET'])
@@ -92,16 +97,19 @@ def myprofile_page():
     return render_template('profilepage.html',images=get_images_by_profileId(current_user.profileId) ,profile=current_user, ratings = ratings)
 
 @index_views.route('/toprated', methods=['GET'])
+@login_required
 def toprated_page():
     profiles = get_top_rated_Profiles()
     ratings = get_all_ratings()
     return render_template('topratedprofiles.html',profiles=profiles,ratings=ratings)
 
 @index_views.route('/editprofile', methods=['GET'])
+@login_required
 def editprofile_page():
     return render_template('editprofilepage.html')  
 
 @index_views.route('/otheruserprofile/<id>', methods=['GET', 'POST'])
+@login_required
 def otheruserprofile_page(id):
     user = get_profile(id)
     rankings=get_all_rankings()
@@ -127,6 +135,7 @@ def otheruserprofile_page(id):
  
 
 @index_views.route('/rankimage/<id>', methods=['GET','POST'])
+@login_required
 def rankimage_page(id):
 
        user = get_profile(id)
@@ -157,3 +166,12 @@ def rankimage_page(id):
 def p_page():
     profiles = get_all_profiles_json
     return profiles
+
+@index_views.route('/deleteImage/<id>', methods=['GET'])
+def deleteImage(id):
+    ratings = get_calculated_rating(current_user.profileId)
+    image = delete_image(id)
+    if(image):
+        return render_template('profilepage.html',images=get_images_by_profileId(current_user.profileId) ,profile=current_user, ratings = ratings)
+    else:
+        return render_template('profilepage.html',images=get_images_by_profileId(current_user.profileId) ,profile=current_user, ratings = ratings)

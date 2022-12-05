@@ -18,6 +18,6 @@ class LogIn(FlaskForm):
 
 class UploadPicture(FlaskForm):
     #username = StringField('Username')
-    url = StringField('URL:')
+    url = StringField('URL:', validators=[InputRequired()])
     #image = FileField("Upload Profile Image:")
     submit = SubmitField('Upload Image', render_kw={'class': 'btn waves-effect waves-light white-text'})

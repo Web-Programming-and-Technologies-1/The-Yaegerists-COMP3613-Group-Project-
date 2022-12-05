@@ -10,7 +10,7 @@ BeRealER.
 {% endblock %}
 
 {% block header2 %}
-Create Account
+Upload Picture
 {% endblock %}
 
 {{ super() }}
@@ -36,6 +36,20 @@ Create Account
 {% endblock %}
 
 {% block content %} 
+
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  
+    
+    {% for message in messages %}
+    <p style="color: yellow">{{ message }}</p>
+    {% endfor %}
+    
+  
+{% endif %}
+{% endwith %}
+
     <i class="material-icons icon" style="font-size: 150px">account_circle</i>
     <form method="POST" action="/uploadpictures" enctype="multipart/form-data">
     {{ form.csrf_token }}
@@ -46,4 +60,8 @@ Create Account
     {{form.submit(class="button")}}
 
    </form>
+
+   <script>
+    
+   </script>
 {% endblock %}

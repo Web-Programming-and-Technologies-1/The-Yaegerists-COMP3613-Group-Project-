@@ -13,6 +13,7 @@
     For you
     {% endblock %}
 
+
 {{ super() }}
 
 
@@ -41,6 +42,17 @@
 
 {% block content %}
   <div>
+    {% with messages = get_flashed_messages() %}
+					{% if messages %}
+					  
+						  
+						  {% for message in messages %}
+							<p style="color: yellow">{{ message }}</p>
+						  {% endfor %}
+						  
+					  
+					{% endif %}
+				  {% endwith %}
     <i class="material-icons icon" style="font-size: 130px">account_circle</i>
  
         <p class="hello">Profiles</p>
