@@ -9,7 +9,6 @@ class Ranking(db.Model):
         'image.imageId'), nullable=False)
     
     score = db.Column(db.Integer, nullable=False)
-    overall_ranking = db.Column(db.Integer)
     def __init__(self, rankerId, imageId, score):
         self.rankerId= rankerId
         self.imageId = imageId
@@ -21,5 +20,4 @@ class Ranking(db.Model):
             'rankerId': self.rankerId,
             'imageId': self.imageId,
             'score': self.score,
-            'overall_ranking': self.overall_ranking
         }

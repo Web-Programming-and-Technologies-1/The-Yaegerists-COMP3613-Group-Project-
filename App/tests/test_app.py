@@ -78,7 +78,7 @@ class RankingUnitTests(unittest.TestCase):
     def test_toJSON(self):
         ranking = Ranking(rankerId=1, imageId=2, score=7)
         ranking_json = ranking.toJSON()
-        self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":7, "overall_ranking": None})
+        self.assertDictEqual(ranking_json, {"id":None, "rankerId":1, "imageId": 2, "score":7})
 
 class DistributionUnitTests(unittest.TestCase):
 
@@ -236,17 +236,17 @@ class RankingIntegrationTests(unittest.TestCase):
     @pytest.mark.run(order=19) 
     def test_get_all_rankings_json(self):
         rankings_json = get_all_rankings_json()
-        self.assertListEqual([{"id":1, "rankerId":1, "imageId": 2, "score":3, "overall_ranking": None}, {"id":2, "rankerId":2, "imageId": 1, "score":4, "overall_ranking": None}], rankings_json)
+        self.assertListEqual([{"id":1, "rankerId":1, "imageId": 2, "score":3}, {"id":2, "rankerId":2, "imageId": 1, "score":4}], rankings_json)
 
     @pytest.mark.run(order=20) 
     def test_get_rankings_by_ranker_json(self):
         rankings = get_rankings_by_ranker_json(2)
-        self.assertListEqual([{"id":2, "rankerId":2, "imageId": 1, "score":4, "overall_ranking": None}], rankings)
+        self.assertListEqual([{"id":2, "rankerId":2, "imageId": 1, "score":4}], rankings)
 
     @pytest.mark.run(order=21)
     def test_get_rankings_by_imageid_json(self):
         rankings = get_rankings_by_image_json(imageId=2)
-        self.assertListEqual(rankings, [{"id":1, "rankerId":1, "imageId": 2, "score":3, "overall_ranking": None}])
+        self.assertListEqual(rankings, [{"id":1, "rankerId":1, "imageId": 2, "score":3}])
 
 
 #NOT WORKING NOT SURE IF IT IS BEING USED
