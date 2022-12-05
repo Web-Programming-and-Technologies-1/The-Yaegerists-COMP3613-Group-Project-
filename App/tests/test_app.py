@@ -220,42 +220,65 @@ class RankingIntegrationTests(unittest.TestCase):
         ranking = create_ranking(rankerId=1, imageId=2, score=3)
         assert ranking.rankingId == 1
 
-#     def test_get_ranking(self):
-#         ranking = get_ranking(1)
-#         assert ranking.creatorId == 1
+    @pytest.mark.run(order=17) 
+    def test_get_ranking(self):
+        ranking = get_ranking(1)
+        assert ranking.rankingId == 1
 
-#     def test_get_all_rankings(self):
-#         ranking = create_ranking(2, 1, 4)
-#         rankingList = []
-#         rankingList.append(get_ranking(1))
-#         rankingList.append(get_ranking(2))
-#         self.assertListEqual(get_all_rankings(), rankingList)
+    @pytest.mark.run(order=18) 
+    def test_get_all_rankings(self):
+        ranking = create_ranking(rankerId=2, imageId=1, score=4)
+        rankingList = []
+        rankingList.append(get_ranking(1))
+        rankingList.append(get_ranking(2))
+        self.assertListEqual(get_all_rankings(), rankingList)
 
-#     def test_get_all_rankings_json(self):
-#         rankings_json = get_all_rankings_json()
-#         self.assertListEqual([{"id":1, "creatorId":1, "imageId": 2, "score":3}, {"id":2, "creatorId":2, "imageId": 1, "score":4}], rankings_json)
+    @pytest.mark.run(order=19) 
+    def test_get_all_rankings_json(self):
+        rankings_json = get_all_rankings_json()
+        self.assertListEqual([{"id":1, "rankerId":1, "imageId": 2, "score":3, "overall_ranking": None}, {"id":2, "rankerId":2, "imageId": 1, "score":4, "overall_ranking": None}], rankings_json)
 
-#     def test_get_rankings_by_creatorid(self):
-#         rankings = get_rankings_by_creator(2)
-#         self.assertListEqual(rankings, [{"id":2, "creatorId":2, "imageId": 1, "score":4}])
+    @pytest.mark.run(order=20) 
+    def test_get_rankings_by_ranker_json(self):
+        rankings = get_rankings_by_ranker_json(2)
+        self.assertListEqual([{"id":2, "rankerId":2, "imageId": 1, "score":4, "overall_ranking": None}], rankings)
 
-#     def test_get_rankings_by_imageid(self):
-#         rankings = get_rankings_by_image(2)
-#         self.assertListEqual(rankings, [{"id":1, "creatorId":1, "imageId": 2, "score":3}])
+    @pytest.mark.run(order=21)
+    def test_get_rankings_by_imageid_json(self):
+        rankings = get_rankings_by_image_json(imageId=2)
+        self.assertListEqual(rankings, [{"id":1, "rankerId":1, "imageId": 2, "score":3, "overall_ranking": None}])
 
-#     def test_get_ranking_by_actors(self):
-#         ranking = get_ranking_by_actors(1, 2)
-#         assert ranking.id == 1
 
-#     def test_update_ranking(self):
-#         ranking = update_ranking(1, 5)
-#         assert ranking.score == 5
+#NOT WORKING NOT SURE IF IT IS BEING USED
+    # def test_get_ranking_by_actors(self):
+    #     ranking = get_ranking_by_actors(1, 2)
+    #     assert ranking.id ==1
 
-#     def test_try_calculate_ranking(self):
-#         ranking = create_ranking(3, 2, 5)
-#         calculated = get_calculated_ranking(2)
-#         assert calculated == 4
 
+    @pytest.mark.run(order=22)
+    def test_update_ranking(self):
+        ranking = update_ranking(1, 5)
+        assert ranking.score == 5
+
+    @pytest.mark.run(order=23)
+    def test_delete_ranking(self):
+        ranking = delete_rank(1)
+        assert ranking == True   
+
+#gets avg ranking by imageId
+    @pytest.mark.run(order=24)
+    def test_try_calculate_ranking(self):
+        ranking = create_ranking(3, 3, 5)
+        ranking = create_ranking(4, 3, 3)
+        calculated = get_calculated_ranking(3)
+        assert calculated == 4 #5 + 3 = 8 /2 = 4
+
+#gets total ranking by imageId
+    @pytest.mark.run(order=25)
+    def test_try_calculate_total_ranking(self):
+        ranking = create_ranking(5, 3, 4) #created another ranking for the same image as test above
+        total = get_total_ranking(3)
+        assert total == 12 #5 + 3 + 4
 
 # class DistributionIntegrationTests(unittest.TestCase):
 #     pass
