@@ -110,6 +110,7 @@ def editprofile_page():
           data = request.form # get data from form submission
           updatedprofile = update_profile(profileId=current_user.profileId,username=data['username'], email=data['email'], password=data['password']) # update user object
           flash('Account Updated!')# send message
+          return render_template('editprofilepage.html',form=form)# redirect to edit page
       else:
           flash('Error invalid input! Retry')
           return render_template('editprofilepage.html',form=form)# redirect to edit page
@@ -131,11 +132,14 @@ def otheruserprofile_page(id):
     if request.method == "POST":
         ###ProfileRating
         data = request.form
-        rating = create_rating(senderId=current_user.profileId, receiverId=user.profileId, score=data['rating'])
-        average = get_calculated_rating(id)
-        average=round(average,2)
-        ###
-        return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating, rankings=rankings)
+        if data == None or data == '':
+           flash('Failed to Rate! Refresh and try again')
+           return render_template('uploadpictures.html', average=average, user=user, images=images, ratings = rating, rankings=rankings)
+        else:
+          rating = create_rating(senderId=current_user.profileId, receiverId=user.profileId, score=data['rating'])
+          average = get_calculated_rating(id)
+          average=round(average,2)
+          return render_template('otheruserprofile.html',average=average, user=user, images=images, ratings = rating, rankings=rankings)
     
     if request.method == "GET":
         rating = get_ratings_by_receiver(id)
