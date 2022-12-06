@@ -28,8 +28,8 @@ def uploadpicturesAction():
         flash('Input an Image URL')
         return render_template('uploadpictures.html', form=form)
     if form.validate_on_submit():
-        imagedata = create_image(
-           profileId=current_user.profileId, url=data['url'])
+        imagedata = create_image(profileId=current_user.profileId, url=data['url'])
+        ranking=create_ranking(current_user.profileId,imagedata.imageId,0)
         flash('Uploaded Picture, Check Profile')
         return render_template('uploadpictures.html', form=form)
 
@@ -154,11 +154,7 @@ def rankimage_page(id):
        average = get_calculated_rating(id)
        average=round(average,2)
        rankings=get_all_rankings()
-       images = get_images_by_profileId(id)
-       #for image in images:
-        #print(image.rankings[1].score)
-      
-       
+       images = get_images_by_profileId(id) 
        
        if request.method == "POST":
           data=request.form
