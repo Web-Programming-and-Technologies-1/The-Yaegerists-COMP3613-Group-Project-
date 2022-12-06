@@ -5,6 +5,7 @@ from flask import Flask, flash
 from App.controllers import *
 from App.forms import SignUp, LogIn, UploadPicture, EditProfile
 import json
+import numpy as np
 # from flask_sqlalchemy_session import current_session
 
 
@@ -84,10 +85,10 @@ def home_page():
     profiles = get_all_profiles()
     for profile in profiles:
         profile.overall_rating = get_total_rating(profile.profileId)
-
-    profiles=distribute(numProfiles=len(profiles),senderId=current_user.profileId)
+    randomizeprofiles=np.random.choice(profiles, size=4)         
+    randomizeprofiles=distribute(numProfiles=len(randomizeprofiles),senderId=current_user.profileId)
                                        
-    return render_template('home.html', activeusers=profiles)
+    return render_template('home.html', activeusers=randomizeprofiles)
 
 @index_views.route('/myprofile', methods=['GET'])
 @login_required
@@ -98,7 +99,7 @@ def myprofile_page():
 @index_views.route('/toprated', methods=['GET'])
 @login_required
 def toprated_page():
-    profiles = get_top_rated_Profiles()
+    profiles = get_top_rated_Profiles()[:4]
     ratings = get_all_ratings()
     return render_template('topratedprofiles.html',profiles=profiles,ratings=ratings)
 
