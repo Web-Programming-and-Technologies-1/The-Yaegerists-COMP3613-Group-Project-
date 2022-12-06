@@ -5,7 +5,6 @@ from flask_wtf.file import FileField
 
 class SignUp(FlaskForm):
     username = StringField('Enter Username', validators=[InputRequired()])
-    #name = StringField('name', validators=[InputRequired()])
     email = StringField('Enter Email', validators=[Email(), InputRequired()])
     password = PasswordField('Enter New Password', validators=[InputRequired(), EqualTo('confirm', message='Passwords must match')])
     confirm  = PasswordField('Repeat Password')
@@ -17,7 +16,12 @@ class LogIn(FlaskForm):
     submit = SubmitField('Login', render_kw={'class': 'btn waves-effect waves-light white-text'})
 
 class UploadPicture(FlaskForm):
-    #username = StringField('Username')
-    url = StringField('URL:', validators=[InputRequired()])
-    #image = FileField("Upload Profile Image:")
+    url = StringField('Enter Image URL:', validators=[InputRequired()])
     submit = SubmitField('Upload Image', render_kw={'class': 'btn waves-effect waves-light white-text'})
+
+class EditProfile(FlaskForm):
+    username = StringField('Enter Username', validators=[InputRequired()])
+    email = StringField('Enter Email', validators=[Email(), InputRequired()])
+    password = PasswordField('Enter New Password', validators=[InputRequired(), EqualTo('confirm', message='Passwords must match')])
+    confirm  = PasswordField('Repeat Password')
+    update = SubmitField('Update', render_kw={'class': 'btn waves-effect waves-light white-text'})

@@ -64,10 +64,11 @@
   
   
 
-  <button2 onclick="window.location.href='/editprofile';">
-    <p class="ph3">My Pictures</p>
-  </button2>
+<ph5 class="b"  onclick="window.location.href='/editprofile';" >Edit Profile</ph5>
+    
+</input>
 
+<div><p class="h">My Pictures</p></div>
   {% for image in images %}
   <div class="responsive">
       <div class="gallery">
@@ -76,7 +77,7 @@
           </a>
           <!--<div class="desc">Rank</div>-->
          
-          <a class="button" href="/deleteImage/{{image.imageId}}">Delete</a>
+          <p><a class="button" href="/deleteImage/{{image.imageId}}">Delete</a></p>
         </div>
   </div>
   {% endfor %}

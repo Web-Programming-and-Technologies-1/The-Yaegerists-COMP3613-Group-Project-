@@ -56,8 +56,8 @@
                   {% for image in images %}
                    <div class="responsive">
                        <div class="desc">
-                         <form method="POST" action="/rankimage/{{user.profileId}}">    
-                           <p3 class="hello">Image ID Number:{{image.imageId}}</p3>
+                         <form method="POST" action="/rankimage/{{user.profileId}}">   
+                           <p3 class="hello">Rank:{{image.rankings[-1].score}}</p3>
                            <div style="margin-bottom: 15px"></div>
                        </div>
                        <div class="gallery">
@@ -76,7 +76,7 @@
         
                            
                         </div>
-                        <input class="button" type="submit" value="Submit"></input>
+                        <input class="button" type="submit" value="Submit Rank"></input>
                        </div> 
                        
                    </div>

@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, current_user, login_manager, login_required
 from flask import Flask, flash
 from App.controllers import *
-from App.forms import SignUp, LogIn, UploadPicture
+from App.forms import SignUp, LogIn, UploadPicture, EditProfile
+import json
 # from flask_sqlalchemy_session import current_session
 
 
@@ -81,13 +82,11 @@ def start_page():
 @login_required
 def home_page():
     profiles = get_all_profiles()
+    for profile in profiles:
+        profile.overall_rating = get_total_rating(profile.profileId)
 
-    ###Trying the profile feed here
-
-    
     profiles=distribute(numProfiles=len(profiles),senderId=current_user.profileId)
-    ###
-    #profiles.feeds = get_all_profile_feed()                                        
+                                       
     return render_template('home.html', activeusers=profiles)
 
 @index_views.route('/myprofile', methods=['GET'])
@@ -103,10 +102,20 @@ def toprated_page():
     ratings = get_all_ratings()
     return render_template('topratedprofiles.html',profiles=profiles,ratings=ratings)
 
-@index_views.route('/editprofile', methods=['GET'])
+@index_views.route('/editprofile', methods=['POST','GET'])
 @login_required
 def editprofile_page():
-    return render_template('editprofilepage.html')  
+    form = EditProfile() # create form object
+    if request.method == "POST":
+      if form.validate_on_submit():
+          data = request.form # get data from form submission
+          updatedprofile = update_profile(profileId=current_user.profileId,username=data['username'], email=data['email'], password=data['password']) # update user object
+          flash('Account Updated!')# send message
+      else:
+          flash('Error invalid input! Retry')
+          return render_template('editprofilepage.html',form=form)# redirect to edit page
+    if request.method == "GET":
+         return render_template('editprofilepage.html',form=form) # redirect to edit page 
 
 @index_views.route('/otheruserprofile/<id>', methods=['GET', 'POST'])
 @login_required
@@ -144,19 +153,20 @@ def rankimage_page(id):
        rating = get_ratings_by_receiver(id)
        average = get_calculated_rating(id)
        average=round(average,2)
-       i=0
-       temp=[]
-       rankingtotal=0
        rankings=get_all_rankings()
        images = get_images_by_profileId(id)
+       #for image in images:
+        #print(image.rankings[1].score)
+      
+       
        
        if request.method == "POST":
           data=request.form
           for image,ranking in data.items():
              ranking=create_ranking(current_user.profileId,image,ranking)
-             print("Image ID:",ranking.imageId)
-             print("Rank ID:",ranking.rankingId)
-             print("Rank Score:",ranking.score)
+             #print("Image ID:",ranking.imageId)
+             #print("Rank ID:",ranking.rankingId)
+             #print("Rank Score:",ranking.score)
           return render_template('rankingimagepage.html', user=user, images=images, ratings = rating, average=average, rankings=rankings)
        
        if request.method == "GET":

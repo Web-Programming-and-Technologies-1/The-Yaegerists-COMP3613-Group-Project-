@@ -55,70 +55,43 @@ Edit My Profile
   
 </div>
 
+<form id="editprofileform" method="POST" action="/editprofile">
+      {{ form.csrf_token }}
+  
 
-  <input type="username" name="username" placeholder="New Username (Optional)" required="">
-  <input type="name" name="name" placeholder="New Name (Optional)" required="">
-  <input type="email" name="email" placeholder="New Email (Optional)" required="">
+       {% with messages = get_flashed_messages() %}
+       {% if messages %}
+    
+      
+        {% for message in messages %}
+        <p style="color: yellow">{{ message }}</p>
+        {% endfor %}
+      
+    
+       {% endif %}
+       {% endwith %}
+
+    {{ form.username.label }} 
+    {{ form.username(size=20, class="validate") }}
+  
+    {{ form.email.label }}
+    {{ form.email(size=50, class="validate") }}
+            
+    {{ form.password.label }}
+    {{ form.password(size=20, class="validate") }}
+            
+    {{ form.confirm.label }}
+    {{ form.confirm(size=20, class="validate") }}
+      
+    <div class="button:hover">
+    {{form.update(class="b")}}
+    </div>
+</form>
 
   <div style="margin-top: 10px">
 
   </div>
-  
-  <p class="hello">Update/ Remove Pictures</p>
+
 {% endblock %} 
 
 
-{% block additionalcontent %}
-<p class="ph4">Remember to always be RealER</p>
-<div class="editpage">
-
-  <box><p class="ph2">Change Pictures</p></box> 
-  
-<div class="centergallary">
- <div class="row">
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc"><input type="file"accept="image/*"><p>Select to upload</p></div>
-    </div>
-  </div>
-  
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc"><input type="file"accept="image/*"><p>Select to upload</p></div>
-    </div>
-  </div>
- </div>
-
-
-  <div class="row">
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc"><input type="file"accept="image/*"><p>Select to upload</p></div>
-    </div>
-  </div>
-  
-  <div class="responsive">
-    <div class="gallery">
-      <a target="_blank" href="{{url_for('static', filename='defaultImage.jpg')}}">
-        <img src="{{url_for('static', filename='defaultImage.jpg')}}" alt="picture" width="600" height="400">
-      </a>
-      <div class="desc"><input type="file"accept="image/*"><p>Select to upload</p></div>
-    </div>
-  </div>
- </div>
-</div>
-
-<button2 onclick="window.location.href='/myprofile';"><p class="ph3">Save Changes</p></button2>
-
-</div>
-{% endblock %}

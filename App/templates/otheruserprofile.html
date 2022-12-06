@@ -85,7 +85,7 @@
     {% for image in images %}
      <div class="responsive">
          <div class="desc"> 
-             <p3 class="hello">Rank:{{image.rankings}}</p3>
+             <p3 class="hello">Rank:{{image.rankings[-1].score}}</p3>
              
          </div>
          <div style="margin-top: 10px"></div>
