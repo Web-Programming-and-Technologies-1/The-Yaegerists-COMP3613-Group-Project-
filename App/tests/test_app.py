@@ -280,8 +280,40 @@ class RankingIntegrationTests(unittest.TestCase):
         total = get_total_ranking(3)
         assert total == 12 #5 + 3 + 4
 
-# class DistributionIntegrationTests(unittest.TestCase):
-#     pass
+class DistributionIntegrationTests(unittest.TestCase):
+
+    @pytest.mark.run(order=26) 
+    def test_create_distribution(self):
+        dist = create_distribution(1)
+        assert dist.distributeId == 1
+   
+
+    @pytest.mark.run(order=27) 
+    def test_get_distribution(self):
+        dist = get_distribution(1)
+        assert dist.distributeId == 1
+
+# NOT WORKING REVIEW
+    # @pytest.mark.run(order=28) 
+    # def test_get_distribution_json(self):
+    #     dist = get_distribution_json(1)
+    #     self.assertListEqual(dist, [{"distributeId":1, "numProfiles":1, "timeStamp": date.today(), "profileFeeds":[]}])
+
+
+
+    @pytest.mark.run(order=28) 
+    def test_get_all_distribution_json(self):
+        dist = get_all_distributions_json()
+        self.assertListEqual(dist, [{"distributeId":1, "numProfiles":1, "timeStamp": date.today(), "profileFeeds":[]}])
+
+
+    @pytest.mark.run(order=29) 
+    def test_get_all_distributions(self):
+        dist = get_distribution(1)
+        dists = []
+        dists.append(dist)
+        self.assertListEqual(get_all_distributions(), dists)
+        
 
 # class ProfileFeedIntegrationTests(unittest.TestCase):
 #     pass
