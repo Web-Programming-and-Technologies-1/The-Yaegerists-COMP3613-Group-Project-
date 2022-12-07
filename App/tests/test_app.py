@@ -319,4 +319,23 @@ class DistributionIntegrationTests(unittest.TestCase):
         
 
 # class ProfileFeedIntegrationTests(unittest.TestCase):
-#     pass
+
+    # @pytest.mark.run(order=30) 
+    # def test_create_profileFeed(self):
+    #     pf = create_profile_Feed(2, 1, 3)
+    #     assert pf.feedId == 1
+
+
+
+    # @pytest.mark.run(order=31) 
+    # def test_get_profile_feed_json(self):
+    #     pf = create_profile_Feed(2, 1, 3) #create
+    #     pf_json = get_profile_feed_json(1)
+    #     self.assertListEqual([{"feedId":1, "senderId":2, "receiverId": 1, "distributeId":3, "seen":False}], pf_json)
+
+
+
+    # @pytest.mark.run(order=24) 
+    # def test_get_all_profileFeed_json(self):
+    #     pf_json = get_all_profile_feed_json()
+    #     self.assertListEqual([{"feedId":1, "senderId":2, "receiverId": 1, "distributeId":3, "seen":False}], pf_json)
