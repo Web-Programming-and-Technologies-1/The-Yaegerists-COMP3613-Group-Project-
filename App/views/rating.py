@@ -10,20 +10,7 @@ from App.controllers import *
 rating_views = Blueprint('rating_views', __name__, template_folder='../templates')
 
 
-@rating_views.route('/api/ratings', methods=['POST'])
-def create_rating_action():
-    data = request.json
-    if get_profile(data['creatorId']) and get_user(data['targetId']):
-        if data['creatorId'] != data['targetId']:
-            
-            prev = get_rating_by_actors(data['creatorId'], data['targetId'])
-            if prev:
-                return jsonify({"message":"Current user already rated this user"}) 
-            rating = create_rating(data['creatorId'], data['targetId'], data['score'])
-            return jsonify({"message":"Rating created"}) 
 
-        return jsonify({"message":"User cannot rate self"})
-    return jsonify({"message":"User not found"}) 
 
 @rating_views.route('/api/ratings', methods=['GET'])
 def get_all_ratings_action():

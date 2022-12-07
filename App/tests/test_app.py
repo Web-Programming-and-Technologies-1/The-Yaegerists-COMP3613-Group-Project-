@@ -119,7 +119,7 @@ def test_authenticate():
 
 class ProfileIntegrationTests(unittest.TestCase):
     @pytest.mark.run(order=2)
-    def test_create_user(self):
+    def test_create_profile(self):
         profile = create_profile(username="rick", email="rick@mail.com", password="rickpass")
         assert profile.username == "rick"
 
@@ -194,38 +194,48 @@ class RatingIntegrationTests(unittest.TestCase):
         ratings_json = get_all_ratings_json()
         self.assertListEqual([{"id":1, "senderId":1, "receiverId": 2, "score":4, "timeStamp": date.today()}], ratings_json)
 
-    # @pytest.mark.run(order=16)
-    # def test_get_rating_by_actors(self):
-    #     rating = get_rating_by_actors(senderId=1, receiverId=2)
-    #     assert rating.score == 4
+    @pytest.mark.run(order=16) 
+    def test_update_rating(self):
+        rating = update_rating(id=1, score=5)
+        assert rating.score == 5
 
-    # def test_update_rating(self):
-    #     rating = update_rating(1, 5)
-    #     assert rating.score == 5
+    @pytest.mark.run(order=17) 
+    def test_get_calculated_rating(self):
+        profile = create_profile(username="john", email="john@gmail.com", password="mypass")
+        rating = create_rating(profile.profileId, 2, 5)
+        calculated = get_calculated_rating(2)
+        assert calculated == 5 #5/1
 
-    # def test_try_calculate_rating(self):
-    #     user = create_user("phil", "philpass")
-    #     rating = create_rating(user.id, 2, 5)
-    #     calculated = get_calculated_rating(2)
-    #     assert calculated == 4
+    @pytest.mark.run(order=18) 
+    def test_get_total_rating(self):
+        rating = get_total_rating(receiverId=2)
+        assert rating == 10
+    
+    # @pytest.mark.run(order=19) 
+    # need to debug
+    # def test_get_top_rated_profiles(self):
+    #     new_rating = create_rating(senderId=1, receiverId=2, score=3)
+    #     top_rating = get_top_rated_Profiles()
+    #     self.assertListEqual([{"profileId":1, "username":1, "email": 2, "overall_rating":4}, {"profileId":1, "username":1, "email": 2, "overall_rating":4}], top_rating)
 
-    # def test_get_level(self):
-    #     assert get_level(1) == 1
-
+    @pytest.mark.run(order=20) 
+    def test_delete_rating(self):
+        is_deleted = delete_rating(id=1)
+        assert is_deleted == True
 
 class RankingIntegrationTests(unittest.TestCase):
 
-    @pytest.mark.run(order=16) 
+    @pytest.mark.run(order=21) 
     def test_create_rating(self):
         ranking = create_ranking(rankerId=1, imageId=2, score=3)
         assert ranking.rankingId == 1
 
-    @pytest.mark.run(order=17) 
+    @pytest.mark.run(order=22) 
     def test_get_ranking(self):
         ranking = get_ranking(1)
         assert ranking.rankingId == 1
 
-    @pytest.mark.run(order=18) 
+    @pytest.mark.run(order=23) 
     def test_get_all_rankings(self):
         ranking = create_ranking(rankerId=2, imageId=1, score=4)
         rankingList = []
@@ -233,40 +243,33 @@ class RankingIntegrationTests(unittest.TestCase):
         rankingList.append(get_ranking(2))
         self.assertListEqual(get_all_rankings(), rankingList)
 
-    @pytest.mark.run(order=19) 
+    @pytest.mark.run(order=24) 
     def test_get_all_rankings_json(self):
         rankings_json = get_all_rankings_json()
         self.assertListEqual([{"id":1, "rankerId":1, "imageId": 2, "score":3}, {"id":2, "rankerId":2, "imageId": 1, "score":4}], rankings_json)
 
-    @pytest.mark.run(order=20) 
+    @pytest.mark.run(order=25) 
     def test_get_rankings_by_ranker_json(self):
         rankings = get_rankings_by_ranker_json(2)
         self.assertListEqual([{"id":2, "rankerId":2, "imageId": 1, "score":4}], rankings)
 
-    @pytest.mark.run(order=21)
+    @pytest.mark.run(order=26)
     def test_get_rankings_by_imageid_json(self):
         rankings = get_rankings_by_image_json(imageId=2)
         self.assertListEqual(rankings, [{"id":1, "rankerId":1, "imageId": 2, "score":3}])
 
-
-#NOT WORKING NOT SURE IF IT IS BEING USED
-    # def test_get_ranking_by_actors(self):
-    #     ranking = get_ranking_by_actors(1, 2)
-    #     assert ranking.id ==1
-
-
-    @pytest.mark.run(order=22)
+    @pytest.mark.run(order=27)
     def test_update_ranking(self):
         ranking = update_ranking(1, 5)
         assert ranking.score == 5
 
-    @pytest.mark.run(order=23)
+    @pytest.mark.run(order=28)
     def test_delete_ranking(self):
         ranking = delete_rank(1)
         assert ranking == True   
 
 #gets avg ranking by imageId
-    @pytest.mark.run(order=24)
+    @pytest.mark.run(order=29)
     def test_try_calculate_ranking(self):
         ranking = create_ranking(3, 3, 5)
         ranking = create_ranking(4, 3, 3)
@@ -274,7 +277,7 @@ class RankingIntegrationTests(unittest.TestCase):
         assert calculated == 4 #5 + 3 = 8 /2 = 4
 
 #gets total ranking by imageId
-    @pytest.mark.run(order=25)
+    @pytest.mark.run(order=30)
     def test_try_calculate_total_ranking(self):
         ranking = create_ranking(5, 3, 4) #created another ranking for the same image as test above
         total = get_total_ranking(3)
