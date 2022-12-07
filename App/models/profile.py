@@ -10,8 +10,8 @@ class Profile(db.Model, UserMixin):
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    recipients = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.senderId")
-    feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
+    # recipients = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.senderId")
+    # feeds = db.relationship('ProfileFeed', primaryjoin="Profile.profileId==ProfileFeed.receiverId")
     image = db.relationship('Image', backref='profile',lazy=True, cascade="all, delete-orphan")
     overall_rating = db.Column(db.Integer)
 
@@ -34,8 +34,8 @@ class Profile(db.Model, UserMixin):
             'profileId': self.profileId,
             'username': self.username,
             'email': self.email,
-            'recipients': [recipient.toJSON() for recipient in self.recipients],
-            'feeds': [feed.toJSON() for feed in self.feeds],
+            # 'recipients': [recipient.toJSON() for recipient in self.recipients],
+            # 'feeds': [feed.toJSON() for feed in self.feeds],
             'overall_rating': self.overall_rating
         }
 

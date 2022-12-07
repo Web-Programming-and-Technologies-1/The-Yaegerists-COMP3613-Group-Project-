@@ -40,7 +40,7 @@ class ProfileUnitTests(unittest.TestCase):
     def test_toJSON(self):
         profile = Profile(username="bob", email="bob@mail.com", password="bobpass")
         profile_json = profile.toJSON()
-        self.assertDictEqual(profile_json, {"profileId":None, "username":"bob", "email":"bob@mail.com",  "recipients": [], "feeds": [], "overall_rating":None})
+        self.assertDictEqual(profile_json, {"profileId":None, "username":"bob", "email":"bob@mail.com",  "overall_rating":None})
     
     def test_hashed_password(self):
         password = "mypass"
@@ -126,7 +126,7 @@ class ProfileIntegrationTests(unittest.TestCase):
     @pytest.mark.run(order=3)
     def test_get_all_profiles_json(self):
         profile_json = get_all_profiles_json()
-        self.assertListEqual([{"profileId":1, "username":"bob", "email": "bob@gmail.com", "recipients": [],"feeds":[],"overall_rating":None}, {"profileId":2, "username":"rick", "email": "rick@mail.com", "recipients": [],"feeds":[],"overall_rating":None}], profile_json)
+        self.assertListEqual([{"profileId":1, "username":"bob", "email": "bob@gmail.com", "overall_rating":None}, {"profileId":2, "username":"rick", "email": "rick@mail.com", "overall_rating":None}], profile_json)
 
     @pytest.mark.run(order=4)
     def test_update_profile(self):

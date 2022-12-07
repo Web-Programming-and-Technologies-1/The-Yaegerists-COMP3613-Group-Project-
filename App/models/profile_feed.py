@@ -10,13 +10,13 @@ class ProfileFeed(db.Model):
         'profile.profileId'), nullable=False)
     distributeId = db.Column(db.Integer, db.ForeignKey(
         'distribution.distributeId'), nullable=False)
-    sender = db.Column(db.Integer, nullable=False)
-    receiver= db.Column(db.Integer, nullable=False)
+    # sender = db.Column(db.Integer, nullable=False)
+    # receiver= db.Column(db.Integer, nullable=False)
     seen = db.Column(db.Boolean, default=False)
 
     def __init__(self, senderId, receiverId, distributorId):
-        self.sender = senderId
-        self.receiver = receiverId
+        self.senderId = senderId
+        self.receiverId = receiverId
         self.distributeId = distributorId
         self.seen = False
 
@@ -26,8 +26,8 @@ class ProfileFeed(db.Model):
     def toJSON(self):
         return {
             'feedId': self.feedId,
-            'senderId': self.sender,
-            'receiverId': self.receiver,
+            'senderId': self.senderId,
+            'receiverId': self.receiverId,
             'distributeId': self.distributeId,
             'seen': self.seen
         }
